@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+    <name>SOHODocs</name>
+    <author>SOHO Prospecting</author>
+    <version>alpha one</version>
+    <authorUrl>https://www.sohoprospecting.com</authorUrl>
+    <authorEmail>info@sohoprospecting.com</authorEmail>
+    <description><i class="icon-fire"></i>SOHO Prospecting: This is our Awesome Cloud based Document Management as never seen before on Joomla! </description>
+    <administration></administration>
+    <files>
+        <filename>sohodocs.php</filename>
+    </files>
+</extension>
