@@ -1,13 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="2.5" method="upgrade">
+<extension type="component" version="2.5.0" method="upgrade">
     <name>SOHODocs</name>
-    <author>SOHO Prospecting</author>
-    <version>alpha one</version>
-    <authorUrl>https://www.sohoprospecting.com</authorUrl>
+
+    <!-- The following elements are optional and free of formatting constraints -->
+    <creationDate>November 2013</creationDate>
+    <author>Rodrigo Kammer</author>
     <authorEmail>info@sohoprospecting.com</authorEmail>
-    <description><i class="icon-fire"></i>SOHO Prospecting: This is our Awesome Cloud based Document Management as never seen before on Joomla! </description>
-    <administration></administration>
-    <files>
-        <filename>sohodocs.php</filename>
+    <authorUrl>https://www.sohoprospecting.com</authorUrl>
+    <copyright>2013 SOHO Prospecting</copyright>
+    <license>License Info</license>
+
+    <!--  The version string is recorded in the components table -->
+    <version>0.0.1</version>
+
+    <!-- The description is optional and defaults to the name -->
+    <description>Awesome Cloud Based Document Management System, never seen before in Joomla!</description>
+
+    <!--BEGIN - Database related Scripts-->
+	<!-- Runs on install -->
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <!-- Runs on uninstall -->
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- Runs on update - will run the file that matches the version defined on xml
+         Look for latest version on #__schema-->
+    <update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+    </update>
+    <!--END - Database related Scripts-->
+
+
+    <!-- Site Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder
+            to copy FROM in the package to install therefore files copied
+            in this section are copied from /site/ in the package -->
+    <files folder="component">
+		<filename>index.html</filename>
+		<filename>sohodocs.php</filename>
+		<filename>controller.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+		<folder>language</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>img</folder>
     </files>
+
+	<!--language file for the Frontend-->
+	<!--<language folder="component">
+		<language tag="en-GB">language/en-GB/en-GB.com_sohodocs.ini</language>
+	</language>-->
+
+    <administration>
+        <!-- Administration Menu Section -->
+        <menu>COM_SOHODOCS_MENU</menu>
+
+        <!-- Administration Main File Copy Section -->
+        <files folder="administrator">
+            <!-- Admin Main File Copy Section -->
+            <filename>index.html</filename>
+            <filename>sohodocs.php</filename>
+
+            <!-- SQL files section -->
+            <folder>sql</folder>
+        </files>
+
+        <!--Language Folder (Backend Only)-->
+        <languages folder="administrator">
+            <!--This file manages Menu items and other translations handled by Joomla-->
+            <language tag="en-GB">language/en-GB/en-GB.com_sohodocs.sys.ini</language>
+            <!--This file has the translationd for SOHODocs Component Backend-->
+            <language tag="en-GB">language/en-GB/en-GB.com_sohodocs.ini</language>
+        </languages>
+    </administration>
+
 </extension>
