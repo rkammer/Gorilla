@@ -10,7 +10,7 @@ class com_gorillaInstallerScript
 
 	function install($parent) 
 	{
-		$parent->getParent()->setRedirectURL('index.php?option=com_gorilla');
+		$parent->getParent()->setRedirectURL('index.php?option=com_gorilla&view=guide&task=install');
 	}
 
 	function uninstall($parent) 
@@ -20,7 +20,7 @@ class com_gorillaInstallerScript
 
 	function update($parent) 
 	{
-		//echo '<p>' . JText::_('COM_GORILLA_UPDATE_TEXT') . '</p>';
+		$parent->getParent()->setRedirectURL('index.php?option=com_gorilla&view=guide&task=update');
 	}
 
 	function preflight($type, $parent) 

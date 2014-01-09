@@ -6,7 +6,7 @@ jimport('joomla.application.component.controller');
 
 /**
  * @package     Joomla.Administrator
- * @subpackage  com_groundwater
+ * @subpackage  com_gorilla
  */
 class GorillaControllerDashboard extends JControllerLegacy
 {
