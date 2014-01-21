@@ -1,0 +1,79 @@
+<?php
+
+// No direct access.
+defined('_JEXEC') or die;
+
+/**
+ * Methods display a list of notebooks records.
+ *
+ * @package		Joomla.Administrator
+ * @subpackage	com_gorilla
+ */
+class GorillaViewNotebook extends JViewLegacy {
+	
+	/**
+	 * Store the data retrieved from the model
+	 *
+	 * @var    array
+	 */	
+	protected $item;
+	
+	/**
+	 * Array of form objects.
+	 *
+	 * @var    array
+	 */
+	protected $form;
+	
+	/**
+	 * Execute and display a template script.
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise a Error object.
+	 *
+	 * @see     JViewLegacy
+	 */	
+	public function display($tpl = null) {
+		
+		// call gets the data from the model file
+		$this->item = $this->get ( 'Item' );
+		$this->form = $this->get ( 'Form' );
+		
+		// error in SQL
+		if (count ( $errors = $this->get ( 'Errors' ) )) {
+			JError::raiseError ( 500, implode ( "\n", $errors ) );
+			return false;
+		}
+		
+		// Add toolbar in the display
+		$this->addToolbar ();
+		
+		parent::display ( $tpl );
+	}
+	
+	/**
+	 * Create toolbar for the view.
+	 *
+	 * @return void
+	 */	
+	protected function addToolbar() {
+		
+		// hide the main menu so we don't see links to the other views
+		JFactory::getApplication ()->input->set ( 'hidemainmenu', true );
+		
+		// Add title
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), '' );
+		
+		// Add save button
+		JToolbarHelper::save ( 'notebook.save' );
+		
+		// show a Cancel button if you create a new record, 
+		// or a Close button if you are editing an existing record
+		if (empty ( $this->item->id )) {
+			JToolbarHelper::cancel ( 'notebook.cancel' );
+		} else {
+			JToolbarHelper::cancel ( 'notebook.cancel', 'JTOOLBAR_CLOSE' );
+		}
+	}
+}
