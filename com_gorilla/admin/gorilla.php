@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright   2013 SOHO Prospecting
- * @license     See component license in installation XML
- */
 
+// No direct access.
 defined('_JEXEC') or die;
 
 // import joomla controller library
