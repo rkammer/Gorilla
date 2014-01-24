@@ -11,7 +11,7 @@
 		<field name="alias" type="text" class="inputbox input-xxlarge input-large-text" size="40"
 			label="JFIELD_ALIAS_LABEL" description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" />
 			
-		<field name="state" type="list" label="JSTATUS"
+		<field name="published" type="list" label="JSTATUS"
 			   description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
 			   filter="intval" size="1" default="1">
 			<option value="1">JPUBLISHED</option>

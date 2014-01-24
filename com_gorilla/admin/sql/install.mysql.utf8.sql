@@ -11,7 +11,7 @@
 	  `alias`          	VARCHAR(255)     NOT NULL,
 	  `color_code`     	INT(6)           NOT NULL,
 	  `description`    	MEDIUMTEXT       NULL,
-	  `state`          	TINYINT(3)       NOT NULL DEFAULT 0,
+	  `published`          	TINYINT(3)       NOT NULL DEFAULT 0,
 	  `access`         	INT(10)          NOT NULL,
 	  `ordering`       	INT(11)          NOT NULL,
 	  `checked_out`      	INT(11) UNSIGNED NOT NULL DEFAULT 0,
@@ -24,5 +24,5 @@
 	  `modified_by`    	INT(10)          NULL,
 	  `publish_up`     	DATETIME         NOT NULL DEFAULT '0000-00-00 00:00:00',
 	  `publish_down`   	DATETIME         NOT NULL DEFAULT '0000-00-00 00:00:00',
-	  PRIMARY KEY (`id`))
+   	  PRIMARY KEY (`id`))
 	ENGINE = InnoDB;

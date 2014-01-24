@@ -26,6 +26,8 @@ class GorillaModelNotebooks extends JModelList
 			$config['filter_fields'] = array(
 					'id', 'a.id',
 					'title', 'a.title',
+					'access', 'a.access', 'access_level',
+					'published', 'a.published'
 			);
 		}
 		parent::__construct($config);
@@ -52,8 +54,11 @@ class GorillaModelNotebooks extends JModelList
 		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);		
 		
-		$published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $published);		
+		$published = $this->getUserStateFromRequest($this->context.'.filter.published', 'filter_published', '', 'string');
+		$this->setState('filter.published', $published);	
+
+		$accessId = $this->getUserStateFromRequest($this->context . '.filter.access', 'filter_access', null, 'int');
+		$this->setState('filter.access', $accessId);		
 		
 		parent::populateState ( 'a.ordering', 'asc' );
 	}	
@@ -74,7 +79,7 @@ class GorillaModelNotebooks extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.alias, a.color_code, a.description, a.state, ' .
+				'a.id, a.title, a.alias, a.color_code, a.description, a.published, ' .
 				'a.access, a.ordering, a.checked_out, a.checked_out_time, a.metadesc, ' .
 				'a.metakey, a.created, a.created_by, a.modified, a.modified_by, ' .
 				'a.publish_up, a.publish_down '
@@ -95,13 +100,13 @@ class GorillaModelNotebooks extends JModelList
 		
 		$query->from('#__gorilla_notebooks a');
 		
-		// Filter by published state
-		$published = $this->getState('filter.state');
+		// Filter by published (state)
+		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
-			$query->where('a.state = ' . (int) $published);
+			$query->where('a.published = ' . (int) $published);
 		}
 		elseif ($published === '') {
-			$query->where('(a.state IN (0, 1))');
+			$query->where('(a.published IN (0, 1))');
 		}
 	
 		// Filter by search in title.
@@ -134,5 +139,6 @@ class GorillaModelNotebooks extends JModelList
 		
 		return $query;
 	}
+	
 }
 

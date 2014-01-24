@@ -34,8 +34,8 @@ defined ( '_JEXEC' ) or die ();
 					<div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
 				</div>				
 				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
+					<div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
+					<div class="controls"><?php echo $this->form->getInput('published'); ?></div>
 				</div>				
 				<div class="control-group">
 					<div class="control-label"><?php echo $this->form->getLabel('access'); ?></div>

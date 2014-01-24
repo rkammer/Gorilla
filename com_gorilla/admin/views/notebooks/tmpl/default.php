@@ -90,13 +90,13 @@ $sortFields = $this->getSortFields();
 						title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>"
 						onclick="Joomla.checkAll(this)" /></th>
 					<th width="1%" style="min-width: 55px" class="nowrap center">
-						<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
+						<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
 					</th>
 					<th class="title">
 						<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 					</th>
-					<th width="10%" class="nowrap hidden-phone">
-						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'a.access_level', $listDirn, $listOrder); ?>
+					<th width="5%" class="nowrap hidden-phone">
+						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
 					</th>
 					<th width="1%" class="nowrap center hidden-phone">
 						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -135,7 +135,7 @@ $sortFields = $this->getSortFields();
 						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->state, $i, 'notebooks.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
+						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'notebooks.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 					</td>
 					<td class="nowrap has-context"><a
 						href="<?php echo JRoute::_('index.php?option=com_gorilla&task=notebook.edit&id='.(int) $item->id); ?>"> 

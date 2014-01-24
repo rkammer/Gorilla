@@ -97,7 +97,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 
 		// Add trash buttons (works only in Joomla 3)
 		$state = $this->get('State');
-		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
+		if ($state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
 			JToolbarHelper::deleteList('', 'notebooks.delete', 'JTOOLBAR_EMPTY_TRASH');
 		} elseif ($canDo->get('core.edit.state'))
@@ -113,9 +113,9 @@ class GorillaViewNotebooks extends JViewLegacy {
 		JHtmlSidebar::setAction('index.php?option=com_gorilla&view=notebooks');
 		
 		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state',
+			JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published',
 			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 
-				'value', 'text', $this->state->get('filter.state'), true)
+				'value', 'text', $this->state->get('filter.published'), true)
 		);		
 	}
 	
@@ -128,10 +128,10 @@ class GorillaViewNotebooks extends JViewLegacy {
 	{
 		return array(
 				'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
-				'a.state' => JText::_('JSTATUS'),
+				'a.published' => JText::_('JSTATUS'),
 				'a.title' => JText::_('JGLOBAL_TITLE'),
 				'a.id' => JText::_('JGRID_HEADING_ID'),
-				'a.access_level' => JText::_('JGRID_HEADING_ACCESS')
+				'a.access' => JText::_('JGRID_HEADING_ACCESS')
 		);
 	}	
 }
