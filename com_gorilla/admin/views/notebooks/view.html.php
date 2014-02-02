@@ -14,16 +14,23 @@ class GorillaViewNotebooks extends JViewLegacy {
 	/**
 	 * Items from models
 	 *
-	 * @var    array
+	 * @var array
 	 */	
 	protected $items;
 	
 	/**
 	 * Current state of the list
 	 *
-	 * @var    array
+	 * @var array
 	 */	
 	protected $state;
+	
+	/**
+	 * Current pagination for the data set 
+	 * 
+	 * @var JPagination
+	 */
+	protected $pagination;
 	
 	/**
 	 * Execute and display a template script.
@@ -41,6 +48,12 @@ class GorillaViewNotebooks extends JViewLegacy {
 		
 		// get current state of the list
 		$this->state = $this->get('State');
+		
+		// get a JPagination object for the data set
+		$this->pagination = $this->get('Pagination');
+		
+		// add submenu in view
+		GorillaHelper::addSubmenu('notebooks');
 		
 		// error in SQL
 		if (count ( $errors = $this->get ( 'Errors' ) )) {
@@ -88,12 +101,6 @@ class GorillaViewNotebooks extends JViewLegacy {
 			JToolbarHelper::archiveList('notebooks.archive');
 			JToolbarHelper::checkin('notebooks.checkin');
 		}
-		
-		// Add delete buttons FIXME
-// 		if ($canDo->get('core.delete'))
-// 		{
-// 			JToolBarHelper::deleteList('', 'notebooks.delete', 'JTOOLBAR_DELETE');
-// 		}		
 
 		// Add trash buttons (works only in Joomla 3)
 		$state = $this->get('State');
@@ -116,6 +123,11 @@ class GorillaViewNotebooks extends JViewLegacy {
 			JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published',
 			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 
 				'value', 'text', $this->state->get('filter.published'), true)
+		);		
+		
+		JHtmlSidebar::addFilter(
+			JText::_('JOPTION_SELECT_ACCESS'), 'filter_access',
+			JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'))
 		);		
 	}
 	

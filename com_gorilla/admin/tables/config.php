@@ -3,12 +3,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Table class for notebook.
+ * Table class for config.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaTableNotebook extends JTable {
+class GorillaTableConfig extends JTable {
 	
 	/**
 	 * Object constructor to set table and key fields.  In most cases this will
@@ -22,7 +22,7 @@ class GorillaTableNotebook extends JTable {
 	 * @see   JTable
 	 */	
 	public function __construct(&$db) {
-		parent::__construct ( '#__gorilla_notebooks', 'id', $db );
+		parent::__construct ( '#__gorilla_config', 'id', $db );
 	}
 	
 	/**

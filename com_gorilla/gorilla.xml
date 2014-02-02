@@ -11,7 +11,7 @@
     <license>COM_GORILLA_LICENSE</license>
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_GORILLA_DESCRIPTION</description>
@@ -75,6 +75,10 @@
     <administration>
         <!-- Administration Menu Section -->
         <menu>COM_GORILLA_MENU</menu>
+		<submenu>
+			<menu link="option=com_gorilla" view="notebooks" img="class:generic"
+				alt="Gorilla/Notebooks">COM_GORILLA_SUBMENU_NOTEBOOKS</menu>
+		</submenu>        
 
         <!-- Administration Main File Copy Section -->
         <files folder="admin">

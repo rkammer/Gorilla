@@ -3,6 +3,8 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' );
+
 /**
  * Model class for notebook.
  *
@@ -11,8 +13,21 @@ defined('_JEXEC') or die;
  */
 class GorillaModelNotebook extends JModelAdmin {
 	
-	// The prefix to use with controller messages.
-	protected $text_prefix = 'COM_GORILLA';
+	/**
+	 * The type alias for this content type.
+	 *
+	 * @var      string
+	 * @since    3.2
+	 */
+	public $typeAlias = 'com_gorilla.notebook';
+	
+	/**
+	 * The prefix to use with controller messages.
+	 *
+	 * @var    string
+	 * @since  1.6
+	 */
+	protected $text_prefix = 'COM_GORILLA';	
 	
 	/**
 	 * Method to get a table object, load it if necessary.
@@ -65,8 +80,20 @@ class GorillaModelNotebook extends JModelAdmin {
 		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.notebook.data', array () );
 		if (empty ( $data )) {
 			$data = $this->getItem ();
+			
+			// Prime some default values.
+			if ($this->getState('notebook.id') == 0)
+			{
+				// Get next color
+				$GorillaModelConfig = new GorillaModelConfig();				
+				$data->set('color_code', $GorillaModelConfig->getNextColor());
+			}			
 		}
 		return $data;
+	}
+	
+	private function getNextColor() {
+		
 	}
 	
 	/**
@@ -78,7 +105,49 @@ class GorillaModelNotebook extends JModelAdmin {
 	 *
 	 * @see   JModelAdmin
 	 */	
-	protected function prepareTable($table) {
+	protected function prepareTable($table) 
+	{
+		$date = JFactory::getDate();
+		$user = JFactory::getUser();		
+		
 		$table->title = htmlspecialchars_decode ( $table->title, ENT_QUOTES );
+		$table->alias = JApplication::stringURLSafe($table->alias);
+		
+		if (empty($table->alias))
+		{
+			$table->alias = JApplication::stringURLSafe($table->title);
+		}		
+		
+		if (empty($table->id))
+		{
+			// Set the values
+		
+			// Set ordering to the last item if not set
+			if (empty($table->ordering))
+			{
+				$db = JFactory::getDbo();
+				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_notebooks');
+				$max = $db->loadResult();
+		
+				$table->ordering = $max + 1;
+				
+				$table->created    = $date->toSql();
+				$table->created_by = $user->get('id');				
+			}
+			
+			// Define next color only if actual was used
+			$GorillaModelConfig = new GorillaModelConfig();
+			
+			if (JString::strtoupper($table->color_code) == JString::strtoupper($GorillaModelConfig->getNextColor())) {
+				$GorillaModelConfig->setNextColor();
+			}
+		}				
+		else
+		{
+			// Set the values
+			$table->modified    = $date->toSql();
+			$table->modified_by = $user->get('id');
+		}
+	
 	}
 }

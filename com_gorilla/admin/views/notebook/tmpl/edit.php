@@ -3,85 +3,64 @@
 // No direct access.
 defined ( '_JEXEC' ) or die ();
 
-/*
-<?php foreach ($this->form->getFieldset('myfields') as $field)
-: ?>
-<div class="control-group">
-<div class="control-label">
-<?php echo $field->label; ?>
-</div>
-<div class="controls">
-<?php echo $field->input; ?>
-</div>
-</div>
-<?php endforeach; ?>
-*/
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+
+JHtml::_('behavior.formvalidation');
+JHtml::_('formbehavior.chosen', 'select');
+
 ?>
-<form
-	action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id='.(int) $this->item->id); ?>"
-	method="post" name="adminForm" id="adminForm" class="form-validate">
-	<div class="row-fluid">
-		<div class="span10 form-horizontal">
-			<fieldset>
-			<?php echo JHtml::_('bootstrap.startPane', 'myTab', array('active' => 'details')); ?>
-				<?php echo JHtml::_('bootstrap.addPanel', 'myTab', 'details', empty($this->item->id) ? JText::_('COM_GORILLA_NEW_NOTEBOOK', true) : JText::sprintf('COM_GORILLA_EDIT_NOTEBOOK', $this->item->id, true)); ?>
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
+<script type="text/javascript">
+	Joomla.submitbutton = function(task)
+	{
+		if (task == 'notebook.cancel' || document.formvalidator.isValid(document.id('notebook-form'))) {
+			<?php echo $this->form->getField('description')->save(); ?>
+			Joomla.submitform(task, document.getElementById('notebook-form'));
+		}
+	}
+</script>
+
+<form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="notebook-form" class="form-validate">
+
+	<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
+
+	<div class="form-horizontal">
+		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'details')); ?>
+
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'details', empty($this->item->id) ? JText::_('COM_GORILLA_NEW_NOTEBOOK', true) : JText::sprintf('COM_GORILLA_EDIT_NOTEBOOK', $this->item->id, true)); ?>
+		<div class="row-fluid">
+			<div class="span9">
+				<div class="form-vertical">
+					<?php echo $this->form->getControlGroup('description'); ?>
 				</div>
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('alias'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('published'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('access'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('access'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('description'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('description'); ?></div>
-				</div>				
-				<?php echo JHtml::_('bootstrap.endPanel'); ?>
-				<input type="hidden" name="task" value="" />
-				<?php echo JHtml::_('form.token'); ?>
-			<?php echo JHtml::_('bootstrap.endPane'); ?>
-			</fieldset>
-			<fieldset>
-			<?php echo JHtml::_('bootstrap.startPane', 'myTabPublish', array('active' => 'publish')); ?>
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('created'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('created'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('publish_up'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('publish_up'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('publish_down'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('publish_down'); ?></div>
-				</div>				
-			<?php echo JHtml::_('bootstrap.endPane'); ?>
-			</fieldset>
-			<fieldset>
-			<?php echo JHtml::_('bootstrap.startPane', 'myTabMetadata', array('active' => 'metadata')); ?>
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('metadesc'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('metadesc'); ?></div>
-				</div>				
-				<div class="control-group">
-					<div class="control-label"><?php echo $this->form->getLabel('metakey'); ?></div>
-					<div class="controls"><?php echo $this->form->getInput('metakey'); ?></div>
-				</div>				
-			<?php echo JHtml::_('bootstrap.endPane'); ?>
-			</fieldset>			
+			</div>
+			<div class="span3">
+				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
+			</div>			
+			<div class="span3">
+				<fieldset class="form-vertical">
+					<?php echo $this->form->getControlGroup('color_code'); ?>
+				</fieldset>
+			</div>
 		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span6">
+				<?php echo $this->form->getControlGroups('publishing'); ?>
+			</div>
+			<div class="span6">
+				<?php echo $this->form->getControlGroups('metadata'); ?>
+			</div>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+		<?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
+
+		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+
 	</div>
+
+	<input type="hidden" name="task" value="" />
+	<?php echo JHtml::_('form.token'); ?>
 </form>

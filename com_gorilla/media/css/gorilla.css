@@ -5,3 +5,9 @@
 .icon-48-dashboard       {
     background-image: url(../img/icon-48-dashboard.png);
 }
+
+.color-sample {
+	width:18px;
+	height:18px;	
+    background-color: #000000;    
+}

@@ -5,7 +5,7 @@
 	  `id`             	INT              NOT NULL AUTO_INCREMENT,
 	  `title`          	VARCHAR(255)     NOT NULL,
 	  `alias`          	VARCHAR(255)     NOT NULL,
-	  `color_code`     	INT(6)           NOT NULL,
+	  `color_code`     	VARCHAR(7)       NOT NULL,
 	  `description`    	MEDIUMTEXT       NULL,
 	  `published`          	TINYINT(3)       NOT NULL DEFAULT 0,
 	  `access`         	INT(10)          NOT NULL,

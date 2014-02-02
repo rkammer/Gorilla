@@ -27,7 +27,8 @@ class GorillaModelNotebooks extends JModelList
 					'id', 'a.id',
 					'title', 'a.title',
 					'access', 'a.access', 'access_level',
-					'published', 'a.published'
+					'published', 'a.published',
+					'ordering', 'a.ordering'
 			);
 		}
 		parent::__construct($config);
@@ -124,6 +125,12 @@ class GorillaModelNotebooks extends JModelList
 				$query->where('(a.title LIKE '.$search.')');
 			}
 		}
+		
+		// Filter by access level.
+		if ($access = $this->getState('filter.access'))
+		{
+			$query->where('a.access = ' . (int) $access);
+		}		
 		
 		// Filter by author
 		$authorId = $this->getState('filter.author_id');

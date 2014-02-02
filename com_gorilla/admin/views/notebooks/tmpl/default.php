@@ -18,7 +18,7 @@ if ($saveOrder)
 $sortFields = $this->getSortFields();
 ?>
 <script type="text/javascript">
-	Joomla!.orderTable = function()
+	Joomla.orderTable = function()
 	{
 		table = document.getElementById("sortTable");
 		direction = document.getElementById("directionTable");
@@ -31,7 +31,7 @@ $sortFields = $this->getSortFields();
 		{
 			dirn = direction.options[direction.selectedIndex].value;
 		}
-		Joomla!.tableOrdering(order, dirn, '');
+		Joomla.tableOrdering(order, dirn, '');
 	}
 </script>
 <form
@@ -61,9 +61,13 @@ $sortFields = $this->getSortFields();
 					<i class="icon-remove"></i></button>
 			</div>
 			<div class="btn-group pull-right hidden-phone">
+				<label for="limit" class="element-invisible"><?php echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC');?></label>
+				<?php echo $this->pagination->getLimitBox(); ?>
+			</div>
+			<div class="btn-group pull-right hidden-phone">
 				<label for="directionTable" class="element-invisible">
 					<?php echo JText::_('JFIELD_ORDERING_DESC');?></label>
-				<select name="directionTable" id="directionTable" class="input-medium" onchange="Joomla!.orderTable()">
+				<select name="directionTable" id="directionTable" class="input-medium" onchange="Joomla.orderTable()">
 					<option value=""><?php echo JText::_('JFIELD_ORDERING_DESC');?></option>
 					<option value="asc" <?php if ($listDirn == 'asc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_ASCENDING');?></option>
 					<option value="desc" <?php if ($listDirn == 'desc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_DESCENDING');?></option>
@@ -72,7 +76,7 @@ $sortFields = $this->getSortFields();
 			<div class="btn-group pull-right">
 				<label for="sortTable" class="element-invisible">
 					<?php echo JText::_('JGLOBAL_SORT_BY');?></label>
-				<select name="sortTable" id="sortTable" class="input-medium" onchange="Joomla!.orderTable()">
+				<select name="sortTable" id="sortTable" class="input-medium" onchange="Joomla.orderTable()">
 					<option value=""><?php echo JText::_('JGLOBAL_SORT_BY');?></option>
 					<?php echo JHtml::_('select.options', $sortFields, 'value', 'text', $listOrder);?>
 				</select>
@@ -137,10 +141,14 @@ $sortFields = $this->getSortFields();
 					<td class="center">
 						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'notebooks.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 					</td>
-					<td class="nowrap has-context"><a
-						href="<?php echo JRoute::_('index.php?option=com_gorilla&task=notebook.edit&id='.(int) $item->id); ?>"> 
+					<td class="nowrap has-context">
+						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=notebook.edit&id='.(int) $item->id); ?>"> 
 							<?php echo $this->escape($item->title); ?>
-						</a></td>
+						</a>
+						<span class="small">
+							<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>
+						</span>						
+					</td>
 					<td class="small hidden-phone">
 						<?php echo $this->escape($item->access_level); ?>
 					</td>
@@ -150,6 +158,13 @@ $sortFields = $this->getSortFields();
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="10">
+						<?php echo $this->pagination->getListFooter(); ?>
+					</td>
+				</tr>
+			</tfoot>			
 		</table>
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="boxchecked" value="0" />
