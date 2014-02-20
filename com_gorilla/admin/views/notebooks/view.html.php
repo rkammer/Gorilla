@@ -84,7 +84,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 		$bar = JToolBar::getInstance ( 'toolbar' );
 		
 		// Add title
-		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), '' );
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), 'book' );
 		
 		// Add add-new button
 		JToolbarHelper::addNew ( 'notebook.add' );

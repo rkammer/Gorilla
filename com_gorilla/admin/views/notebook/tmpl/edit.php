@@ -4,7 +4,6 @@
 defined ( '_JEXEC' ) or die ();
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
-
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select');
 
@@ -13,7 +12,6 @@ JHtml::_('formbehavior.chosen', 'select');
 	Joomla.submitbutton = function(task)
 	{
 		if (task == 'notebook.cancel' || document.formvalidator.isValid(document.id('notebook-form'))) {
-			<?php echo $this->form->getField('description')->save(); ?>
 			Joomla.submitform(task, document.getElementById('notebook-form'));
 		}
 	}
@@ -30,17 +28,13 @@ JHtml::_('formbehavior.chosen', 'select');
 		<div class="row-fluid">
 			<div class="span9">
 				<div class="form-vertical">
-					<?php echo $this->form->getControlGroup('description'); ?>
+					<?php echo $this->form->getControlGroup('color_code'); ?>
+					<?php echo $this->form->getControlGroup('description'); ?>										
 				</div>
 			</div>
 			<div class="span3">
 				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
 			</div>			
-			<div class="span3">
-				<fieldset class="form-vertical">
-					<?php echo $this->form->getControlGroup('color_code'); ?>
-				</fieldset>
-			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 

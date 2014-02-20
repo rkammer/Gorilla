@@ -20,7 +20,8 @@ class Com_GorillaInstallerScript {
 	 * @see     JoomlaupdateModelDefault
 	 */	
 	function install($parent) {
-		$parent->getParent ()->setRedirectURL ( 'index.php?option=com_gorilla' );
+		//$parent->getParent ()->setRedirectURL ( 'index.php?option=com_gorilla&view=guide&task=install' );
+		echo '<p>' . JText::_ ( 'COM_GORILLA_INSTALL_TEXT' ) . '</p>';
 	}
 	
 	/**
@@ -44,6 +45,7 @@ class Com_GorillaInstallerScript {
 	 * @see     JoomlaupdateModelDefault
 	 */	
 	function update($parent) {
+		//$parent->getParent ()->setRedirectURL ( 'index.php?option=com_gorilla&view=guide&task=update' );
 		echo '<p>' . JText::_ ( 'COM_GORILLA_UPDATE_TEXT' ) . '</p>';
 	}
 	
@@ -57,7 +59,7 @@ class Com_GorillaInstallerScript {
 	 * @see     JoomlaupdateModelDefault
 	 */	
 	function preflight($type, $parent) {
-		echo '<p>' . JText::_ ( 'COM_GORILLA_PREFLIGHT_' . $type . '_TEXT' ) . '</p>';
+		//echo '<p>' . JText::_ ( 'COM_GORILLA_PREFLIGHT_' . $type . '_TEXT' ) . '</p>';
 	}
 	
 	/**
@@ -70,6 +72,6 @@ class Com_GorillaInstallerScript {
 	 * @see     JoomlaupdateModelDefault
 	 */
 	function postflight($type, $parent) {
-		echo '<p>' . JText::_ ( 'COM_GORILLA_POSTFLIGHT_' . $type . '_TEXT' ) . '</p>';
+		//echo '<p>' . JText::_ ( 'COM_GORILLA_POSTFLIGHT_' . $type . '_TEXT' ) . '</p>';
 	}
 }

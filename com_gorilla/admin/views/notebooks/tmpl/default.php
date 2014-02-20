@@ -16,6 +16,10 @@ if ($saveOrder)
 	JHtml::_('sortablelist.sortable', 'notebookList', 'adminForm',	strtolower($listDirn), $saveOrderingUrl);
 }
 $sortFields = $this->getSortFields();
+
+// Use minicolors in grid 
+JHtml::_('script', 'jui/jquery.minicolors.min.js', false, true);
+JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 ?>
 <script type="text/javascript">
 	Joomla.orderTable = function()
@@ -88,7 +92,7 @@ $sortFields = $this->getSortFields();
 				<tr>
 					<th width="1%" class="nowrap center hidden-phone">
 						<?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'a.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
-					</th>				
+					</th>					
 					<th width="1%" class="hidden-phone"><input type="checkbox"
 						name="checkall-toggle" value=""
 						title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>"
@@ -142,9 +146,11 @@ $sortFields = $this->getSortFields();
 						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'notebooks.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 					</td>
 					<td class="nowrap has-context">
+					    <span class="minicolors-swatch">
+					        <span style="background-color: <?php echo $this->escape($item->color_code); ?>;"></span>
+					    </span>
 						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=notebook.edit&id='.(int) $item->id); ?>"> 
-							<?php echo $this->escape($item->title); ?>
-						</a>
+							<?php echo $this->escape($item->title); ?></a>
 						<span class="small">
 							<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>
 						</span>						

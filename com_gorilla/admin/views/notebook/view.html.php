@@ -62,11 +62,25 @@ class GorillaViewNotebook extends JViewLegacy {
 		// hide the main menu so we don't see links to the other views
 		JFactory::getApplication ()->input->set ( 'hidemainmenu', true );
 		
+		// New record
+		$isNew = ($this->item->id == 0);
+		
 		// Add title
 		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), '' );
 		
+		// Add apply button
+		JToolbarHelper::apply('notebook.apply');
+		
 		// Add save button
 		JToolbarHelper::save ( 'notebook.save' );
+		
+		// Add save2new (after save, create new record)
+		JToolbarHelper::save2new('notebook.save2new');
+		
+		// Add save2copy only when record already exists
+		if (!$isNew) {
+			JToolbarHelper::save2copy('notebook.save2copy');
+		}
 		
 		// show a Cancel button if you create a new record, 
 		// or a Close button if you are editing an existing record

@@ -150,4 +150,53 @@ class GorillaModelNotebook extends JModelAdmin {
 		}
 	
 	}
+	
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param   array  $data  The form data.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since	3.1
+	 */
+	public function save($data)
+	{
+		$app = JFactory::getApplication();
+	
+		// Alter the title for save as copy
+		if ($app->input->get('task') == 'save2copy')
+		{
+			list($name, $alias) = $this->generateNewTitle($data['alias'], $data['title']);
+			$data['title']	= $name;
+			$data['alias']	= $alias;
+			$data['state']	= 0;
+		}
+	
+		return parent::save($data);
+	}
+
+	/**
+	 * Method to change the title & alias.
+	 *
+	 * @param   string   $alias        The alias.
+	 * @param   string   $title        The title.
+	 *
+	 * @return	array  Contains the modified title and alias.
+	 *
+	 * @since	12.2
+	 */
+	protected function generateNewTitle($alias, $title)
+	{
+		// Alter the title & alias
+		$table = $this->getTable();
+		while ($table->load(array('alias' => $alias)))
+		{
+			$title = JString::increment($title);
+			$alias = JString::increment($alias, 'dash');
+		}
+	
+		return array($title, $alias);
+	}	
+	
 }

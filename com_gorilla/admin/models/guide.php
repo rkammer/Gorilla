@@ -4,12 +4,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Guide controller class.
+ * Model for veryfing installation
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaControllerGuide extends JControllerLegacy
+class GorillaModelGuide extends JModelLegacy
 {
 
 }

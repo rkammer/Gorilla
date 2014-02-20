@@ -16,11 +16,9 @@
 		    size="40" label="JFIELD_ALIAS_LABEL" 
 		    description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" />
 			
-		<field name="description" type="editor"
-			buttons="true" hide="pagebreak,readmore"
-			class="inputbox"
-			filter="JComponentHelper::filterText" label="JGLOBAL_DESCRIPTION" 
-			description="COM_GORILLA_NOTEBOOKS_FIELD_DESCRIPTION_DESC" />			
+		<field name="description" type="textarea" class="inputbox"
+			rows="3" cols="30" label="JGLOBAL_DESCRIPTION"
+			description="COM_GORILLA_NOTEBOOKS_FIELD_DESCRIPTION_DESC" />						
 			
 		<field name="published" type="list" label="JSTATUS"
 			   description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
@@ -79,15 +77,9 @@
 
 		<field name="checked_out_time" type="hidden" filter="unset" />
 	
-		<field name="publish_up" type="calendar"
-			   label="JGLOBAL_FIELD_PUBLISH_UP_LABEL" description="JGLOBAL_FIELD_PUBLISH_UP_DESC"
-			   class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22"
-			   filter="user_utc" />
+		<field name="publish_up" type="hidden" filter="unset" />
 			   
-		<field name="publish_down" type="calendar"
-		       label="JGLOBAL_FIELD_PUBLISH_DOWN_LABEL" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC"
-			   class="inputbox" format="%Y-%m-%d %H:%M:%S" size="22"
-			   filter="user_utc" />	
+		<field name="publish_down" type="hidden" filter="unset" />	
 	</fieldset>
 	
 	<fieldset name="metadata">

@@ -59,4 +59,39 @@ class GorillaHelper {
 // 			JToolbarHelper::title ( JText::sprintf ( 'COM_CATEGORIES_CATEGORIES_TITLE', JText::_ ( 'com_folio' ) ), 'folios-categories' );
 // 		}
 	}
+	
+	/**
+	 * Generic list (combo) creater for notebooks.
+	 * 
+	 * @return array  The field option objects.
+	 */
+	public static function getNotebookListOptions() {
+		// Initialize variables.
+		$options = array();
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('a.id As value, a.alias As text');
+		$query->from('#__gorilla_notebooks AS a');
+		$query->where('a.published = 1');
+		$query->order('a.ordering, a.alias');
+		
+		// Get the options.
+		$db->setQuery($query);
+		
+		$options = $db->loadObjectList();
+		
+		// Check for a database error.
+		if ($db->getErrorNum())
+		{
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		// Merge any additional options in the XML definition.
+		//$options = array_merge(parent::getOptions(), $options);
+		array_unshift($options, JHtml::_('select.option', '0', JText::_('COM_GORILLA_NOTEBOOK_LIST_SELECT')));
+		
+		return $options;	
+	}
 }

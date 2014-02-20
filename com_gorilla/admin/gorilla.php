@@ -14,7 +14,7 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_gorilla'))
 
 // Add css and js files
 $document = JFactory::getDocument();
-$document->addStyleSheet('../media/com_gorilla/css/gorilla.css');
+$document->addStyleSheet('./media/com_gorilla/css/gorilla.css');
 
 // Using legacy to keep MVC compatibility between 2.5 and 3
 $controller = JControllerLegacy::getInstance('Gorilla');

@@ -1,14 +1,22 @@
 <?php
 defined('_JEXEC') or die;
  
-// import Joomla view library
-jimport('joomla.application.component.view');
- 
 /**
- * Guide View
+ * Methods display a guide to component.
+ *
+ * @package		Joomla.Administrator
+ * @subpackage	com_gorilla
  */
 class GorillaViewGuide extends JViewLegacy
 {
+	
+	/**
+	 * Indication if is installation or update
+	 *
+	 * @var boolean
+	 */	
+	protected $installation;
+	
     /**
     * View display method
     * @return void
@@ -23,9 +31,12 @@ class GorillaViewGuide extends JViewLegacy
         	JError::raiseError(500, implode('<br />', $errors));
             return false;
         }
-		
+        
+        //TODO get this from task
+        $this->installation = false;
+        
         //adds scripts and styles
-        $this->addScripts();		
+        //$this->addScripts();		
         
         // Display the template
         parent::display($tpl);

@@ -1,1 +1,1 @@
-<?phpdefined('_JEXEC') or die;// Import Joomla controller libraryjimport('joomla.application.component.controller');/** * Gorilla frontend display controller. * * @package		Joomla.Component * @subpackage	com_gorilla */class GorillaController extends JControllerLegacy {}
+<?php// No direct access.defined('_JEXEC') or die;/** * Gorilla master display controller * * @package		Joomla.Site * @subpackage	com_gorilla */class GorillaController extends JControllerLegacy {}
