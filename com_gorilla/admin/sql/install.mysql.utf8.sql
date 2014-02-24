@@ -24,6 +24,7 @@
 	  `modified_by`    	INT(10)          NULL,
 	  `publish_up`     	DATETIME         NOT NULL DEFAULT '0000-00-00 00:00:00',
 	  `publish_down`   	DATETIME         NOT NULL DEFAULT '0000-00-00 00:00:00',
+	  `asset_id`        INT(10)          NOT NULL DEFAULT '0',
    	  PRIMARY KEY (`id`))
 	ENGINE = InnoDB;
 

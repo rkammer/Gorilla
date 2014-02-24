@@ -29,13 +29,13 @@ class GorillaHelper {
 		$user = JFactory::getUser ();
 		$result = new JObject ();
 		
-		if (empty ( $categoryId )) {
+// 		if (empty ( $categoryId )) {
 			$assetName = 'com_gorilla';
 			$level = 'component';
-		} else {
-			$assetName = 'com_gorilla.category.' . ( int ) $categoryId;
-			$level = 'category';
-		}
+// 		} else {
+// 			$assetName = 'com_gorilla.category.' . ( int ) $categoryId;
+// 			$level = 'category';
+// 		}
 		
 		$actions = JAccess::getActions ( 'com_gorilla', $level );
 		foreach ( $actions as $action ) {
@@ -53,11 +53,18 @@ class GorillaHelper {
 	 * @return void
 	 */	
 	public static function addSubmenu($vName = 'notebooks') {
-		JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTEBOOKS' ), 'index.php?option=com_gorilla&view=notebooks', $vName == 'notebooks' );
-// 		JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CATEGORIES' ), 'index.php?option=com_categories&extension=com_folio', $vName == 'categories' );
-// 		if ($vName == 'categories') {
-// 			JToolbarHelper::title ( JText::sprintf ( 'COM_CATEGORIES_CATEGORIES_TITLE', JText::_ ( 'com_folio' ) ), 'folios-categories' );
-// 		}
+
+		if (version_compare(JVERSION, '3', 'lt')) {
+			JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTEBOOKS' ), 'index.php?option=com_gorilla&view=notebooks', $vName == 'notebooks' );			
+		}
+		else {
+			JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTEBOOKS' ), 'index.php?option=com_gorilla&view=notebooks', $vName == 'notebooks' );
+			// 		JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CATEGORIES' ), 'index.php?option=com_categories&extension=com_folio', $vName == 'categories' );
+			// 		if ($vName == 'categories') {
+			// 			JToolbarHelper::title ( JText::sprintf ( 'COM_CATEGORIES_CATEGORIES_TITLE', JText::_ ( 'com_folio' ) ), 'folios-categories' );
+			// 		}					
+		}
+		
 	}
 	
 	/**

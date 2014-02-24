@@ -3,6 +3,8 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+jimport('joomla.application.component.modellist');
+
 /**
  * Methods to load documents from a notebook
  *

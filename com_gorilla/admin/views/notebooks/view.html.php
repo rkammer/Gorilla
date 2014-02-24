@@ -64,10 +64,19 @@ class GorillaViewNotebooks extends JViewLegacy {
 		// Add toolbar in the display
 		$this->addToolbar ();
 		
-		// Add sidebar in the display
-		$this->sidebar = JHtmlSidebar::render();
-		
-		parent::display ( $tpl );
+		// Different layout for different version
+		if (version_compare(JVERSION, '3', 'lt')) {
+
+			// Load filter
+			$this->filter = $this->addFilter();			
+			
+			parent::display ( $tpl . 'j25' );
+		} else {
+			// Add sidebar in the display
+			$this->sidebar = JHtmlSidebar::render();				
+			
+			parent::display ( $tpl );
+		}	
 	}
 	
 	/**
@@ -117,18 +126,23 @@ class GorillaViewNotebooks extends JViewLegacy {
 			JToolbarHelper::preferences ( 'com_gorilla' );
 		}
 		
-		JHtmlSidebar::setAction('index.php?option=com_gorilla&view=notebooks');
-		
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published',
-			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 
-				'value', 'text', $this->state->get('filter.published'), true)
-		);		
-		
-		JHtmlSidebar::addFilter(
-			JText::_('JOPTION_SELECT_ACCESS'), 'filter_access',
-			JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'))
-		);		
+		if (version_compare(JVERSION, '3', 'lt')) {
+			
+		}
+		else {
+			JHtmlSidebar::setAction('index.php?option=com_gorilla&view=notebooks');
+			
+			JHtmlSidebar::addFilter(
+				JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published',
+				JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 
+					'value', 'text', $this->state->get('filter.published'), true)
+			);		
+			
+			JHtmlSidebar::addFilter(
+				JText::_('JOPTION_SELECT_ACCESS'), 'filter_access',
+				JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'))
+			);		
+		}
 	}
 	
 	/**
@@ -145,5 +159,21 @@ class GorillaViewNotebooks extends JViewLegacy {
 				'a.id' => JText::_('JGRID_HEADING_ID'),
 				'a.access' => JText::_('JGRID_HEADING_ACCESS')
 		);
+	}	
+	
+	/**
+	 * Add the filter.
+	 * Only for Joomla 2.5.
+	 */
+	protected function addFilter()
+	{
+		//TODO Include filter like Groundwater
+// 		$original_layout = $this->getLayout();
+// 		$this->setLayout('geophysical');
+// 		$this->addTemplatePath( JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_groundwater' . DS . 'views' . DS . 'common' . DS . 'tmpl' );
+// 		$filter = $this->loadTemplate('filter');
+// 		$this->setLayout(  $original_layout );
+// 		return $filter;
+		return null;
 	}	
 }

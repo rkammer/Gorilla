@@ -27,9 +27,9 @@ class GorillaController extends JControllerLegacy
 	{
 		require_once JPATH_COMPONENT.'/helpers/gorilla.php';
 		
-		$view	= $this->input->get('view', 'notebooks');
-		$layout = $this->input->get('layout', 'default');
-		$id		= $this->input->getInt('id');
+		$view	= JFactory::getApplication()->input->get('view', 'notebooks');
+		$layout = JFactory::getApplication()->input->get('layout', 'default');
+		$id		= JFactory::getApplication()->input->getInt('id');
 		
 		// Protect edit view from direct access
 		if ($view == 'notebook' && $layout == 'edit' && !$this->checkEditId('com_gorilla.edit.notebook', $id))

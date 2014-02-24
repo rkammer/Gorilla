@@ -38,7 +38,22 @@ class GorillaTableNotebook extends JTable {
 	 * @see     JTable
 	 * @throws  InvalidArgumentException
 	 */	
-	public function bind($array, $ignore = '') {
+	public function bind($array, $ignore = '') 
+	{
+		// Bind the metadata.  		
+		if (isset($array['metadata']) && is_array($array['metadata']))
+		{
+			$registry = new JRegistry;
+			$registry->loadArray($array['metadata']);
+			$array['metadata'] = (string) $registry;
+		}
+		
+		// Bind the rules.                
+		if (isset($array['rules']) && is_array($array['rules']))                
+		{                        
+			$rules = new JAccessRules($array['rules']);                        
+			$this->setRules($rules);                
+		}		
 		return parent::bind ( $array, $ignore );
 	}
 	
@@ -58,5 +73,91 @@ class GorillaTableNotebook extends JTable {
 	public function store($updateNulls = false) {
 		return parent::store ( $updateNulls );
 	}
+	
+	/**
+	 * Method to compute the default name of the asset.
+	 * The default name is in the form table_name.id
+	 * where id is the value of the primary key of the table.
+	 *
+	 * @return  string
+	 */
+	protected function _getAssetName()
+	{
+		$k = $this->_tbl_key;
+	
+		return $this->extension . '.notebook.' . (int) $this->$k;
+	}	
+	
+	/**
+	 * Method to return the title to use for the asset table.
+	 *
+	 * @return  string
+	 */
+	protected function _getAssetTitle()
+	{
+		return $this->title;
+	}	
+	
+	/**
+	 * Get the parent asset id for the record
+	 *
+	 * @param   JTable   $table  A JTable object for the asset parent.
+	 * @param   integer  $id     The id for the asset
+	 *
+	 * @return  integer  The id of the asset's parent
+	 *
+	 * @since   11.1
+	 */
+	protected function _getAssetParentId(JTable $table = null, $id = null)
+	{
+		$assetId = null;
+	
+		// For while, we don't have hierarchy in notebooks
+		
+		// This is a category under a category.
+// 		if ($this->parent_id > 1)
+// 		{
+// 			// Build the query to get the asset id for the parent category.
+// 			$query = $this->_db->getQuery(true)
+// 			->select($this->_db->quoteName('asset_id'))
+// 			->from($this->_db->quoteName('#__gorilla_notebooks'))
+// 			->where($this->_db->quoteName('id') . ' = ' . $this->parent_id);
+	
+// 			// Get the asset id from the database.
+// 			$this->_db->setQuery($query);
+	
+// 			if ($result = $this->_db->loadResult())
+// 			{
+// 				$assetId = (int) $result;
+// 			}
+// 		}
+// 		// This is a category that needs to parent with the extension.
+// 		elseif ($assetId === null)
+// 		{
+			// Build the query to get the asset id for the parent category.
+			$query = $this->_db->getQuery(true)
+			->select($this->_db->quoteName('id'))
+			->from($this->_db->quoteName('#__assets'))
+			->where($this->_db->quoteName('name') . ' = ' . $this->_db->quote($this->extension));
+	
+			// Get the asset id from the database.
+			$this->_db->setQuery($query);
+	
+			if ($result = $this->_db->loadResult())
+			{
+				$assetId = (int) $result;
+			}
+// 		}
+	
+		// Return the asset id.
+		if ($assetId)
+		{
+			return $assetId;
+		}
+		else
+		{
+			return parent::_getAssetParentId($table, $id);
+		}
+	}	
 
 }

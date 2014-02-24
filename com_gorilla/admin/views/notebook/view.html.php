@@ -49,7 +49,12 @@ class GorillaViewNotebook extends JViewLegacy {
 		// Add toolbar in the display
 		$this->addToolbar ();
 		
-		parent::display ( $tpl );
+		// Different layout for different version
+		if (version_compare(JVERSION, '3', 'lt')) {
+			parent::display ( $tpl . 'j25' );
+		} else {
+			parent::display ( $tpl );
+		}
 	}
 	
 	/**
@@ -66,7 +71,7 @@ class GorillaViewNotebook extends JViewLegacy {
 		$isNew = ($this->item->id == 0);
 		
 		// Add title
-		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), '' );
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), 'book' );
 		
 		// Add apply button
 		JToolbarHelper::apply('notebook.apply');

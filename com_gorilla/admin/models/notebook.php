@@ -3,6 +3,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+jimport('joomla.application.component.modeladmin');
 JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' );
 
 /**

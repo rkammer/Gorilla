@@ -3,6 +3,8 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+jimport('joomla.application.component.controlleradmin');
+
 /**
  * Notebooks list controller class.
  *
@@ -45,5 +47,6 @@ class GorillaControllerNotebooks extends JControllerAdmin
 			echo "1";
 		}
 		JFactory::getApplication()->close();
+		
 	}	
 }

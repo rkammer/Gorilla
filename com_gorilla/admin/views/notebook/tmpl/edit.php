@@ -38,6 +38,14 @@ JHtml::_('formbehavior.chosen', 'select');
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('JCONFIG_PERMISSIONS_LABEL', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span12">
+				<?php echo $this->form->getControlGroups('permissions'); ?>
+			</div>		
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>		
+		
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span6">
