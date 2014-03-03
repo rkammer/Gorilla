@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="component"
-		label="COM_GORILLA"
-		description="COM_GORILLA_DESCRIPTION"
-	>
+	<fieldset name="notebooks"
+		label="COM_GORILLA_CONFIG_NOTEBOOKS_LABEL"
+		description="COM_GORILLA_CONFIG_NOTEBOOKS_DESCRIPTION">
+		
+		<field name="show_description" type="radio"			    
+			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
+			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC"
+			class="btn-group btn-group-yesno"
+			default="1" filter="integer">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		
+		<field name="show_color_code" type="radio"
+			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_TITLE"
+			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_DESC"
+			class="btn-group btn-group-yesno"
+			default="1" filter="integer">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>	
+		
+		<field name="order_by" type="list"
+			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_TITLE"
+			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_DESC"
+			default="0" filter="integer">				
+			<option value="0">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
+			<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
+			<option value="2">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
+		</field>
+		
+		<field name="order_orientation" type="list"
+			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
+			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_DESC">
+			<option value="0">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
+			<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>				
+		</field>		
+		
+		<field name="number_of_columns" type="list"
+			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_TITLE"
+			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_DESC"
+			default="2" filter="integer">
+			<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_1</option>
+			<option value="2">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_2</option>				
+			<option value="3">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_3</option>
+		</field>					
+		
 	</fieldset>
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"

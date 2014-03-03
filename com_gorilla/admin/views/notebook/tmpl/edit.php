@@ -15,6 +15,20 @@ JHtml::_('formbehavior.chosen', 'select');
 			Joomla.submitform(task, document.getElementById('notebook-form'));
 		}
 	}
+
+	// Replace next color when color is invalid
+	jQuery(document).ready(function (){
+		jQuery( "#jform_color_code" ).blur(function() {
+			var colorCode = jQuery( "#jform_color_code" ).val();
+			var colorCodeLengthRule = colorCode.length == 7;
+			var colorCodeHashRule = colorCode.substr(0,1) == '#';
+			if ( (!colorCodeLengthRule) || (!colorCodeHashRule) ) {
+				var colorSuggValue = jQuery( "#color_code_suggest" ).val();
+				jQuery( "#jform_color_code" ).val(colorSuggValue);
+				jQuery( "span .minicolors-swatch > span" ).css("background-color",colorSuggValue);  
+			}
+		});
+	});	
 </script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="notebook-form" class="form-validate">
@@ -64,5 +78,6 @@ JHtml::_('formbehavior.chosen', 'select');
 	</div>
 
 	<input type="hidden" name="task" value="" />
+	<input type="hidden" id="color_code_suggest" value="<?php echo $this->form->getValue('color_code'); ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

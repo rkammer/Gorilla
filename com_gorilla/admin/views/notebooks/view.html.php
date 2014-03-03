@@ -61,8 +61,11 @@ class GorillaViewNotebooks extends JViewLegacy {
 			return false;
 		}
 		
+		// Add scripts and styles
+		$this->addScripts();
+		
 		// Add toolbar in the display
-		$this->addToolbar ();
+		$this->addToolbar();
 		
 		// Different layout for different version
 		if (version_compare(JVERSION, '3', 'lt')) {
@@ -167,13 +170,27 @@ class GorillaViewNotebooks extends JViewLegacy {
 	 */
 	protected function addFilter()
 	{
-		//TODO Include filter like Groundwater
-// 		$original_layout = $this->getLayout();
-// 		$this->setLayout('geophysical');
-// 		$this->addTemplatePath( JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_groundwater' . DS . 'views' . DS . 'common' . DS . 'tmpl' );
-// 		$filter = $this->loadTemplate('filter');
-// 		$this->setLayout(  $original_layout );
-// 		return $filter;
-		return null;
+		$original_layout = $this->getLayout();
+		$this->setLayout('j25');
+		$this->addTemplatePath( JPATH_ROOT . '/admin/components/com_gorilla/views/common/tmpl' );
+		$filter = $this->loadTemplate('filter');
+		$this->setLayout(  $original_layout );
+		return $filter;		
+	}	
+	
+	/**
+	 * Add extra scripts and style to display
+	 *
+	 * @return void
+	 */
+	protected function addScripts()
+	{
+		if (version_compare(JVERSION, '3', 'lt')) {
+			$doc = JFactory::getDocument();
+			$doc->addScript(JURI::root().'media/com_gorilla/js/jquery-2.0.3.min.js');
+			//$doc->addScript(JURI::root().'media/com_gorilla/js/bootstrap.js');
+			//$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/bootstrap.css');
+			$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/gorilla-minicolors.css');
+		}
 	}	
 }

@@ -97,7 +97,7 @@ class GorillaHelper {
 		
 		// Merge any additional options in the XML definition.
 		//$options = array_merge(parent::getOptions(), $options);
-		array_unshift($options, JHtml::_('select.option', '0', JText::_('COM_GORILLA_NOTEBOOK_LIST_SELECT')));
+		array_unshift($options, JHtml::_('select.option', '', JText::_('COM_GORILLA_NOTEBOOK_LIST_SELECT')));
 		
 		return $options;	
 	}

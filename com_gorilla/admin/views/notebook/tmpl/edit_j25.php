@@ -29,10 +29,19 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
     var $j = jQuery.noConflict(true);
 
 	$j(document).ready(function(){
-
-        $j("#jform_color_code").click(function(){
-            alert($j('#jform_color_code').val());
-        });
+		$j( "#jform_color_code" ).blur(function() {
+			var colorCode = $j( "#jform_color_code" ).val();
+			var colorCodeLengthRule = colorCode.length == 7;
+			var colorCodeHashRule = colorCode.substr(0,1) == '#';
+			if ( (!colorCodeLengthRule) || (!colorCodeHashRule) ) {
+				var colorSuggValue = $j( "#color_code_suggest" ).val();
+				$j( "#jform_color_code" ).val(colorSuggValue);
+				$j( "#colorBox" ).css("background-color",colorSuggValue);
+			}
+			//else {
+			//	$j( "#colorBox" ).css("background-color",colorCode);
+			//}
+		});
     });	
 </script>
 
@@ -110,6 +119,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 	<?php endif; ?>	
 	<div>
 		<input type="hidden" name="task" value="" />
+		<input type="hidden" id="color_code_suggest" value="<?php echo $this->form->getValue('color_code'); ?>" />
 		<input type="hidden" name="return" value="<?php echo JRequest::getCmd('return');?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>

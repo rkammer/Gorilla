@@ -64,6 +64,7 @@
 		<folder>css</folder>
 		<folder>img</folder>
 		<folder>js</folder>
+		<folder>jscolor</folder>
 	</media>
 
 	<!-- Language Folder (Frontend Only) -->
@@ -74,9 +75,9 @@
 
     <administration>
         <!-- Administration Menu Section -->
-        <menu>COM_GORILLA_MENU</menu>
+        <menu img="../media/com_gorilla/img/icon-16-dashboard.png">COM_GORILLA_MENU</menu>
 		<submenu>
-			<menu link="option=com_gorilla" view="notebooks" img="class:generic"
+			<menu link="option=com_gorilla" view="notebooks" img="../media/com_gorilla/img/icon-16-book.png"
 				alt="Gorilla/Notebooks">COM_GORILLA_SUBMENU_NOTEBOOKS</menu>
 		</submenu>        
 

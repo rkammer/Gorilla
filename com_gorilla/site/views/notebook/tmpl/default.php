@@ -1,10 +1,14 @@
 <?php
 defined ( '_JEXEC' ) or die ();
+
+$notebook = $this->params->get('notebook');
+$show_back_to_notebooks_button = ($notebook == "");
+$add_href = 'index.php?option=com_gorilla&view=notebooks';
 ?>
 
-<i class="icon-reply"></i>
-<a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebooks'); ?>"><?php echo JText::_('COM_GORILLA_NOTEBOOK_BACK_TO_NOTEBOOKS'); ?></a>
-
+<?php if ($show_back_to_notebooks_button) :  ?>
+<a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebooks'); ?>"><i class="icon-32-arrow-left" style="width: 32px; height: 32px;"></i></a>
+<?php endif; ?>
 <div class="container-fluid" width=60%>
 
 	<?php foreach ($this->items as $item) : ?>

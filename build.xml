@@ -51,11 +51,11 @@
                         <fileset refid="site_files" />
                 </copy>
                 
-        		
+        		<!--
         		<zip destfile="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds/com_gorilla.zip">
                         <fileset refid="all_files" />
                 </zip>
-                
+                -->
 
 	            <echo>Building Gorilla for Joomla 2.5
 	            </echo>

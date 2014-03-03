@@ -43,7 +43,7 @@
 	
 	   	<field 
 	   		name="color_code"
-			type="Color"
+			type="color"
 			label="COM_GORILLA_NOTEBOOKS_FIELD_COLOR_CODE_LABEL"
 			description="COM_GORILLA_NOTEBOOKS_FIELD_COLOR_CODE_DESC"
 			required="true"	

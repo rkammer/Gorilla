@@ -59,7 +59,11 @@ class GorillaModelNotebook extends JModelAdmin {
 	 */	
 	public function getForm($data = array(), $loadData = true) {
 		$app = JFactory::getApplication ();
-		$form = $this->loadForm ( 'com_gorilla.notebook', 'notebook', array (
+		$modelXMLName = 'notebook';
+		if (version_compare(JVERSION, '3', 'lt')) {
+			$modelXMLName .= '_j25';			
+		}
+		$form = $this->loadForm ( 'com_gorilla.notebook', $modelXMLName, array (
 				'control' => 'jform',
 				'load_data' => $loadData 
 			) 

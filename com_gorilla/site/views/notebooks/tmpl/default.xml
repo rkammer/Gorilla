@@ -6,31 +6,28 @@
 		</message>
 	</layout>
 	<fields name="params">
-		<fieldset name="basic" label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_OPTIONS"
-			addfieldpath="/components/com_gorilla/models/fields">
+		<fieldset name="basic" label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_OPTIONS">
 
-			<field name="show_description" type="radio"			    
+			<field name="show_description" type="list"			    
 				label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
-				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC"
-				class="btn-group btn-group-yesno"
-				default="1" filter="integer">
+				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>
 			
-			<field name="show_color_code" type="radio"
+			<field name="show_color_code" type="list"
 				label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_TITLE"
-				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_DESC"
-				class="btn-group btn-group-yesno"
-				default="1" filter="integer">
+				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="1">JYES</option>
 				<option value="0">JNO</option>
 			</field>
 			
 			<field name="order_by" type="list"
 				label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_TITLE"
-				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_DESC"
-				default="0" filter="integer">				
+				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_DESC">	
+				<option value="">JGLOBAL_USE_GLOBAL</option>			
 				<option value="0">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
 				<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
 				<option value="2">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
@@ -38,19 +35,20 @@
 			
 			<field name="order_orientation" type="list"
 				label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
-				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_DESC"
-				default="0" filter="integer">
+				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="0">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
 				<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>				
 			</field>			
 
-			<field name="notebook" type="NotebookList" 
-			   label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NOTEBOOK_LABEL" description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NOTEBOOK_DESC" />
-
-			<field name="number_of_columns" type="integer"
+			<field name="number_of_columns" type="list"
 				label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_TITLE"
-				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_DESC"
-				default="2" filter="integer" first="1" last="3" step="1" />			
+				description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_1</option>
+				<option value="2">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_2</option>				
+				<option value="3">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_3</option>
+			</field>			
 
 		</fieldset>
 	</fields>	

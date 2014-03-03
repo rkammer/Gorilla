@@ -151,10 +151,8 @@ class GorillaModelNotebooks extends JModelList
 		}
 	
 		// Filter by access level.
-		if ($access = $this->getState('filter.access'))
-		{
-			$query->where('a.access = ' . (int) $access);
-		}
+		$groups = implode(',', $user->getAuthorisedViewLevels());
+		$query->where('a.access IN ('.$groups.')');
 	
 		// Filter by author
 		$authorId = $this->getState('filter.author_id');

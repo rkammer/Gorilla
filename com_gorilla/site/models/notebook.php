@@ -51,9 +51,20 @@ class GorillaModelNotebook extends JModelList
 	 *
 	 * @see     JModelList
 	 */
-	protected function populateState($ordering = null, $direction = null) {
+	protected function populateState($ordering = null, $direction = null) 
+	{
+		$app = JFactory::getApplication();		
+
+		// Allow to use params in view
+		$params = $app->getParams();
+		$this->setState('params', $params);
+
+		// Verifying params from the caller		
 		$id = JRequest::getInt('id');
-		$this->setState('id', $id);
+		if ($id == 0) {
+			$id = $params->get('notebook');
+		}
+		$this->setState('id', $id);		
 	}
 	
 	/**
@@ -86,6 +97,10 @@ class GorillaModelNotebook extends JModelList
 		elseif ($published === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
+		
+		// Filter by access level.
+		$groups = implode(',', $user->getAuthorisedViewLevels());
+		$query->where('a.access IN ('.$groups.')');		
 	
 		// Filter by id
 		if ($id = $this->getState('id'))

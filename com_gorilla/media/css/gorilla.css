@@ -1,9 +1,37 @@
+.icon-16-dashboard       {
+	background-image: url(../img/icon-16-dashboard.png);
+}
+
 .icon-32-dashboard       {
 	background-image: url(../img/icon-32-dashboard.png);
 }
 
 .icon-48-dashboard       {
     background-image: url(../img/icon-48-dashboard.png);
+}
+
+.icon-16-book       {
+	background-image: url(../img/icon-16-book.png);
+}
+
+.icon-32-book       {
+	background-image: url(../img/icon-32-book.png);
+}
+
+.icon-48-book       {
+    background-image: url(../img/icon-48-book.png);
+}
+
+.icon-16-arrow-left       {
+	background-image: url(../img/icon-16-arrow-left.png);
+}
+
+.icon-32-arrow-left       {
+	background-image: url(../img/icon-32-arrow-left.png);
+}
+
+.icon-48-arrow-left       {
+    background-image: url(../img/icon-48-arrow-left.png);
 }
 
 .color-sample {
