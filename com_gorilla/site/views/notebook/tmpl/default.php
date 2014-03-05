@@ -7,7 +7,7 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 ?>
 
 <?php if ($show_back_to_notebooks_button) :  ?>
-<a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebooks'); ?>"><i class="icon-32-arrow-left" style="width: 32px; height: 32px;"></i></a>
+<a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebooks'); ?>"><i class="icon-arrow-left"></i>Back</a>
 <?php endif; ?>
 <div class="container-fluid" width=60%>
 

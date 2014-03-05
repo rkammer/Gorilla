@@ -10,6 +10,7 @@ $document->addStyleSheet('./media/com_gorilla/css/gorilla.css');
 if (version_compare(JVERSION, '3', 'lt')) {
 	$document->addScript(JURI::root().'./media/com_gorilla/js/jquery-2.0.3.min.js');
 	$document->addScript(JURI::root().'./media/com_gorilla/js/bootstrap.js');
+	$document->addScript(JURI::root().'./media/com_gorilla/js/bootstrap.min.js');
 	$document->addStyleSheet(JURI::root().'./media/com_gorilla/css/bootstrap.css');
 }
 
