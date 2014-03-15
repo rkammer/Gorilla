@@ -18,7 +18,7 @@ $span = "span" . (12 / $cols);
 	    </div>
 	</div>
 
-	<?php foreach (array_chunk($this->items, $cols) as $row) : ?>
+	<?php foreach (array_chunk($this->items, isset($cols) ? $cols : 1) as $row) : ?>
 	<div class="row-fluid">
 		<?php foreach ($row as $col) : ?>
 		<div class="<?php echo $span ?>">
