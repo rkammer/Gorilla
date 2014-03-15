@@ -7,6 +7,7 @@
 	-- -----------------------------------------------------
 	CREATE TABLE IF NOT EXISTS `#__gorilla_notebooks` (
 	  `id`             		INT              NOT NULL AUTO_INCREMENT,
+      `guid`                VARCHAR(36)      NOT NULL,
 	  `title`          		VARCHAR(255)     NOT NULL,
 	  `alias`          		VARCHAR(255)     NOT NULL,
 	  `color_code`     		VARCHAR(7)       NOT NULL,
@@ -29,7 +30,7 @@
    	  INDEX `idx_access` (`access` ASC),
 	  INDEX `idx_checkout` (`checked_out` ASC),
 	  INDEX `idx_created_by` (`created_by` ASC),
-	  INDEX `idx_published` (`published` ASC),	  	  
+	  INDEX `idx_published` (`published` ASC),
 	  INDEX `idx_title` (`title` ASC)
 	ENGINE = InnoDB;
 
@@ -47,18 +48,18 @@
 	-- -----------------------------------------------------
 	-- Adds colorcode config - json style
 	-- -----------------------------------------------------
-	INSERT INTO `#__gorilla_config` 
-	(`key`, `value`) 
-	SELECT 'COLOR_CODE_COLORS','[{"name":"Red","color":"#FF8A8A"},{"name":"Orange","color":"#FFC83B"},{"name":"Yellow","color":"#FFF028"},{"name":"Green","color":"#BEF126"},{"name":"Blue","color":"#96D3FF"},{"name":"Purple","color":"#EBB4FF"},{"name":"Gray","color":"#C8C8C8"}]' 
-	  FROM dual 
-	 WHERE not exists (SELECT 1 AS OK 
-	                     FROM `#__gorilla_config` 
+	INSERT INTO `#__gorilla_config`
+	(`key`, `value`)
+	SELECT 'COLOR_CODE_COLORS','[{"name":"Red","color":"#FF8A8A"},{"name":"Orange","color":"#FFC83B"},{"name":"Yellow","color":"#FFF028"},{"name":"Green","color":"#BEF126"},{"name":"Blue","color":"#96D3FF"},{"name":"Purple","color":"#EBB4FF"},{"name":"Gray","color":"#C8C8C8"}]'
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
 	                    WHERE `key` = 'COLOR_CODE_COLORS' );
 
 	INSERT INTO `#__gorilla_config`
 	(`key`, `value`)
-	SELECT 'COLOR_CODE_NEXTCOLOR','0' 
-	  FROM dual 
-	 WHERE not exists (SELECT 1 AS OK 
-	                     FROM `#__gorilla_config` 
+	SELECT 'COLOR_CODE_NEXTCOLOR','0'
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
 	                    WHERE `key` = 'COLOR_CODE_NEXTCOLOR' );

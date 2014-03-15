@@ -6,6 +6,8 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modeladmin');
 JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' );
 
+require_once dirname(__FILE__) . '/../helpers/gorilla.php';
+
 /**
  * Model class for notebook.
  *
@@ -13,7 +15,7 @@ JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' 
  * @subpackage	com_gorilla
  */
 class GorillaModelNotebook extends JModelAdmin {
-	
+
 	/**
 	 * The type alias for this content type.
 	 *
@@ -21,15 +23,15 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @since    3.2
 	 */
 	public $typeAlias = 'com_gorilla.notebook';
-	
+
 	/**
 	 * The prefix to use with controller messages.
 	 *
 	 * @var    string
 	 * @since  1.6
 	 */
-	protected $text_prefix = 'COM_GORILLA';	
-	
+	protected $text_prefix = 'COM_GORILLA';
+
 	/**
 	 * Method to get a table object, load it if necessary.
 	 *
@@ -40,13 +42,13 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @return  JTable  A JTable object
 	 *
 	 * @throws  Exception
-	 * 
+	 *
 	 * @see     JModelLegacy
-	 */	
+	 */
 	public function getTable($type = 'Notebook', $prefix = 'GorillaTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
-	
+
 	/**
 	 * Method for getting the form from the model.
 	 *
@@ -56,17 +58,17 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @return  mixed  A JForm object on success, false on failure
 	 *
 	 * @see     JModelForm
-	 */	
+	 */
 	public function getForm($data = array(), $loadData = true) {
 		$app = JFactory::getApplication ();
 		$modelXMLName = 'notebook';
 		if (version_compare(JVERSION, '3', 'lt')) {
-			$modelXMLName .= '_j25';			
+			$modelXMLName .= '_j25';
 		}
 		$form = $this->loadForm ( 'com_gorilla.notebook', $modelXMLName, array (
 				'control' => 'jform',
-				'load_data' => $loadData 
-			) 
+				'load_data' => $loadData
+			)
 		);
 		if (empty ( $form )) {
 			return false;
@@ -80,27 +82,27 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @return  array    The default data is an empty array.
 	 *
 	 * @see  	JModelForm
-	 */	
+	 */
 	protected function loadFormData() {
 		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.notebook.data', array () );
 		if (empty ( $data )) {
 			$data = $this->getItem ();
-			
+
 			// Prime some default values.
 			if ($this->getState('notebook.id') == 0)
 			{
 				// Get next color
-				$GorillaModelConfig = new GorillaModelConfig();				
+				$GorillaModelConfig = new GorillaModelConfig();
 				$data->set('color_code', $GorillaModelConfig->getNextColor());
-			}			
+			}
 		}
 		return $data;
 	}
-	
+
 	private function getNextColor() {
-		
+
 	}
-	
+
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
@@ -109,53 +111,56 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @return  void
 	 *
 	 * @see   JModelAdmin
-	 */	
-	protected function prepareTable($table) 
+	 */
+	protected function prepareTable($table)
 	{
 		$date = JFactory::getDate();
-		$user = JFactory::getUser();		
-		
+		$user = JFactory::getUser();
+
 		$table->title = htmlspecialchars_decode ( $table->title, ENT_QUOTES );
 		$table->alias = JApplication::stringURLSafe($table->alias);
-		
+
 		if (empty($table->alias))
 		{
 			$table->alias = JApplication::stringURLSafe($table->title);
-		}		
-		
+		}
+
 		if (empty($table->id))
 		{
 			// Set the values
-		
+
 			// Set ordering to the last item if not set
 			if (empty($table->ordering))
 			{
 				$db = JFactory::getDbo();
 				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_notebooks');
 				$max = $db->loadResult();
-		
+
 				$table->ordering = $max + 1;
-				
-				$table->created    = $date->toSql();
-				$table->created_by = $user->get('id');				
+
 			}
-			
+
+            $table->created    = $date->toSql();
+			$table->created_by = $user->get('id');
+            //rodrigo 03/14/2014
+            $table->guid       = GorillaHelper::getGUID();
+
 			// Define next color only if actual was used
 			$GorillaModelConfig = new GorillaModelConfig();
-			
+
 			if (JString::strtoupper($table->color_code) == JString::strtoupper($GorillaModelConfig->getNextColor())) {
 				$GorillaModelConfig->setNextColor();
 			}
-		}				
+		}
 		else
 		{
 			// Set the values
 			$table->modified    = $date->toSql();
 			$table->modified_by = $user->get('id');
 		}
-	
+
 	}
-	
+
 	/**
 	 * Method to save the form data.
 	 *
@@ -168,7 +173,7 @@ class GorillaModelNotebook extends JModelAdmin {
 	public function save($data)
 	{
 		$app = JFactory::getApplication();
-	
+
 		// Alter the title for save as copy
 		if ($app->input->get('task') == 'save2copy')
 		{
@@ -177,7 +182,7 @@ class GorillaModelNotebook extends JModelAdmin {
 			$data['alias']	= $alias;
 			$data['state']	= 0;
 		}
-	
+
 		return parent::save($data);
 	}
 
@@ -200,8 +205,8 @@ class GorillaModelNotebook extends JModelAdmin {
 			$title = JString::increment($title);
 			$alias = JString::increment($alias, 'dash');
 		}
-	
+
 		return array($title, $alias);
-	}	
-	
+	}
+
 }
