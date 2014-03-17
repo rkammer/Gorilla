@@ -115,7 +115,8 @@ class GorillaHelper {
 	 *
 	 * @return string guid
 	 */
-    public static function getGUID(){
+    public static function getGUID()
+    {
         $charid = strtoupper(md5(uniqid(rand(), true)));
         $guid = substr($charid, 0, 8).chr(45)
                .substr($charid, 8, 4).chr(45)
