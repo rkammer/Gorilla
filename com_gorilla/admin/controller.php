@@ -38,6 +38,15 @@ class GorillaController extends JControllerLegacy
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect(JRoute::_('index.php?option=com_gorilla&view=notebooks', false));
 			return false;
+		}
+
+		// Protect edit view from direct access
+		if ($view == 'document' && $layout == 'edit' && !$this->checkEditId('com_gorilla.edit.document', $id))
+		{
+			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+			$this->setMessage($this->getError(), 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_gorilla&view=documents', false));
+			return false;
 		}		
 		
 		parent::display();

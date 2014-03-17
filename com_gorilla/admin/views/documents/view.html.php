@@ -3,13 +3,15 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+require_once dirname(__FILE__) . '/../../helpers/gorilla.php';
+
 /**
- * Methods display a list of notebooks records.
+ * Methods display a list of documents records.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaViewNotebooks extends JViewLegacy {
+class GorillaViewDocuments extends JViewLegacy {
 	
 	/**
 	 * Items from models
@@ -53,7 +55,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 		$this->pagination = $this->get('Pagination');
 		
 		// add submenu in view
-		GorillaHelper::addSubmenu('notebooks');
+		GorillaHelper::addSubmenu('documents');
 		
 		// error in SQL
 		if (count ( $errors = $this->get ( 'Errors' ) )) {
@@ -96,32 +98,32 @@ class GorillaViewNotebooks extends JViewLegacy {
 		$bar = JToolBar::getInstance ( 'toolbar' );
 		
 		// Add title
-		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), 'book' );
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_DOCUMENTS' ), 'stack' );
 		
 		// Add add-new button
-		JToolbarHelper::addNew ( 'notebook.add' );
+		JToolbarHelper::addNew ( 'document.add' );
 		
 		// Add edit button if user has permission
 		if ($canDo->get ( 'core.edit' )) {
-			JToolbarHelper::editList ( 'notebook.edit' );
+			JToolbarHelper::editList ( 'document.edit' );
 		}
 		
 		// Add other default edit buttons
 		if ($canDo->get('core.edit.state')) {
-			JToolbarHelper::publish('notebooks.publish', 'JTOOLBAR_PUBLISH', true);
-			JToolbarHelper::unpublish('notebooks.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-			JToolbarHelper::archiveList('notebooks.archive');
-			JToolbarHelper::checkin('notebooks.checkin');
+			JToolbarHelper::publish('documents.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolbarHelper::unpublish('documents.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			JToolbarHelper::archiveList('documents.archive');
+			JToolbarHelper::checkin('documents.checkin');
 		}
 
 		// Add trash buttons (works only in Joomla 3)
 		$state = $this->get('State');
 		if ($state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			JToolbarHelper::deleteList('', 'notebooks.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolbarHelper::deleteList('', 'documents.delete', 'JTOOLBAR_EMPTY_TRASH');
 		} elseif ($canDo->get('core.edit.state'))
 		{
-			JToolbarHelper::trash('notebooks.trash');
+			JToolbarHelper::trash('documents.trash');
 		}		
 		
 		// Add preferences button if user has permission
@@ -133,7 +135,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 			
 		}
 		else {
-			JHtmlSidebar::setAction('index.php?option=com_gorilla&view=notebooks');
+			JHtmlSidebar::setAction('index.php?option=com_gorilla&view=documents');
 			
 			JHtmlSidebar::addFilter(
 				JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published',
@@ -141,10 +143,21 @@ class GorillaViewNotebooks extends JViewLegacy {
 					'value', 'text', $this->state->get('filter.published'), true)
 			);		
 			
+			//Get notebook options
+			JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+			$notebookList = JFormHelper::loadFieldType('NotebookList', false);
+			$notebookListOptions = $notebookList->getOptions();			
+			
+			JHtmlSidebar::addFilter(
+				JText::_('COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL'), 'filter_notebook_id',
+				JHtml::_('select.options', $notebookListOptions, 'value', 'text', $this->state->get('filter.notebook_id')),
+				true
+			);		
+			
 			JHtmlSidebar::addFilter(
 				JText::_('JOPTION_SELECT_ACCESS'), 'filter_access',
 				JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'))
-			);		
+			);			
 		}
 	}
 	
@@ -160,7 +173,8 @@ class GorillaViewNotebooks extends JViewLegacy {
 				'a.published' => JText::_('JSTATUS'),
 				'a.title' => JText::_('JGLOBAL_TITLE'),
 				'a.id' => JText::_('JGRID_HEADING_ID'),
-				'a.access' => JText::_('JGRID_HEADING_ACCESS')
+				'a.access' => JText::_('JGRID_HEADING_ACCESS'),
+				'a.notebook_id' => JText::_('COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL')
 		);
 	}	
 	
@@ -190,7 +204,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 			$doc->addScript(JURI::root().'media/com_gorilla/js/jquery-2.0.3.min.js');
 			//$doc->addScript(JURI::root().'media/com_gorilla/js/bootstrap.js');
 			//$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/bootstrap.css');
-			$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/gorilla-minicolors.css');
+			//$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/gorilla-minicolors.css');
 		}
 	}	
 }

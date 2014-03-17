@@ -3,6 +3,8 @@
 // No direct access.
 defined ( '_JEXEC' ) or die ();
 
+jimport( 'joomla.html.parameter' );
+
 /**
  * Script file of Gorilla.
  *
@@ -10,6 +12,57 @@ defined ( '_JEXEC' ) or die ();
  * @subpackage com_gorilla
  */
 class Com_GorillaInstallerScript {
+	
+	/**
+	 * Default configurations 
+	 * 
+	 * @ return void
+	 */
+	function configure() {
+		//load params
+		$component = JComponentHelper::getComponent("com_gorilla");
+		
+		//data array for bind, check and save
+		$params	= array(
+				'params'	=> $component->params->toArray(),
+				'id'		=> $component->id
+		);
+
+		$table	= JTable::getInstance('extension');
+		// Load the previous Data
+		if (!$table->load($params['id'])) {
+			$this->setError($table->getError());
+			return false;
+		}
+		
+		// Change configurations
+		$cParams = $component->params;		
+		$cParams->set('show_description', 	$cParams->get('show_description', 	'1') );
+		$cParams->set('show_color_code', 	$cParams->get('show_color_code', 	'1') );
+		$cParams->set('order_by', 			$cParams->get('order_by', 			'0') );
+		$cParams->set('order_orientation', 	$cParams->get('order_orientation', 	'0') );
+		$cParams->set('number_of_columns', 	$cParams->get('number_of_columns', 	'3') );		
+		$params['params'] = $cParams->toArray();
+
+		// Bind the data.
+		if (!$table->bind($params)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Check the data.
+		if (!$table->check()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Store the data.
+		if (!$table->store()) {
+			$this->setError($table->getError());
+			return false;
+		}		
+		
+	}
 	
 	/**
 	 * Executed after installed.
@@ -72,6 +125,9 @@ class Com_GorillaInstallerScript {
 	 * @see     JoomlaupdateModelDefault
 	 */
 	function postflight($type, $parent) {
+		
+		$this->configure();
+		
 		//echo '<p>' . JText::_ ( 'COM_GORILLA_POSTFLIGHT_' . $type . '_TEXT' ) . '</p>';
 	}
 }

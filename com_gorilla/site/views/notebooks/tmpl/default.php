@@ -5,7 +5,7 @@ $cols = $this->params->get('number_of_columns');
 $span = "span" . (12 / $cols);
 ?>
 
-<div class="container-fluid <?php echo $this->params->get('pageclass_sfx') ?>">
+<div class="container-fluid <?php echo $this->params->get('pageclass_sfx'); ?>">
 
 
     <div class="row">
@@ -14,11 +14,11 @@ $span = "span" . (12 / $cols);
             <div class="page-header">
                 <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
             </div>
-            <?endif;?>
+            <?php endif; ?>
 	    </div>
 	</div>
 
-	<?php foreach (array_chunk($this->items, $cols) as $row) : ?>
+	<?php foreach (array_chunk($this->items, isset($cols) ? $cols : 1) as $row) : ?>
 	<div class="row-fluid">
 		<?php foreach ($row as $col) : ?>
 		<div class="<?php echo $span ?>">
@@ -35,12 +35,10 @@ $span = "span" . (12 / $cols);
             <?php endif; ?>
 	    </div>
 	    <?php endforeach; ?>
-	    <?php //if (count($row) == 1) : ?>
 	    <?php for ($i = count($row); $i < $cols; $i++) : ?>
-		<div class="<?php echo $span ?>">
+		<div class="<?php echo $span; ?>">
 	    </div>
-	    <?php endfor; ?>
-	    <?php //endif; ?>
+	    <?php endfor; ?>	    
 	</div>
 	<?php endforeach; ?>
 

@@ -1,3 +1,12 @@
+<?php 
+require_once dirname(__FILE__) . '/../../../helpers/gorilla.php';
+
+//Get notebook options
+JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+$notebookList = JFormHelper::loadFieldType('NotebookList', false);
+$notebookListOptions = $notebookList->getOptions();
+?>
+
 <fieldset id="filter-bar">
 	<div class="filter-search fltlft">
 		<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
@@ -8,6 +17,12 @@
 	</div>
 	
 	<div class="filter-select fltrt">
+		<?php if(JRequest::getCmd('view') == 'documents'):?>
+			<select name="filter.notebook_id" class="inputbox" onchange="this.form.submit()">
+				<?php echo JHtml::_('select.options', $notebookListOptions, 'value', 'text', $this->state->get('filter.notebook_id'), true);?>
+			</select>		
+		<?php endif; ?>
+	
 		<select name="filter_published" class="inputbox" onchange="this.form.submit()">
 			<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 			<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>

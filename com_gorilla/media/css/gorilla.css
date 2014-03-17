@@ -22,6 +22,18 @@
     background-image: url(../img/icon-48-book.png);
 }
 
+.icon-16-stack       {
+	background-image: url(../img/icon-16-stack.png);
+}
+
+.icon-32-stack       {
+	background-image: url(../img/icon-32-stack.png);
+}
+
+.icon-48-stack       {
+    background-image: url(../img/icon-48-stack.png);
+}
+
 .icon-32-arrow-left  {
 	background-image: url('../img/icon-32-arrow-left.png');
 }

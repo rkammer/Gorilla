@@ -97,10 +97,6 @@ class GorillaModelNotebook extends JModelAdmin {
 		return $data;
 	}
 	
-	private function getNextColor() {
-		
-	}
-	
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
@@ -172,7 +168,7 @@ class GorillaModelNotebook extends JModelAdmin {
 		// Alter the title for save as copy
 		if ($app->input->get('task') == 'save2copy')
 		{
-			list($name, $alias) = $this->generateNewTitle($data['alias'], $data['title']);
+			list($name, $alias) = $this->generateNewTitle(null, $data['alias'], $data['title']);
 			$data['title']	= $name;
 			$data['alias']	= $alias;
 			$data['state']	= 0;
@@ -184,6 +180,7 @@ class GorillaModelNotebook extends JModelAdmin {
 	/**
 	 * Method to change the title & alias.
 	 *
+	 * @param   integer  $category_id  The id of the category.
 	 * @param   string   $alias        The alias.
 	 * @param   string   $title        The title.
 	 *
@@ -191,7 +188,7 @@ class GorillaModelNotebook extends JModelAdmin {
 	 *
 	 * @since	12.2
 	 */
-	protected function generateNewTitle($alias, $title)
+	protected function generateNewTitle($category_id, $alias, $title)
 	{
 		// Alter the title & alias
 		$table = $this->getTable();
