@@ -6,6 +6,8 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modeladmin');
 JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' );
 
+require_once dirname(__FILE__) . '/../helpers/gorilla.php';
+
 /**
  * Model class for document.
  *
@@ -129,7 +131,8 @@ class GorillaModelDocument extends JModelAdmin {
 				$table->ordering = $max + 1;
 				
 				$table->created    = $date->toSql();
-				$table->created_by = $user->get('id');				
+				$table->created_by = $user->get('id');		
+				$table->guid       = GorillaHelper::getGUID();
 			}
 			
 		}				

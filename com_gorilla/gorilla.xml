@@ -76,14 +76,14 @@
     <administration>
         <!-- Administration Menu Section -->
         <menu img="../media/com_gorilla/img/icon-16-dashboard.png">COM_GORILLA_MENU</menu>
-		<submenu>			
+		<submenu>
 			<menu view="notebooks"
 			      img="../media/com_gorilla/img/icon-16-book.png"
 				  alt="Gorilla/Notebooks">COM_GORILLA_SUBMENU_NOTEBOOKS</menu>
 			<menu view="documents"
 			      img="../media/com_gorilla/img/icon-16-stack.png"
-				  alt="Gorilla/Documents">COM_GORILLA_SUBMENU_DOCUMENTS</menu>				
-		</submenu>        
+				  alt="Gorilla/Documents">COM_GORILLA_SUBMENU_DOCUMENTS</menu>
+		</submenu>
 
         <!-- Administration Main File Copy Section -->
         <files folder="admin">
@@ -109,7 +109,7 @@
             <!-- This file has the translationd for Gorilla Component Backend -->
             <language tag="en-GB">language/en-GB/en-GB.com_gorilla.ini</language>
         </languages>
-        
+
     </administration>
 
 </extension>
