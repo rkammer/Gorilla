@@ -1,7 +1,14 @@
 <?php
+
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_gorilla
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
  */
 
 // No direct access.
@@ -18,7 +25,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {
-		if (task == 'document.cancel' || document.formvalidator.isValid(document.id('document-form'))) {			
+		if (task == 'document.cancel' || document.formvalidator.isValid(document.id('document-form'))) {
 			Joomla.submitform(task, document.getElementById('document-form'));
 		} else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
@@ -46,11 +53,11 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 				<li>
 					<?php echo $this->form->getLabel('access'); ?>
 					<?php echo $this->form->getInput('access'); ?>
-				</li>				
+				</li>
 				<li>
 					<?php echo $this->form->getLabel('notebook_id'); ?>
 					<?php echo $this->form->getInput('notebook_id'); ?>
-				</li>				
+				</li>
 				<li>
 					<?php echo $this->form->getLabel('id'); ?>
 					<?php echo $this->form->getInput('id'); ?>
@@ -58,14 +65,14 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 				<li>
 					<?php echo $this->form->getLabel('description'); ?>
 					<?php echo $this->form->getInput('description'); ?>
-				</li>				
-			</ul>	
+				</li>
+			</ul>
 		</fieldset>
 	</div>
-	
+
 	<div class="width-40 fltrt">
 		<?php echo JHtml::_('sliders.start', 'document-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-	
+
 		<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 			<fieldset class="panelform">
 				<ul class="adminformlist">
@@ -75,13 +82,13 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 					<?php endforeach; ?>
 				</ul>
 			</fieldset>
-			
+
 			<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 			<fieldset class="panelform">
 				<?php echo $this->loadTemplate('j25_metadata'); ?>
-			</fieldset>			
+			</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
-	
+
 	</div>
 	<div class="clr"></div>
 	<?php if ($canConfig): ?>
@@ -97,7 +104,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 
 			<?php echo JHtml::_('sliders.end'); ?>
 		</div>
-	<?php endif; ?>	
+	<?php endif; ?>
 	<div>
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="return" value="<?php echo JRequest::getCmd('return');?>" />

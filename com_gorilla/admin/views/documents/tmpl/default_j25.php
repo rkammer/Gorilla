@@ -1,7 +1,14 @@
 <?php
+
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_gorilla 
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
  */
 
 // no direct access
@@ -20,7 +27,7 @@ $saveOrder	= $listOrder == 'r.ordering';
 <form action="<?php echo JRoute::_('index.php?option=com_gorilla&view=documents');?>" method="post" name="adminForm" id="adminForm">
 
 	<?php echo $this->filter; ?>
-	
+
 	<div class="clr"> </div>
 
 	<table class="adminlist">
@@ -34,19 +41,19 @@ $saveOrder	= $listOrder == 'r.ordering';
 				</th>
 				<th width="30%">
 					<?php echo JHtml::_('grid.sort', 'COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL', 'a.notebook_id', $listDirn, $listOrder); ?>
-				</th>				
+				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
-				</th>				
+				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
 					<?php if ($saveOrder) :?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'documents.saveorder'); ?>
 					<?php endif; ?>
-				</th>	
+				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
-				</th>			
+				</th>
 				<th width="5%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
@@ -62,11 +69,11 @@ $saveOrder	= $listOrder == 'r.ordering';
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
 			$item->max_ordering = 0; //??
-			$ordering	= ($listOrder == 'a.ordering');		
+			$ordering	= ($listOrder == 'a.ordering');
 			$canCreate	= $user->authorise('core.create',		'com_gorilla');
 			$canEdit	= $user->authorise('core.edit',			'com_gorilla');
-			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out == $userId || $item->checked_out == 0;			
-			$canChange	= $user->authorise('core.edit.state',	'com_gorilla') && $canCheckin;	
+			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out == $userId || $item->checked_out == 0;
+			$canChange	= $user->authorise('core.edit.state',	'com_gorilla') && $canCheckin;
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -75,7 +82,7 @@ $saveOrder	= $listOrder == 'r.ordering';
 				<td>
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'documents.', true); ?>
-					<?php endif; ?>			
+					<?php endif; ?>
 					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=document.edit&id='.$item->id);?>">
 							<?php echo $this->escape($item->title); ?></a>
@@ -87,11 +94,11 @@ $saveOrder	= $listOrder == 'r.ordering';
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->notebook_title); ?>
-				</td>				
+				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'documents.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
-				</td>			
-				<td class="order">					
+				</td>
+				<td class="order">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) :?>
 							<?php if ($listDirn == 'asc') : ?>

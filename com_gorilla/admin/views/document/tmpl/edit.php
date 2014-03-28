@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined ( '_JEXEC' ) or die ();
 
@@ -29,12 +40,12 @@ JHtml::_('formbehavior.chosen', 'select');
 			<div class="span9">
 				<div class="form-vertical">
 					<?php echo $this->form->getControlGroup('notebook_id'); ?>
-					<?php echo $this->form->getControlGroup('description'); ?>										
+					<?php echo $this->form->getControlGroup('description'); ?>
 				</div>
 			</div>
 			<div class="span3">
 				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
-			</div>			
+			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
@@ -42,10 +53,10 @@ JHtml::_('formbehavior.chosen', 'select');
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span12">
 				<?php echo $this->form->getControlGroups('permissions'); ?>
-			</div>		
+			</div>
 		</div>
-		<?php echo JHtml::_('bootstrap.endTab'); ?>		
-		
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span6">

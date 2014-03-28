@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -9,7 +21,7 @@ defined('_JEXEC') or die;
  * @subpackage	com_gorilla
  */
 class GorillaTableConfig extends JTable {
-	
+
 	/**
 	 * Object constructor to set table and key fields.  In most cases this will
 	 * be overridden by child classes to explicitly set the table and key fields
@@ -20,11 +32,11 @@ class GorillaTableConfig extends JTable {
 	 * @param   JDatabaseDriver  $db     JDatabaseDriver object.
 	 *
 	 * @see   JTable
-	 */	
+	 */
 	public function __construct(&$db) {
 		parent::__construct ( '#__gorilla_config', 'id', $db );
 	}
-	
+
 	/**
 	 * Method to bind an associative array or object to the JTable instance.This
 	 * method only binds properties that are publicly accessible and optionally
@@ -37,11 +49,11 @@ class GorillaTableConfig extends JTable {
 	 *
 	 * @see     JTable
 	 * @throws  InvalidArgumentException
-	 */	
+	 */
 	public function bind($array, $ignore = '') {
 		return parent::bind ( $array, $ignore );
 	}
-	
+
 	/**
 	 * Method to store a row in the database from the JTable instance properties.
 	 * If a primary key value is set the row with that primary key value will be
@@ -54,7 +66,7 @@ class GorillaTableConfig extends JTable {
 	 * @return  boolean  True on success.
 	 *
 	 * @see     JTable
-	 */	
+	 */
 	public function store($updateNulls = false) {
 		return parent::store ( $updateNulls );
 	}

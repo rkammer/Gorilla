@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined ( '_JEXEC' ) or die ();
 
@@ -12,16 +23,16 @@ jimport( 'joomla.html.parameter' );
  * @subpackage com_gorilla
  */
 class Com_GorillaInstallerScript {
-	
+
 	/**
-	 * Default configurations 
-	 * 
+	 * Default configurations
+	 *
 	 * @ return void
 	 */
 	function configure() {
 		//load params
 		$component = JComponentHelper::getComponent("com_gorilla");
-		
+
 		//data array for bind, check and save
 		$params	= array(
 				'params'	=> $component->params->toArray(),
@@ -34,14 +45,14 @@ class Com_GorillaInstallerScript {
 			$this->setError($table->getError());
 			return false;
 		}
-		
+
 		// Change configurations
-		$cParams = $component->params;		
+		$cParams = $component->params;
 		$cParams->set('show_description', 	$cParams->get('show_description', 	'1') );
 		$cParams->set('show_color_code', 	$cParams->get('show_color_code', 	'1') );
 		$cParams->set('order_by', 			$cParams->get('order_by', 			'0') );
 		$cParams->set('order_orientation', 	$cParams->get('order_orientation', 	'0') );
-		$cParams->set('number_of_columns', 	$cParams->get('number_of_columns', 	'3') );		
+		$cParams->set('number_of_columns', 	$cParams->get('number_of_columns', 	'3') );
 		$params['params'] = $cParams->toArray();
 
 		// Bind the data.
@@ -60,10 +71,10 @@ class Com_GorillaInstallerScript {
 		if (!$table->store()) {
 			$this->setError($table->getError());
 			return false;
-		}		
-		
+		}
+
 	}
-	
+
 	/**
 	 * Executed after installed.
 	 *
@@ -71,12 +82,12 @@ class Com_GorillaInstallerScript {
 	 *
 	 * @return  void
 	 * @see     JoomlaupdateModelDefault
-	 */	
+	 */
 	function install($parent) {
 		//$parent->getParent ()->setRedirectURL ( 'index.php?option=com_gorilla&view=guide&task=install' );
 		echo '<p>' . JText::_ ( 'COM_GORILLA_INSTALL_TEXT' ) . '</p>';
 	}
-	
+
 	/**
 	 * Executed after uninstalled.
 	 *
@@ -84,11 +95,11 @@ class Com_GorillaInstallerScript {
 	 *
 	 * @return  void
 	 * @see     JoomlaupdateModelDefault
-	 */	
+	 */
 	function uninstall($parent) {
 		echo '<p>' . JText::_ ( 'COM_GORILLA_UNINSTALL_TEXT' ) . '</p>';
 	}
-	
+
 	/**
 	 * Executed after updated.
 	 *
@@ -96,12 +107,12 @@ class Com_GorillaInstallerScript {
 	 *
 	 * @return  void
 	 * @see     JoomlaupdateModelDefault
-	 */	
+	 */
 	function update($parent) {
 		//$parent->getParent ()->setRedirectURL ( 'index.php?option=com_gorilla&view=guide&task=update' );
 		echo '<p>' . JText::_ ( 'COM_GORILLA_UPDATE_TEXT' ) . '</p>';
 	}
-	
+
 	/**
 	 * Executed before installing/updating.
 	 *
@@ -110,11 +121,11 @@ class Com_GorillaInstallerScript {
 	 *
 	 * @return  void
 	 * @see     JoomlaupdateModelDefault
-	 */	
+	 */
 	function preflight($type, $parent) {
 		//echo '<p>' . JText::_ ( 'COM_GORILLA_PREFLIGHT_' . $type . '_TEXT' ) . '</p>';
 	}
-	
+
 	/**
 	 * Executed after installing/updating.
 	 *
@@ -125,9 +136,9 @@ class Com_GorillaInstallerScript {
 	 * @see     JoomlaupdateModelDefault
 	 */
 	function postflight($type, $parent) {
-		
+
 		$this->configure();
-		
+
 		//echo '<p>' . JText::_ ( 'COM_GORILLA_POSTFLIGHT_' . $type . '_TEXT' ) . '</p>';
 	}
 }

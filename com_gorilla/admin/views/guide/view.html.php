@@ -1,6 +1,18 @@
 <?php
+
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 defined('_JEXEC') or die;
- 
+
 /**
  * Methods display a guide to component.
  *
@@ -9,39 +21,39 @@ defined('_JEXEC') or die;
  */
 class GorillaViewGuide extends JViewLegacy
 {
-	
+
 	/**
 	 * Indication if is installation or update
 	 *
 	 * @var boolean
-	 */	
+	 */
 	protected $installation;
-	
+
     /**
     * View display method
     * @return void
     */
-	function display($tpl = null) 
+	function display($tpl = null)
     {
     	JToolBarHelper::title(JText::_('COM_GORILLA'), 'guide');
-    	
+
 		//Check for errors.
-        if (count($errors = $this->get('Errors'))) 
+        if (count($errors = $this->get('Errors')))
         {
         	JError::raiseError(500, implode('<br />', $errors));
             return false;
         }
-        
+
         //TODO get this from task
         $this->installation = false;
-        
+
         //adds scripts and styles
-        //$this->addScripts();		
-        
+        //$this->addScripts();
+
         // Display the template
         parent::display($tpl);
 	}
-	
+
     /**
      * Add script to Bootstrap work out.
      *
@@ -52,5 +64,5 @@ class GorillaViewGuide extends JViewLegacy
         $doc->addScript('../media/com_gorilla/js/jquery-2.0.3.min.js');
         $doc->addScript('../media/com_gorilla/js/bootstrap.js');
         $doc->addStyleSheet('../media/com_gorilla/css/bootstrap.css');
-    }	
+    }
 }

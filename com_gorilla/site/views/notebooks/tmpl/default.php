@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 defined ( '_JEXEC' ) or die ();
 
 $cols = $this->params->get('number_of_columns');
@@ -38,7 +50,7 @@ $span = "span" . (12 / $cols);
 	    <?php for ($i = count($row); $i < $cols; $i++) : ?>
 		<div class="<?php echo $span; ?>">
 	    </div>
-	    <?php endfor; ?>	    
+	    <?php endfor; ?>
 	</div>
 	<?php endforeach; ?>
 
