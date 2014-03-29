@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 defined ( '_JEXEC' ) or die ();
 
 $notebook = $this->params->get('notebook');
@@ -13,11 +25,11 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 
 	<?php foreach ($this->items as $item) : ?>
 	<div class="row">
-		<div class="span12">		
-	        <div style="background-color:<?php echo $item->color_code; ?>;" class="notebook-box-large">&nbsp;</div> <h1 class="notebookj25-h1"><?php echo $item->title; ?></h1>		
-	    </div>	
+		<div class="span12">
+	        <div style="background-color:<?php echo $item->color_code; ?>;" class="notebook-box-large">&nbsp;</div> <h1 class="notebookj25-h1"><?php echo $item->title; ?></h1>
+	    </div>
 	</div>
-	
+
 	<div class="row">
 	    <div class="span12">
 	        <blockquote>
@@ -26,8 +38,8 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 	    </div>
 	</div>
 	<?php endforeach; ?>
-	
-	
+
+
 	<div class="row">
 	    <div class="span12 well">
 	        <a href="#"><h2>Document One</h2></a>
@@ -37,7 +49,7 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 	        <button class="btn" type="button"><i class="icon-download"></i> Download</button>
 	    </div>
 	</div>
-	
+
 	<div class="row">
 	    <div class="span12 well">
 	        <a href="#"><h2>Document Two</h2></a>
@@ -47,7 +59,7 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 	        <button class="btn" type="button"><i class="icon-download"></i> Download</button>
 	    </div>
 	</div>
-	
+
 	<div class="row">
 	    <div class="span12 well">
 	        <a href="#"><h2>Document Three</h2></a>
@@ -57,7 +69,7 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 	        <button class="btn" type="button"><i class="icon-download"></i> Download</button>
 	    </div>
 	</div>
-	
+
 	<div class="row">
 	    <div class="span12 well">
 	        <a href="#"><h2>Document Four</h2></a>
@@ -67,7 +79,7 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 	        <button class="btn" type="button"><i class="icon-download"></i> Download</button>
 	    </div>
 	</div>
-	
+
 	<div class="pagination center">
 	    <ul>
 	        <li><a href="#">Prev</a></li>
@@ -79,5 +91,9 @@ $add_href = 'index.php?option=com_gorilla&view=notebooks';
 	        <li><a href="#">Next</a></li>
 	    </ul>
 	</div>
+
+    <div class="gorilla-footer">
+         <p><img src="../media/com_gorilla/img/icon-32.png">&nbsp;<?php echo JText::_('COM_GORILLA_POWERED','Powered by Gorilla Document Manager');?></p>
+    </div>
 
 </div>

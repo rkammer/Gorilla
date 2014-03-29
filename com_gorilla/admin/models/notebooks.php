@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -35,7 +46,7 @@ class GorillaModelNotebooks extends JModelList
 		}
 		parent::__construct($config);
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -51,21 +62,21 @@ class GorillaModelNotebooks extends JModelList
 	 * @return  void
 	 *
 	 * @see     JModelList
-	 */	
+	 */
 	protected function populateState($ordering = null, $direction = null) {
-		
+
 		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);		
-		
+		$this->setState('filter.search', $search);
+
 		$published = $this->getUserStateFromRequest($this->context.'.filter.published', 'filter_published', '', 'string');
-		$this->setState('filter.published', $published);	
+		$this->setState('filter.published', $published);
 
 		$accessId = $this->getUserStateFromRequest($this->context . '.filter.access', 'filter_access', null, 'int');
-		$this->setState('filter.access', $accessId);		
-		
+		$this->setState('filter.access', $accessId);
+
 		parent::populateState ( 'a.ordering', 'asc' );
-	}	
-	
+	}
+
 	/**
 	 * Build an SQL query to load the list data.
 	 *
@@ -88,21 +99,21 @@ class GorillaModelNotebooks extends JModelList
 				'a.publish_up, a.publish_down '
 			)
 		);
-		
+
 		// Join over the users for the author user.
 		$query->select('ua.name AS author_name');
 		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
-		
+
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
 		$query->join('LEFT', '#__users AS uc ON uc.id = a.checked_out');
-		
+
 		// Join over the asset groups.
 		$query->select('ag.title AS access_level');
-		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');		
-		
+		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+
 		$query->from('#__gorilla_notebooks a');
-		
+
 		// Filter by published (state)
 		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
@@ -111,7 +122,7 @@ class GorillaModelNotebooks extends JModelList
 		elseif ($published === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
-	
+
 		// Filter by search in title.
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
@@ -127,27 +138,27 @@ class GorillaModelNotebooks extends JModelList
 				$query->where('(a.title LIKE '.$search.')');
 			}
 		}
-		
+
 		// Filter by access level.
 		if ($access = $this->getState('filter.access'))
 		{
 			$query->where('a.access = ' . (int) $access);
-		}		
-		
+		}
+
 		// Filter by author
 		$authorId = $this->getState('filter.author_id');
 		if (is_numeric($authorId)) {
 			$type = $this->getState('filter.author_id.include', true) ? '= ' : '<>';
 			$query->where('a.created_by '.$type.(int) $authorId);
 		}
-		
+
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering', 'a.ordering');
-		$orderDirn	= $this->state->get('list.direction', 'asc');				
+		$orderDirn	= $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($orderCol.' '.$orderDirn));
-		
+
 		return $query;
 	}
-	
+
 }
 

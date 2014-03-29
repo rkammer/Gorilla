@@ -1,7 +1,14 @@
 <?php
+
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_gorilla
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
  */
 
 // No direct access.
@@ -18,7 +25,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {
-		if (task == 'notebook.cancel' || document.formvalidator.isValid(document.id('notebook-form'))) {			
+		if (task == 'notebook.cancel' || document.formvalidator.isValid(document.id('notebook-form'))) {
 			Joomla.submitform(task, document.getElementById('notebook-form'));
 		} else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
@@ -42,7 +49,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 			//	$j( "#colorBox" ).css("background-color",colorCode);
 			//}
 		});
-    });	
+    });
 </script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="notebook-form" class="form-validate">
@@ -65,11 +72,11 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 				<li>
 					<?php echo $this->form->getLabel('access'); ?>
 					<?php echo $this->form->getInput('access'); ?>
-				</li>				
+				</li>
 				<li>
 					<?php echo $this->form->getLabel('color_code'); ?>
 					<?php echo $this->form->getInput('color_code'); ?>
-				</li>				
+				</li>
 				<li>
 					<?php echo $this->form->getLabel('id'); ?>
 					<?php echo $this->form->getInput('id'); ?>
@@ -77,14 +84,14 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 				<li>
 					<?php echo $this->form->getLabel('description'); ?>
 					<?php echo $this->form->getInput('description'); ?>
-				</li>				
-			</ul>	
+				</li>
+			</ul>
 		</fieldset>
 	</div>
-	
+
 	<div class="width-40 fltrt">
 		<?php echo JHtml::_('sliders.start', 'notebook-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-	
+
 		<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 			<fieldset class="panelform">
 				<ul class="adminformlist">
@@ -94,13 +101,13 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 					<?php endforeach; ?>
 				</ul>
 			</fieldset>
-			
+
 			<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 			<fieldset class="panelform">
 				<?php echo $this->loadTemplate('j25_metadata'); ?>
-			</fieldset>			
+			</fieldset>
 		<?php echo JHtml::_('sliders.end'); ?>
-	
+
 	</div>
 	<div class="clr"></div>
 	<?php if ($canConfig): ?>
@@ -116,7 +123,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 
 			<?php echo JHtml::_('sliders.end'); ?>
 		</div>
-	<?php endif; ?>	
+	<?php endif; ?>
 	<div>
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" id="color_code_suggest" value="<?php echo $this->form->getValue('color_code'); ?>" />

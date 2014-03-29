@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -15,7 +26,7 @@ require_once dirname(__FILE__) . '/../helpers/gorilla.php';
  * @subpackage	com_gorilla
  */
 class GorillaModelDocument extends JModelAdmin {
-	
+
 	/**
 	 * The type alias for this content type.
 	 *
@@ -23,15 +34,15 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @since    3.2
 	 */
 	public $typeAlias = 'com_gorilla.document';
-	
+
 	/**
 	 * The prefix to use with controller messages.
 	 *
 	 * @var    string
 	 * @since  1.6
 	 */
-	protected $text_prefix = 'COM_GORILLA';	
-	
+	protected $text_prefix = 'COM_GORILLA';
+
 	/**
 	 * Method to get a table object, load it if necessary.
 	 *
@@ -42,13 +53,13 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @return  JTable  A JTable object
 	 *
 	 * @throws  Exception
-	 * 
+	 *
 	 * @see     JModelLegacy
-	 */	
+	 */
 	public function getTable($type = 'Document', $prefix = 'GorillaTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
-	
+
 	/**
 	 * Method for getting the form from the model.
 	 *
@@ -58,13 +69,13 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @return  mixed  A JForm object on success, false on failure
 	 *
 	 * @see     JModelForm
-	 */	
+	 */
 	public function getForm($data = array(), $loadData = true) {
 		$app = JFactory::getApplication ();
 		$form = $this->loadForm ( 'com_gorilla.document', 'document', array (
 				'control' => 'jform',
-				'load_data' => $loadData 
-			) 
+				'load_data' => $loadData
+			)
 		);
 		if (empty ( $form )) {
 			return false;
@@ -78,23 +89,23 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @return  array    The default data is an empty array.
 	 *
 	 * @see  	JModelForm
-	 */	
+	 */
 	protected function loadFormData() {
 		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.document.data', array () );
 		if (empty ( $data )) {
 			$data = $this->getItem ();
-			
+
 			// Prime some default values.
 			if ($this->getState('document.id') == 0)
 			{
 				// Get next color
-				$GorillaModelConfig = new GorillaModelConfig();				
+				$GorillaModelConfig = new GorillaModelConfig();
 				$data->set('color_code', $GorillaModelConfig->getNextColor());
-			}			
+			}
 		}
 		return $data;
 	}
-	
+
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
@@ -103,48 +114,48 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @return  void
 	 *
 	 * @see   JModelAdmin
-	 */	
-	protected function prepareTable($table) 
+	 */
+	protected function prepareTable($table)
 	{
 		$date = JFactory::getDate();
-		$user = JFactory::getUser();		
-		
+		$user = JFactory::getUser();
+
 		$table->title = htmlspecialchars_decode ( $table->title, ENT_QUOTES );
 		$table->alias = JApplication::stringURLSafe($table->alias);
-		
+
 		if (empty($table->alias))
 		{
 			$table->alias = JApplication::stringURLSafe($table->title);
-		}		
-		
+		}
+
 		if (empty($table->id))
 		{
 			// Set the values
-		
+
 			// Set ordering to the last item if not set
 			if (empty($table->ordering))
 			{
 				$db = JFactory::getDbo();
 				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_documents');
 				$max = $db->loadResult();
-		
+
 				$table->ordering = $max + 1;
-				
+
 				$table->created    = $date->toSql();
-				$table->created_by = $user->get('id');		
+				$table->created_by = $user->get('id');
 				$table->guid       = GorillaHelper::getGUID();
 			}
-			
-		}				
+
+		}
 		else
 		{
 			// Set the values
 			$table->modified    = $date->toSql();
 			$table->modified_by = $user->get('id');
 		}
-	
+
 	}
-	
+
 	/**
 	 * Method to save the form data.
 	 *
@@ -157,7 +168,7 @@ class GorillaModelDocument extends JModelAdmin {
 	public function save($data)
 	{
 		$app = JFactory::getApplication();
-	
+
 		// Alter the title for save as copy
 		if ($app->input->get('task') == 'save2copy')
 		{
@@ -166,7 +177,7 @@ class GorillaModelDocument extends JModelAdmin {
 			$data['alias']	= $alias;
 			$data['state']	= 0;
 		}
-	
+
 		return parent::save($data);
 	}
 
@@ -190,8 +201,8 @@ class GorillaModelDocument extends JModelAdmin {
 			$title = JString::increment($title);
 			$alias = JString::increment($alias, 'dash');
 		}
-	
+
 		return array($title, $alias);
-	}	
-	
+	}
+
 }

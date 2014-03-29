@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -13,7 +24,7 @@ jimport('joomla.application.component.controlleradmin');
  */
 class GorillaControllerNotebooks extends JControllerAdmin
 {
-	
+
 	/**
 	 * Proxy for getModel.
 	 *
@@ -27,12 +38,12 @@ class GorillaControllerNotebooks extends JControllerAdmin
 		$model = parent::getModel($name, $prefix, $config);
 		return $model;
 	}
-	
+
 	/**
 	 * Called from form list to change order with drag and drop.
 	 *
 	 * @return	void
-	 */	
+	 */
 	public function saveOrderAjax()
 	{
 		$input = JFactory::getApplication()->input;
@@ -47,6 +58,6 @@ class GorillaControllerNotebooks extends JControllerAdmin
 			echo "1";
 		}
 		JFactory::getApplication()->close();
-		
-	}	
+
+	}
 }

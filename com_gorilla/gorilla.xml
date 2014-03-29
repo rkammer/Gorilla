@@ -8,7 +8,7 @@
     <authorEmail>info@sohoprospecting.com</authorEmail>
     <authorUrl>https://www.sohoprospecting.com</authorUrl>
     <copyright>2013-2014 SOHO Prospecting</copyright>
-    <license>COM_GORILLA_LICENSE</license>
+    <license>GNU/GPLv2 or later</license>
 
     <!--  The version string is recorded in the components table -->
     <version>0.0.6</version>
