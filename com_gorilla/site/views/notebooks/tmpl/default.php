@@ -54,4 +54,8 @@ $span = "span" . (12 / $cols);
 	</div>
 	<?php endforeach; ?>
 
+    <div class="gorilla-footer">
+         <p><img src="../media/com_gorilla/img/icon-32.png">&nbsp;<?php echo JText::_('COM_GORILLA_POWERED','Powered by Gorilla Document Manager');?></p>
+    </div>
+
 </div>
