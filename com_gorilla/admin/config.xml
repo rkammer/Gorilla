@@ -49,6 +49,21 @@
 		</field>					
 		
 	</fieldset>
+	
+	<fieldset name="documents"
+		label="COM_GORILLA_CONFIG_DOCUMENTS_LABEL"
+		description="COM_GORILLA_CONFIG_DOCUMENTS_DESCRIPTION">
+		
+		<field name="list_limit" 
+		    type="limitbox"
+			class="inputbox input-mini"
+			default="5"
+			label="COM_GORILLA_CONFIG_DOCUMENTS_LIST_LIMIT_LABEL"
+			description="COM_GORILLA_CONFIG_DOCUMENTS_LIST_LIMIT_DESC"			
+		/>	
+		
+	</fieldset>
+				
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
 		label="JCONFIG_PERMISSIONS_LABEL">

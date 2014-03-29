@@ -25,7 +25,7 @@ $span = "span" . (12 / $cols);
 			<?php if ($this->params->get('show_color_code') == 1) : ?>
                 <div style="background-color:<?php echo $col->color_code; ?>;" class="notebook-box-small">&nbsp;</div>
             <?php endif; ?>
-            <a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebook&id='.(int) $col->id); ?>">
+            <a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=documents&id='.(int) $col->id); ?>">
                 <?php echo $col->title; ?>
             </a>
 			<?php if ($this->params->get('show_description') == 1) : ?>
