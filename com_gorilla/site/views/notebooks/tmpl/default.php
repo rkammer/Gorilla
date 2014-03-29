@@ -35,7 +35,7 @@ $span = "span" . (12 / $cols);
 		<?php foreach ($row as $col) : ?>
 		<div class="<?php echo $span ?>">
 			<?php if ($this->params->get('show_color_code') == 1) : ?>
-                <div style="background-color:<?php echo $col->color_code; ?>;" class="notebook-box-small">&nbsp;</div>
+                <div style="background-color:<?php echo $col->color_code; ?>;" class="notebook-box-small" title="<?php echo $col->title; ?>">&nbsp;</div>
             <?php endif; ?>
             <a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebook&id='.(int) $col->id); ?>">
                 <?php echo $col->title; ?>
