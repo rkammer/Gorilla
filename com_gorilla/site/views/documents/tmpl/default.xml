@@ -1,17 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_GORILLA_NOTEBOOK_VIEW_DEFAULT_TITLE" option="COM_GORILLA_NOTEBOOK_VIEW_DEFAULT_OPTION">
+	<layout title="COM_GORILLA_DOCUMENTS_VIEW_DEFAULT_TITLE" option="COM_GORILLA_DOCUMENTS_VIEW_DEFAULT_OPTION">
 		<message>
-			<![CDATA[COM_GORILLA_NOTEBOOK_VIEW_DEFAULT_DESC]]>
+			<![CDATA[COM_GORILLA_DOCUMENTS_VIEW_DEFAULT_DESC]]>
 		</message>
 	</layout>
 	<fields name="params">
-		<fieldset name="basic" label="COM_GORILLA_NOTEBOOK_FIELD_CONFIG_OPTIONS"
+		<fieldset name="basic" label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_OPTIONS"
 			addfieldpath="/components/com_gorilla/models/fields">
 			
 			<field name="notebook" type="NotebookList" 
 			   label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NOTEBOOK_LABEL" description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NOTEBOOK_DESC" 
-			   required="true" />			
+			   required="true" />	
+			   
+			<field name="show_notebook_description" type="list"			    
+				label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_DESCRIPTION_TITLE"
+				description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_DESCRIPTION_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+			
+			<field name="show_notebook_color_code" type="list"
+				label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_COLOR_BOX_TITLE"
+				description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_COLOR_BOX_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+			
+			<field name="show_document_description" type="list"			    
+				label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
+				description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>			
+			
+			<field name="documents_order_by" type="list"
+				label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_TITLE"
+				description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_DESC">	
+				<option value="">JGLOBAL_USE_GLOBAL</option>			
+				<option value="0">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
+				<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
+				<option value="2">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
+			</field>						
+			
+			<field name="documents_order_orientation" type="list"
+				label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
+				description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
+				<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>				
+			</field>			   		
 
 		</fieldset>
 	</fields>	

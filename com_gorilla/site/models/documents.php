@@ -22,16 +22,6 @@ class GorillaModelDocuments extends JModelList
 	 */
 	public function __construct($config = array())
 	{
-/* 		if (empty($config['filter_fields']))
-		{
-			$config['filter_fields'] = array(
-					'id', 'a.id',
-					'title', 'a.title',
-					'access', 'a.access', 'access_level',
-					'published', 'a.published',
-					'ordering', 'a.ordering'
-			);
-		} */
 		parent::__construct($config);
 	}
 	
@@ -55,21 +45,13 @@ class GorillaModelDocuments extends JModelList
 	{
 		$app = JFactory::getApplication();
 	
-/* 		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
-	
-		$published = $this->getUserStateFromRequest($this->context.'.filter.published', 'filter_published', '', 'string');
-		$this->setState('filter.published', $published);
-	
-		$accessId = $this->getUserStateFromRequest($this->context . '.filter.access', 'filter_access', null, 'int');
-		$this->setState('filter.access', $accessId); */
-
 		// Allow to use params in view
 		$params = $app->getParams();
 		$this->setState('params', $params);
 		
-/* 		$ordering = '';
-		switch ($params->get('order_by')) {
+		// Param documents_order_by
+ 		$ordering = '';
+		switch ($params->get('documents_order_by')) {
 			case 1:
 				$ordering = 'a.created';
 				break;
@@ -78,13 +60,13 @@ class GorillaModelDocuments extends JModelList
 				break;
 			default:
 				$ordering = 'a.ordering';				
-		} 
-		*/
+		}
+
+		// Param documents_order_orientation
  		$orientation = 'asc';
- 		/*
-		if ($params->get('order_orientation') == 1) {
+		if ($params->get('documents_order_orientation') == 1) {
 			$orientation = 'desc';
-		} */
+		}
 		
 		// Verifying params from the caller
 		$id = JRequest::getInt('id');
@@ -94,14 +76,6 @@ class GorillaModelDocuments extends JModelList
 		$this->setState('id', $id);		
 		
 		parent::populateState($ordering, $orientation);
-		
-		// Override global configuration loaded in populate state
-		$limit = $params->get('list_limit');
-		$this->setState('list.limit', $limit);		
-		
-		$value = $app->getUserStateFromRequest($this->context . '.limitstart', 'limitstart', 0);
-		$limitstart = ($limit != 0 ? (floor($value / $limit) * $limit) : 0);
-		$this->setState('list.start', $limitstart);		
 	}
 	
 	/**
@@ -123,16 +97,8 @@ class GorillaModelDocuments extends JModelList
 						'a.title, a.description '
 				)
 		);
-	
-		// Join over the users for the author user.
-		$query->select('nb.title AS notebook_title, ' .
-				       'nb.description AS notebook_description, ' .
-				       'nb.color_code AS notebook_color_code '
-		);
-		$query->join('INNER', '#__gorilla_notebooks AS nb ON nb.id = a.notebook_id');
-	
 		$query->from('#__gorilla_documents a');
-	
+		
 		// Filter by id
 		if ($id = $this->getState('id'))
 		{

@@ -215,7 +215,7 @@ class GorillaViewDocuments extends JViewLegacy {
 			$doc->addScript(JURI::root().'media/com_gorilla/js/jquery-2.0.3.min.js');
 			//$doc->addScript(JURI::root().'media/com_gorilla/js/bootstrap.js');
 			//$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/bootstrap.css');
-			//$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/gorilla-minicolors.css');
+			$doc->addStyleSheet(JURI::root().'media/com_gorilla/css/gorilla-minicolors.css');
 		}
 	}
 }

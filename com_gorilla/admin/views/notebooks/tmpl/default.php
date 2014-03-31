@@ -29,7 +29,6 @@ if ($saveOrder)
 $sortFields = $this->getSortFields();
 
 // Use minicolors in grid
-//JHtml::_('script', 'jui/jquery.minicolors.min.js', false, true);
 JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 ?>
 <script type="text/javascript">

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
+	<!-- 
+		 IMPORTANT WARNING !!!
+		 
+		 Please, initialize every configuration field in install.script.php
+		 
+		 See function configure()
+	 -->
 	<fieldset name="notebooks"
 		label="COM_GORILLA_CONFIG_NOTEBOOKS_LABEL"
 		description="COM_GORILLA_CONFIG_NOTEBOOKS_DESCRIPTION">
@@ -54,13 +61,49 @@
 		label="COM_GORILLA_CONFIG_DOCUMENTS_LABEL"
 		description="COM_GORILLA_CONFIG_DOCUMENTS_DESCRIPTION">
 		
-		<field name="list_limit" 
-		    type="limitbox"
-			class="inputbox input-mini"
-			default="5"
-			label="COM_GORILLA_CONFIG_DOCUMENTS_LIST_LIMIT_LABEL"
-			description="COM_GORILLA_CONFIG_DOCUMENTS_LIST_LIMIT_DESC"			
-		/>	
+		<field name="show_notebook_description" type="radio"			    
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_DESCRIPTION_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_DESCRIPTION_DESC"
+			class="btn-group btn-group-yesno"
+			default="1" filter="integer">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		
+		<field name="show_notebook_color_code" type="radio"
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_COLOR_BOX_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_COLOR_BOX_DESC"
+			class="btn-group btn-group-yesno"
+			default="1" filter="integer">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>	
+		
+		<field name="show_document_description" type="radio"			    
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC"
+			class="btn-group btn-group-yesno"
+			default="1" filter="integer">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>		
+		
+		<field name="documents_order_by" type="list"
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_DESC"
+			default="0" filter="integer">				
+			<option value="0">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
+			<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
+			<option value="2">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
+		</field>
+		
+		<field name="documents_order_orientation" type="list"
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_DESC"
+			default="0">
+			<option value="0">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
+			<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>				
+		</field>		
 		
 	</fieldset>
 				

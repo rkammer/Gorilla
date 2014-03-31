@@ -29,8 +29,7 @@ if ($saveOrder)
 $sortFields = $this->getSortFields();
 
 // Use minicolors in grid
-//JHtml::_('script', 'jui/jquery.minicolors.min.js', false, true);
-//JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
+JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 ?>
 <script type="text/javascript">
 	Joomla.orderTable = function()
@@ -167,7 +166,10 @@ $sortFields = $this->getSortFields();
 						</span>
 					</td>
 					<td class="small">
-						<?php echo $this->escape($item->notebook_title); ?>
+					    <span class="minicolors-swatch">
+					        <span style="background-color: <?php echo $this->escape($item->notebook_color_code); ?>;"></span>
+					    </span>
+ 					    <?php echo $this->escape($item->notebook_title); ?>
 					</td>
 					<td class="small hidden-phone">
 						<?php echo $this->escape($item->access_level); ?>

@@ -11,6 +11,6 @@ jimport('joomla.application.component.controlleradmin');
  * @package		Joomla.Site
  * @subpackage	com_gorilla
  */
-class GorillaControllerdocuments extends JControllerForm
+class GorillaControllerDocuments extends JControllerForm
 {
 }

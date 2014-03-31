@@ -106,7 +106,8 @@ class GorillaModelDocuments extends JModelList
 		);
 
 		// Join over the notebooks for the notebook title.
-		$query->select('un.title AS notebook_title');
+		$query->select('un.title AS notebook_title, ' .
+					   'un.color_code AS notebook_color_code ' );
 		$query->join('INNER', '#__gorilla_notebooks AS un ON un.id = a.notebook_id');
 
 		// Join over the users for the author user.

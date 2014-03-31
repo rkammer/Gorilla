@@ -207,7 +207,7 @@ class GorillaModelNotebook extends JModelAdmin {
 	 *
 	 * @since	12.2
 	 */
-	protected function generateNewTitle($alias, $title)
+	protected function generateNewTitle($category_id, $alias, $title)
 	{
 		// Alter the title & alias
 		$table = $this->getTable();

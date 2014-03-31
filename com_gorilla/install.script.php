@@ -48,11 +48,16 @@ class Com_GorillaInstallerScript {
 
 		// Change configurations
 		$cParams = $component->params;
-		$cParams->set('show_description', 	$cParams->get('show_description', 	'1') );
-		$cParams->set('show_color_code', 	$cParams->get('show_color_code', 	'1') );
-		$cParams->set('order_by', 			$cParams->get('order_by', 			'0') );
-		$cParams->set('order_orientation', 	$cParams->get('order_orientation', 	'0') );
-		$cParams->set('number_of_columns', 	$cParams->get('number_of_columns', 	'3') );
+		$cParams->set('show_description', 				$cParams->get('show_description', 				'1') );
+		$cParams->set('show_color_code', 				$cParams->get('show_color_code', 				'1') );
+		$cParams->set('order_by', 						$cParams->get('order_by', 						'0') );
+		$cParams->set('order_orientation', 				$cParams->get('order_orientation', 				'0') );
+		$cParams->set('number_of_columns', 				$cParams->get('number_of_columns', 				'3') );
+		$cParams->set('show_notebook_description', 		$cParams->get('show_notebook_description', 		'1') );
+		$cParams->set('show_notebook_color_code', 		$cParams->get('show_notebook_color_code', 		'1') );
+		$cParams->set('show_document_description', 		$cParams->get('show_document_description', 		'1') );
+		$cParams->set('documents_order_by', 			$cParams->get('documents_order_by', 			'0') );
+		$cParams->set('documents_order_orientation', 	$cParams->get('documents_order_orientation', 	'0') );		
 		$params['params'] = $cParams->toArray();
 
 		// Bind the data.

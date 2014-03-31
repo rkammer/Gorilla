@@ -33,16 +33,6 @@ class GorillaModelNotebook extends JModelList
 	 */
 	public function __construct($config = array())
 	{
-		if (empty($config['filter_fields']))
-		{
-			$config['filter_fields'] = array(
-					'id', 'a.id',
-					'title', 'a.title',
-					'access', 'a.access', 'access_level',
-					'published', 'a.published',
-					'ordering', 'a.ordering'
-			);
-		}
 		parent::__construct($config);
 	}
 

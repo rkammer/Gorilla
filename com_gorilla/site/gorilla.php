@@ -24,6 +24,7 @@ if (version_compare(JVERSION, '3', 'lt')) {
 	$document->addScript(JURI::root().'./media/com_gorilla/js/bootstrap.js');
 	$document->addScript(JURI::root().'./media/com_gorilla/js/bootstrap.min.js');
 	$document->addStyleSheet(JURI::root().'./media/com_gorilla/css/bootstrap.css');
+	$document->addStyleSheet(JURI::root().'./media/com_gorilla/css/gorilla-j25-conflicts.css');
 }
 
 // Get an instance of the controller prefixed by SohoWater

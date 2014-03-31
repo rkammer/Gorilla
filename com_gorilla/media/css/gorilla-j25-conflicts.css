@@ -1,0 +1,28 @@
+/* Pagination in Front-end - Start here */ 
+
+#main .pagination li {
+	padding: 0px 0px 0px 0px !important;
+	margin: 0px 0px 0px 0px !important;
+}
+
+#main .pagination ul li span {
+	float: none !important;
+	padding: 4px 2px 4px 2px !important;
+	margin: 0px 0px 0px 0px !important;	
+}
+
+#main .pagination ul > li > a {
+	float: none !important;
+	padding: 4px 2px 4px 2px !important;
+	margin: 0px 0px 0px 0px !important;
+}
+
+#main .pagination .limit {
+	display: none;
+}
+
+#main .pagination .counter {
+	display: none;
+}
+
+/* Pagination in Front-end - Finish here */

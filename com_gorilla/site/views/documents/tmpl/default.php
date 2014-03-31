@@ -1,8 +1,8 @@
 <?php
 defined ( '_JEXEC' ) or die ();
 
-$document = $this->params->get('document');
-$show_back_to_notebooks_button = ($document == "");
+$notebook = $this->params->get('notebook');
+$show_back_to_notebooks_button = ($notebook == "");
 $add_href = 'index.php?option=com_gorilla&view=documents';
 ?>
 
@@ -11,26 +11,32 @@ $add_href = 'index.php?option=com_gorilla&view=documents';
 <?php endif; ?>
 <div class="container-fluid" width=60%>
 
-	<?php $notebook = $this->items[0] ?>
 	<div class="row">
-		<div class="span12">		
-	        <div style="background-color:<?php echo $notebook->notebook_color_code; ?>;" class="notebook-box-large">&nbsp;</div> <h1 class="notebookj25-h1"><?php echo $notebook->notebook_title; ?></h1>		
+		<div class="span12">
+			<?php if ($this->params->get('show_notebook_color_code') == 1) : ?>		
+	        <div style="background-color:<?php echo $this->notebook->color_code; ?>;" class="notebook-box-large">&nbsp;</div>
+	        <?php endif; ?> 
+	        <h1 class="notebookj25-h1"><?php echo $this->notebook->title; ?></h1>		
 	    </div>	
 	</div>
 	
+	<?php if ($this->params->get('show_notebook_description') == 1) : ?>
 	<div class="row">
 	    <div class="span12">
 	        <blockquote>
-	        <p class="muted"><?php echo $notebook->notebook_description; ?></p>
+	        <p class="muted"><?php echo $this->notebook->description; ?></p>
 	        </blockquote>
 	    </div>
 	</div>
+	<?php endif; ?>
 
 	<?php foreach ($this->items as $key => $item) : ?>
 	<div class="row">
 	    <div class="span12 well">
 	        <a href="#"><h2><?php echo $item->title; ?></h2></a>
+	        <?php if ($this->params->get('show_document_description') == 1) : ?>
 	        <p class="muted"><?php echo $item->description; ?></p>
+	        <?php endif; ?>
 	        <button class="btn" type="button"><i class="icon-file"></i> Document</button>
 	        <button class="btn" type="button"><i class="icon-folder-open"></i> Open</button>
 	        <button class="btn" type="button"><i class="icon-download"></i> Download</button>

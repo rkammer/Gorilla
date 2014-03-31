@@ -98,7 +98,7 @@ class GorillaHelper {
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 
-		$query->select('a.id As value, a.alias As text');
+		$query->select('a.id AS value, a.title AS text');
 		$query->from('#__gorilla_notebooks AS a');
 		$query->where('a.published = 1');
 		$query->order('a.ordering, a.alias');

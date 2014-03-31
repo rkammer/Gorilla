@@ -39,7 +39,7 @@ $saveOrder	= $listOrder == 'r.ordering';
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
-				<th width="30%">
+				<th width="10%" colspan="2">
 					<?php echo JHtml::_('grid.sort', 'COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL', 'a.notebook_id', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%">
@@ -92,7 +92,12 @@ $saveOrder	= $listOrder == 'r.ordering';
 					<p class="smallsub">
 						<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?></p>
 				</td>
-				<td class="center">
+				<td width="1%">
+					<span class="minicolors-swatch">
+						<span style="background-color: <?php echo $this->escape($item->notebook_color_code); ?>;"></span>
+					</span>
+				</td>				
+				<td class="left">
 					<?php echo $this->escape($item->notebook_title); ?>
 				</td>
 				<td class="center">

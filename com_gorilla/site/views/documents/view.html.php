@@ -27,6 +27,13 @@ class GorillaViewDocuments extends JViewLegacy
 	protected $items;
 	
 	/**
+	 * Notebook from models
+	 *
+	 * @var array
+	 */
+	protected $notebook;	
+	
+	/**
 	 * Params from xml
 	 *
 	 * @var JRegistry
@@ -55,6 +62,7 @@ class GorillaViewDocuments extends JViewLegacy
 		
 		$this->state 		= $this->get('State');
 		$this->items 		= $this->get('Items');
+		$this->notebook		= $this->get('Items', 'Notebook')[0];
 		$this->pagination   = $this->get('Pagination');
 		
 		// Check for errors
