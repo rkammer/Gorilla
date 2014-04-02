@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gorilla Document Manager
+ *
+ * @author     Rodrigo Petters
+ * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @link https://www.sohoprospecting.com
+ *
+ * Try not. Do or do not. There is no try.
+ */
+
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -24,7 +35,7 @@ class GorillaModelDocuments extends JModelList
 	{
 		parent::__construct($config);
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -41,14 +52,14 @@ class GorillaModelDocuments extends JModelList
 	 *
 	 * @see     JModelList
 	 */
-	protected function populateState($ordering = null, $direction = null) 
+	protected function populateState($ordering = null, $direction = null)
 	{
 		$app = JFactory::getApplication();
-	
+
 		// Allow to use params in view
 		$params = $app->getParams();
 		$this->setState('params', $params);
-		
+
 		// Param documents_order_by
  		$ordering = '';
 		switch ($params->get('documents_order_by')) {
@@ -59,7 +70,7 @@ class GorillaModelDocuments extends JModelList
 				$ordering = 'a.title';
 				break;
 			default:
-				$ordering = 'a.ordering';				
+				$ordering = 'a.ordering';
 		}
 
 		// Param documents_order_orientation
@@ -67,17 +78,17 @@ class GorillaModelDocuments extends JModelList
 		if ($params->get('documents_order_orientation') == 1) {
 			$orientation = 'desc';
 		}
-		
+
 		// Verifying params from the caller
 		$id = JRequest::getInt('id');
 		if ($id == 0) {
 			$id = $params->get('notebook');
 		}
-		$this->setState('id', $id);		
-		
+		$this->setState('id', $id);
+
 		parent::populateState($ordering, $orientation);
 	}
-	
+
 	/**
 	 * Build an SQL query to load the list data.
 	 *
@@ -89,7 +100,7 @@ class GorillaModelDocuments extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 		$user	= JFactory::getUser();
-	
+
 		// Select the required fields from the table.
 		$query->select(
 				$this->getState(
@@ -98,13 +109,13 @@ class GorillaModelDocuments extends JModelList
 				)
 		);
 		$query->from('#__gorilla_documents a');
-		
+
 		// Filter by id
 		if ($id = $this->getState('id'))
 		{
 			$query->where('a.notebook_id = '.(int) $id);
-		}		
-		
+		}
+
 		// Filter by published (state)
 		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
@@ -113,17 +124,17 @@ class GorillaModelDocuments extends JModelList
 		elseif ($published === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
-	
+
 		// Filter by access level.
 		$groups = implode(',', $user->getAuthorisedViewLevels());
 		$query->where('a.access IN ('.$groups.')');
-	
+
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering', 'a.ordering');
 		$orderDirn	= $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($orderCol.' '.$orderDirn));
-	
+
 		return $query;
 	}
-	
+
 }
