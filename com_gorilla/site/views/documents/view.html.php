@@ -62,6 +62,13 @@ class GorillaViewDocuments extends JViewLegacy
 		
 		$this->state 		= $this->get('State');
 		$this->items 		= $this->get('Items');
+		
+		// Check if return a notebook
+		if (count($this->get('Items', 'Notebook')) == 0) {
+			JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+			return false;			
+		}
+		
 		$this->notebook		= $this->get('Items', 'Notebook')[0];
 		$this->pagination   = $this->get('Pagination');
 		
