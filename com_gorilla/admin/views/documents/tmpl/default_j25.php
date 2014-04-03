@@ -21,7 +21,7 @@ $user		= JFactory::getUser();
 $userId		= $user->get('id');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
-$saveOrder	= $listOrder == 'r.ordering';
+$saveOrder	= $listOrder == 'a.ordering';
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_gorilla&view=documents');?>" method="post" name="adminForm" id="adminForm">
