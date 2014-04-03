@@ -26,7 +26,7 @@ $add_href = 'index.php?option=com_gorilla&view=documents';
 	<div class="row">
 		<div class="span12">
 			<?php if ($this->params->get('show_notebook_color_code') == 1) : ?>
-                <div style="background-color:<?php echo $this->notebook->color_code; ?>;" title="<?php echo $col->notebook->title; ?>" class="notebook-box-large">&nbsp;</div>
+                <div style="background-color:<?php echo $this->notebook->color_code; ?>;" title="<?php echo $this->notebook->title; ?>" class="notebook-box-large">&nbsp;</div>
 	        <?php endif; ?>
 	        <h1 class="notebookj25-h1"><?php echo $this->notebook->title; ?></h1>
 	    </div>
@@ -45,7 +45,7 @@ $add_href = 'index.php?option=com_gorilla&view=documents';
 	<?php foreach ($this->items as $key => $item) : ?>
         <div class="row">
             <div class="span12">
-                <div style="background-color: <?php echo $this->notebook->color_code; ?>;" class="notebook-box-small" title="<?php echo $col->notebook->title; ?>">&nbsp;</div> <a href="#"><p class="lead" style="margin-bottom: 0px;"><b><?php echo $item->title; ?></b></p></a>
+                <div style="background-color: <?php echo $this->notebook->color_code; ?>;" class="notebook-box-small" title="<?php echo $this->notebook->title; ?>">&nbsp;</div> <a href="#"><p class="lead" style="margin-bottom: 0px;"><b><?php echo $item->title; ?></b></p></a>
                 <?php if ($this->params->get('show_document_description') == 1) : ?>
                     <p class="muted"><?php echo $item->description; ?></p>
                 <?php endif; ?>

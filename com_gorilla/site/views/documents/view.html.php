@@ -14,6 +14,8 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+require_once JPATH_COMPONENT . '/models/notebook.php';
+
 /**
  * Methods display a list of documents records.
  *
@@ -74,13 +76,18 @@ class GorillaViewDocuments extends JViewLegacy
 		$this->state 		= $this->get('State');
 		$this->items 		= $this->get('Items');
 		
+		// Get notebook from context
+		$NotebookModel = new GorillaModelNotebook();
+		$notebooks = $NotebookModel->getItems();
+		
 		// Check if return a notebook
-		if (count($this->get('Items', 'Notebook')) == 0) {
+		if (count($notebooks) != 1) {
 			JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 			return false;			
 		}
-		
-		$this->notebook		= $this->get('Items', 'Notebook')[0];
+		$this->notebook = $notebooks[0]; 
+				
+		//$this->notebook		= $this->get('Items', 'Notebook')[0];
 		$this->pagination   = $this->get('Pagination');
 
 		// Check for errors
