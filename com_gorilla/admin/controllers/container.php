@@ -14,14 +14,14 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controlleradmin');
+jimport('joomla.application.component.controllerform');
 
 /**
- * Notebooks list controller class.
+ * Container controller class.
  *
- * @package		Joomla.Site
+ * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaControllerNotebooks extends JControllerForm
+class GorillaControllerContainer extends JControllerForm
 {
 }

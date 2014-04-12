@@ -15,10 +15,10 @@ defined('_JEXEC') or die;
 
 require_once dirname(__FILE__) . '/../../../helpers/gorilla.php';
 
-//Get notebook options
+//Get container options
 JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
-$notebookList = JFormHelper::loadFieldType('NotebookList', false);
-$notebookListOptions = $notebookList->getOptions();
+$containerList = JFormHelper::loadFieldType('ContainerList', false);
+$containerListOptions = $containerList->getOptions();
 ?>
 
 <fieldset id="filter-bar">
@@ -32,8 +32,8 @@ $notebookListOptions = $notebookList->getOptions();
 
 	<div class="filter-select fltrt">
 		<?php if(JRequest::getCmd('view') == 'documents'):?>
-			<select name="filter.notebook_id" class="inputbox" onchange="this.form.submit()">
-				<?php echo JHtml::_('select.options', $notebookListOptions, 'value', 'text', $this->state->get('filter.notebook_id'), true);?>
+			<select name="filter.container_id" class="inputbox" onchange="this.form.submit()">
+				<?php echo JHtml::_('select.options', $containerListOptions, 'value', 'text', $this->state->get('filter.container_id'), true);?>
 			</select>
 		<?php endif; ?>
 

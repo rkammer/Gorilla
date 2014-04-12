@@ -17,14 +17,13 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Methods supporting a list of notebooks records.
+ * Methods supporting a list of containers records.
  *
- * @package		Joomla.Administrator
+ * @package		Joomla.Site
  * @subpackage	com_gorilla
  */
-class GorillaModelNotebooks extends JModelList
+class GorillaModelContainers extends JModelList
 {
-
 	/**
 	 * Constructor.
 	 *
@@ -63,7 +62,9 @@ class GorillaModelNotebooks extends JModelList
 	 *
 	 * @see     JModelList
 	 */
-	protected function populateState($ordering = null, $direction = null) {
+	protected function populateState($ordering = null, $direction = null)
+	{
+		$app = JFactory::getApplication();
 
 		$search = $this->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
@@ -74,7 +75,28 @@ class GorillaModelNotebooks extends JModelList
 		$accessId = $this->getUserStateFromRequest($this->context . '.filter.access', 'filter_access', null, 'int');
 		$this->setState('filter.access', $accessId);
 
-		parent::populateState ( 'a.ordering', 'asc' );
+		// Allow to use params in view
+		$params = $app->getParams();
+		$this->setState('params', $params);
+
+		$ordering = '';
+		switch ($params->get('order_by')) {
+			case 1:
+				$ordering = 'a.created';
+				break;
+			case 2:
+				$ordering = 'a.title';
+				break;
+			default:
+				$ordering = 'a.ordering';
+		}
+
+		$orientation = 'asc';
+		if ($params->get('order_orientation') == 1) {
+			$orientation = 'desc';
+		}
+
+		parent::populateState($ordering, $orientation);
 	}
 
 	/**
@@ -91,13 +113,13 @@ class GorillaModelNotebooks extends JModelList
 
 		// Select the required fields from the table.
 		$query->select(
-			$this->getState(
-				'list.select',
-				'a.id, a.title, a.alias, a.color_code, a.description, a.published, ' .
-				'a.access, a.ordering, a.checked_out, a.checked_out_time, a.metadesc, ' .
-				'a.metakey, a.created, a.created_by, a.modified, a.modified_by, ' .
-				'a.publish_up, a.publish_down '
-			)
+				$this->getState(
+						'list.select',
+						'a.id, a.title, a.alias, a.color_code, a.description, a.published, ' .
+						'a.access, a.ordering, a.checked_out, a.checked_out_time, a.metadesc, ' .
+						'a.metakey, a.created, a.created_by, a.modified, a.modified_by, ' .
+						'a.publish_up, a.publish_down '
+				)
 		);
 
 		// Join over the users for the author user.
@@ -112,7 +134,7 @@ class GorillaModelNotebooks extends JModelList
 		$query->select('ag.title AS access_level');
 		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
 
-		$query->from('#__gorilla_notebooks a');
+		$query->from('#__gorilla_containers a');
 
 		// Filter by published (state)
 		$published = $this->getState('filter.published');
@@ -140,10 +162,8 @@ class GorillaModelNotebooks extends JModelList
 		}
 
 		// Filter by access level.
-		if ($access = $this->getState('filter.access'))
-		{
-			$query->where('a.access = ' . (int) $access);
-		}
+		$groups = implode(',', $user->getAuthorisedViewLevels());
+		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by author
 		$authorId = $this->getState('filter.author_id');
@@ -161,4 +181,3 @@ class GorillaModelNotebooks extends JModelList
 	}
 
 }
-

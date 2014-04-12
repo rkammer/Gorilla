@@ -42,7 +42,7 @@ class GorillaModelDocuments extends JModelList
 					'access', 'a.access', 'access_level',
 					'published', 'a.published',
 					'ordering', 'a.ordering',
-					'notebook_id', 'a.notebook_id', 'notebook_title'
+					'container_id', 'a.container_id', 'container_title'
 			);
 		}
 		parent::__construct($config);
@@ -75,8 +75,8 @@ class GorillaModelDocuments extends JModelList
 		$accessId = $this->getUserStateFromRequest($this->context . '.filter.access', 'filter_access', null, 'int');
 		$this->setState('filter.access', $accessId);
 
-		$notebookId = $this->getUserStateFromRequest($this->context.'.filter.notebook_id', 'filter_notebook_id', null, 'int');
-		$this->setState('filter.notebook_id', $notebookId);
+		$containerId = $this->getUserStateFromRequest($this->context.'.filter.container_id', 'filter_container_id', null, 'int');
+		$this->setState('filter.container_id', $containerId);
 
 		parent::populateState ( 'a.ordering', 'asc' );
 	}
@@ -97,7 +97,7 @@ class GorillaModelDocuments extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.alias, a.description, a.notebook_id, ' .
+				'a.id, a.title, a.alias, a.description, a.container_id, ' .
 				'a.filename, a.published, ' .
 				'a.access, a.ordering, a.checked_out, a.checked_out_time, a.metadesc, ' .
 				'a.metakey, a.created, a.created_by, a.modified, a.modified_by, ' .
@@ -105,10 +105,10 @@ class GorillaModelDocuments extends JModelList
 			)
 		);
 
-		// Join over the notebooks for the notebook title.
-		$query->select('un.title AS notebook_title, ' .
-					   'un.color_code AS notebook_color_code ' );
-		$query->join('INNER', '#__gorilla_notebooks AS un ON un.id = a.notebook_id');
+		// Join over the containers for the container title.
+		$query->select('un.title AS container_title, ' .
+					   'un.color_code AS container_color_code ' );
+		$query->join('INNER', '#__gorilla_containers AS un ON un.id = a.container_id');
 
 		// Join over the users for the author user.
 		$query->select('ua.name AS author_name');
@@ -149,10 +149,10 @@ class GorillaModelDocuments extends JModelList
 			}
 		}
 
-		// Filter by notebook.
-		if ($notebookId = $this->getState('filter.notebook_id'))
+		// Filter by container.
+		if ($containerId = $this->getState('filter.container_id'))
 		{
-			$query->where('a.notebook_id = ' . (int) $notebookId);
+			$query->where('a.container_id = ' . (int) $containerId);
 		}
 
 		// Filter by access level.

@@ -23,8 +23,8 @@ $canOrder = $user->authorise('core.edit.state', 'com_gorilla');
 $saveOrder = $listOrder == 'a.ordering';
 if ($saveOrder)
 {
-	$saveOrderingUrl = 'index.php?option=com_gorilla&task=notebooks.saveOrderAjax&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'notebookList', 'adminForm',	strtolower($listDirn), $saveOrderingUrl);
+	$saveOrderingUrl = 'index.php?option=com_gorilla&task=containers.saveOrderAjax&tmpl=component';
+	JHtml::_('sortablelist.sortable', 'containerList', 'adminForm',	strtolower($listDirn), $saveOrderingUrl);
 }
 $sortFields = $this->getSortFields();
 
@@ -49,7 +49,7 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 	}
 </script>
 <form
-	action="<?php echo JRoute::_('index.php?option=com_gorilla&view=notebooks'); ?>"
+	action="<?php echo JRoute::_('index.php?option=com_gorilla&view=containers'); ?>"
 	method="post" name="adminForm" id="adminForm">
 	<?php if (!empty( $this->sidebar)) : ?>
 	<div id="j-sidebar-container" class="span2">
@@ -97,7 +97,7 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<table class="table table-striped" id="notebookList">
+		<table class="table table-striped" id="containerList">
 			<thead>
 				<tr>
 					<th width="1%" class="nowrap center hidden-phone">
@@ -153,13 +153,13 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'notebooks.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
+						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'containers.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 					</td>
 					<td class="nowrap has-context">
 					    <span class="minicolors-swatch">
 					        <span style="background-color: <?php echo $this->escape($item->color_code); ?>;"></span>
 					    </span>
-						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=notebook.edit&id='.(int) $item->id); ?>">
+						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=container.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->title); ?></a>
 						<span class="small">
 							<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>

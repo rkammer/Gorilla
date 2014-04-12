@@ -82,7 +82,7 @@ class GorillaModelDocuments extends JModelList
 		// Verifying params from the caller
 		$id = JRequest::getInt('id');
 		if ($id == 0) {
-			$id = $params->get('notebook');
+			$id = $params->get('container');
 		}
 		$this->setState('id', $id);
 
@@ -113,7 +113,7 @@ class GorillaModelDocuments extends JModelList
 		// Filter by id
 		if ($id = $this->getState('id'))
 		{
-			$query->where('a.notebook_id = '.(int) $id);
+			$query->where('a.container_id = '.(int) $id);
 		}
 
 		// Filter by published (state)

@@ -154,14 +154,14 @@ class GorillaViewDocuments extends JViewLegacy {
 					'value', 'text', $this->state->get('filter.published'), true)
 			);
 
-			//Get notebook options
+			//Get container options
 			JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
-			$notebookList = JFormHelper::loadFieldType('NotebookList', false);
-			$notebookListOptions = $notebookList->getOptions();
+			$containerList = JFormHelper::loadFieldType('ContainerList', false);
+			$containerListOptions = $containerList->getOptions();
 
 			JHtmlSidebar::addFilter(
-				JText::_('COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL'), 'filter_notebook_id',
-				JHtml::_('select.options', $notebookListOptions, 'value', 'text', $this->state->get('filter.notebook_id')),
+				JText::_('COM_GORILLA_DOCUMENTS_FIELD_CONTAINER_ID_LABEL'), 'filter_container_id',
+				JHtml::_('select.options', $containerListOptions, 'value', 'text', $this->state->get('filter.container_id')),
 				true
 			);
 
@@ -185,7 +185,7 @@ class GorillaViewDocuments extends JViewLegacy {
 				'a.title' => JText::_('JGLOBAL_TITLE'),
 				'a.id' => JText::_('JGRID_HEADING_ID'),
 				'a.access' => JText::_('JGRID_HEADING_ACCESS'),
-				'a.notebook_id' => JText::_('COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL')
+				'a.container_id' => JText::_('COM_GORILLA_DOCUMENTS_FIELD_CONTAINER_ID_LABEL')
 		);
 	}
 

@@ -3,9 +3,9 @@
 --
 
 	-- -----------------------------------------------------
-	-- Table `#__gorilla_notebooks`
+	-- Table `#__gorilla_containers`
 	-- -----------------------------------------------------
-	CREATE TABLE IF NOT EXISTS `#__gorilla_notebooks` (
+	CREATE TABLE IF NOT EXISTS `#__gorilla_containers` (
 	  `id`             		INT              	NOT NULL AUTO_INCREMENT,
 	  `title`          		VARCHAR(255)     	NOT NULL,
 	  `alias`          		VARCHAR(255)     	NOT NULL,
@@ -30,7 +30,7 @@
    	  INDEX `idx_access` (`access` ASC),
 	  INDEX `idx_checkout` (`checked_out` ASC),
 	  INDEX `idx_created_by` (`created_by` ASC),
-	  INDEX `idx_published` (`published` ASC),	  	  
+	  INDEX `idx_published` (`published` ASC),
 	  INDEX `idx_title` (`title` ASC))
 	ENGINE = InnoDB;
 
@@ -58,21 +58,21 @@
 
 	INSERT INTO `#__gorilla_config`
 	(`key`, `value`)
-	SELECT 'COLOR_CODE_NEXTCOLOR','0' 
-	  FROM dual 
-	 WHERE not exists (SELECT 1 AS OK 
-	                     FROM `#__gorilla_config` 
+	SELECT 'COLOR_CODE_NEXTCOLOR','0'
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
 	                    WHERE `key` = 'COLOR_CODE_NEXTCOLOR' );
-	                    
+
 	-- -----------------------------------------------------
 	-- Table `#__gorilla_documents`
-	-- -----------------------------------------------------	                    
+	-- -----------------------------------------------------
 	CREATE TABLE IF NOT EXISTS `#__gorilla_documents` (
 	  `id` 					INT NOT NULL AUTO_INCREMENT,
 	  `title` 				VARCHAR(255) 		NOT NULL,
 	  `alias` 				VARCHAR(255) 		NOT NULL,
 	  `description` 		MEDIUMTEXT 			NULL,
-	  `notebook_id` 		INT 				NOT NULL,
+	  `container_id` 		INT 				NOT NULL,
 	  `filename` 			VARCHAR(45) 		NOT NULL,
 	  `published` 			TINYINT(3) 			NOT NULL DEFAULT 0,
 	  `access` 				INT(10) 			NOT NULL,
@@ -96,10 +96,10 @@
 	  INDEX `idx_created_by` (`created_by` ASC),
 	  INDEX `idx_published` (`published` ASC),
 	  INDEX `idx_title` (`title` ASC),
-	  INDEX `fk_documents_notebooks_idx` (`notebook_id` ASC),
-	  CONSTRAINT `fk_documents_notebooks`
-	    FOREIGN KEY (`notebook_id`)
-	    REFERENCES `#__gorilla_notebooks` (`id`)
+	  INDEX `fk_documents_containers_idx` (`container_id` ASC),
+	  CONSTRAINT `fk_documents_containers`
+	    FOREIGN KEY (`container_id`)
+	    REFERENCES `#__gorilla_containers` (`id`)
 	    ON DELETE NO ACTION
 	    ON UPDATE NO ACTION)
 	ENGINE = InnoDB;

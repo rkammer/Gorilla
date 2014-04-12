@@ -15,12 +15,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Methods display a list of notebooks records.
+ * Methods display a list of containers records.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaViewNotebooks extends JViewLegacy {
+class GorillaViewContainers extends JViewLegacy {
 
 	/**
 	 * Items from models
@@ -64,7 +64,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 		$this->pagination = $this->get('Pagination');
 
 		// add submenu in view
-		GorillaHelper::addSubmenu('notebooks');
+		GorillaHelper::addSubmenu('containers');
 
 		// error in SQL
 		if (count ( $errors = $this->get ( 'Errors' ) )) {
@@ -107,32 +107,32 @@ class GorillaViewNotebooks extends JViewLegacy {
 		$bar = JToolBar::getInstance ( 'toolbar' );
 
 		// Add title
-		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), 'book' );
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_CONTAINERS' ), 'book' );
 
 		// Add add-new button
-		JToolbarHelper::addNew ( 'notebook.add' );
+		JToolbarHelper::addNew ( 'container.add' );
 
 		// Add edit button if user has permission
 		if ($canDo->get ( 'core.edit' )) {
-			JToolbarHelper::editList ( 'notebook.edit' );
+			JToolbarHelper::editList ( 'container.edit' );
 		}
 
 		// Add other default edit buttons
 		if ($canDo->get('core.edit.state')) {
-			JToolbarHelper::publish('notebooks.publish', 'JTOOLBAR_PUBLISH', true);
-			JToolbarHelper::unpublish('notebooks.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-			JToolbarHelper::archiveList('notebooks.archive');
-			JToolbarHelper::checkin('notebooks.checkin');
+			JToolbarHelper::publish('containers.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolbarHelper::unpublish('containers.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			JToolbarHelper::archiveList('containers.archive');
+			JToolbarHelper::checkin('containers.checkin');
 		}
 
 		// Add trash buttons (works only in Joomla 3)
 		$state = $this->get('State');
 		if ($state->get('filter.published') == -2 && $canDo->get('core.delete'))
 		{
-			JToolbarHelper::deleteList('', 'notebooks.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolbarHelper::deleteList('', 'containers.delete', 'JTOOLBAR_EMPTY_TRASH');
 		} elseif ($canDo->get('core.edit.state'))
 		{
-			JToolbarHelper::trash('notebooks.trash');
+			JToolbarHelper::trash('containers.trash');
 		}
 
 		// Add preferences button if user has permission
@@ -144,7 +144,7 @@ class GorillaViewNotebooks extends JViewLegacy {
 
 		}
 		else {
-			JHtmlSidebar::setAction('index.php?option=com_gorilla&view=notebooks');
+			JHtmlSidebar::setAction('index.php?option=com_gorilla&view=containers');
 
 			JHtmlSidebar::addFilter(
 				JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_published',

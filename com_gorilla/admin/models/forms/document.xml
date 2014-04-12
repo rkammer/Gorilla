@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<fieldset name="details">
-	
+
 		<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
-			readonly="true" class="readonly" 
+			readonly="true" class="readonly"
 			description="JGLOBAL_FIELD_ID_DESC" />
-		
-		<field name="title" type="text" 
-		    class="inputbox input-xxlarge input-large-text" 
-		    size="40" label="JGLOBAL_TITLE" 
+
+		<field name="title" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="JGLOBAL_TITLE"
 		    description="JFIELD_TITLE_DESC" required="true" />
-		
-		<field name="alias" type="text" 
-		    class="inputbox input-xxlarge input-large-text" 
-		    size="40" label="JFIELD_ALIAS_LABEL" 
+
+		<field name="alias" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="JFIELD_ALIAS_LABEL"
 		    description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" />
-			
+
 		<field name="description" type="textarea" class="inputbox"
 			rows="3" cols="30" label="JGLOBAL_DESCRIPTION"
-			description="COM_GORILLA_DOCUMENTS_FIELD_DESCRIPTION_DESC" />						
-			
+			description="COM_GORILLA_DOCUMENTS_FIELD_DESCRIPTION_DESC" />
+
 		<field name="published" type="list" label="JSTATUS"
 			   description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
 			   filter="intval" size="1" default="1">
@@ -27,42 +27,42 @@
 			<option value="0">JUNPUBLISHED</option>
 			<option value="2">JARCHIVED</option>
 			<option value="-2">JTRASHED</option>
-		</field>	
-		
+		</field>
+
 		<field name="ordering" type="ordering" class="inputbox"
 			label="JFIELD_ORDERING_LABEL"
 			description="JFIELD_ORDERING_DESC"
-			content_type="com_gorilla.notebook"
+			content_type="com_gorilla.container"
         />
-		
-	   	<field 
+
+	   	<field
 	   		name="access"
 			type="accesslevel"
 			label="JFIELD_ACCESS_LABEL"
 			description="JFIELD_ACCESS_DESC"/>
-	
-	   	<field 
-	   		name="notebook_id"
-			type="NotebookList"
-			label="COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL"
-			description="COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_DESC"
-			required="true"	
-			/>	
-	
+
+	   	<field
+	   		name="container_id"
+			type="ContainerList"
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONTAINER_ID_LABEL"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONTAINER_ID_DESC"
+			required="true"
+			/>
+
 	</fieldset>
-	
-	<fieldset name="publishing">	
+
+	<fieldset name="publishing">
 		<field name="created" type="calendar"
 			label="JGLOBAL_FIELD_CREATED_LABEL" description="JGLOBAL_FIELD_CREATED_DESC"
 			class="inputbox" size="22" format="%Y-%m-%d %H:%M:%S"
-			filter="user_utc" />	
+			filter="user_utc" />
 
 		<field
 			name="created_by"
 			type="user"
 			label="JGLOBAL_FIELD_CREATED_BY_LABEL"
 			desc="JGLOBAL_FIELD_CREATED_BY_DESC" />
-			
+
 		<field name="modified" type="calendar" class="readonly"
 			label="JGLOBAL_FIELD_MODIFIED_LABEL" description="JGLOBAL_FIELD_MODIFIED_DESC"
 			size="22" readonly="true" format="%Y-%m-%d %H:%M:%S"
@@ -73,40 +73,40 @@
 			class="readonly"
 			readonly="true"
 			filter="unset" />
-				    
+
 		<field name="checked_out" type="hidden" filter="unset" />
 
 		<field name="checked_out_time" type="hidden" filter="unset" />
-	
+
 		<field name="publish_up" type="hidden" filter="unset" />
-			   
-		<field name="publish_down" type="hidden" filter="unset" />	
+
+		<field name="publish_down" type="hidden" filter="unset" />
 	</fieldset>
-	
+
 	<fieldset name="metadata">
-		
+
 		<field name="metakey" type="textarea"
 			label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"
 			class="inputbox" rows="3" cols="30" />
 
 		<field name="metadesc" type="textarea"
 			label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC"
-			class="inputbox" rows="3" cols="30" />			
-			
-	</fieldset>	
-	
+			class="inputbox" rows="3" cols="30" />
+
+	</fieldset>
+
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
 		label="JCONFIG_PERMISSIONS_LABEL">
-		
+
 		<field name="asset_id" type="hidden" filter="unset" />
 		<field name="rules" type="rules"
 			component="com_gorilla"
 			filter="rules"
 			validate="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"			
+			label="JCONFIG_PERMISSIONS_LABEL"
 			section="document" />
-		
-	</fieldset>	
-				 	
+
+	</fieldset>
+
 </form>

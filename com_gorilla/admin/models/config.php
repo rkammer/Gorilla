@@ -74,7 +74,7 @@ class GorillaModelConfig extends JModelLegacy
 	}
 
 	/**
-	 * Method to get next color to be used in notebook
+	 * Method to get next color to be used in container
 	 *
 	 * @return string color code. Ex.: '#000000'
 	 */

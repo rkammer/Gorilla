@@ -114,7 +114,7 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 						<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 					</th>
 					<th width="10%">
-						<?php echo JHtml::_('grid.sort', 'COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL', 'a.notebook_id', $listDirn, $listOrder); ?>
+						<?php echo JHtml::_('grid.sort', 'COM_GORILLA_DOCUMENTS_FIELD_CONTAINER_ID_LABEL', 'a.container_id', $listDirn, $listOrder); ?>
 					</th>
 					<th width="5%" class="nowrap hidden-phone">
 						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
@@ -167,9 +167,9 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 					</td>
 					<td class="small">
 					    <span class="minicolors-swatch">
-					        <span style="background-color: <?php echo $this->escape($item->notebook_color_code); ?>;"></span>
+					        <span style="background-color: <?php echo $this->escape($item->container_color_code); ?>;"></span>
 					    </span>
- 					    <?php echo $this->escape($item->notebook_title); ?>
+ 					    <?php echo $this->escape($item->container_title); ?>
 					</td>
 					<td class="small hidden-phone">
 						<?php echo $this->escape($item->access_level); ?>

@@ -1,112 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<!-- 
+	<!--
 		 IMPORTANT WARNING !!!
-		 
+
 		 Please, initialize every configuration field in install.script.php
-		 
+
 		 See function configure()
 	 -->
-	<fieldset name="notebooks"
-		label="COM_GORILLA_CONFIG_NOTEBOOKS_LABEL"
-		description="COM_GORILLA_CONFIG_NOTEBOOKS_DESCRIPTION">
-		
-		<field name="show_description" type="radio"			    
-			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
-			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC"
+	<fieldset name="containers"
+		label="COM_GORILLA_CONFIG_CONTAINERS_LABEL"
+		description="COM_GORILLA_CONFIG_CONTAINERS_DESCRIPTION">
+
+		<field name="show_description" type="radio"
+			label="COM_GORILLA_CONTAINERS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
+			description="COM_GORILLA_CONTAINERS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC"
 			class="btn-group btn-group-yesno"
 			default="1" filter="integer">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>		
-		
-		<field name="show_color_code" type="radio"
-			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_TITLE"
-			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_SHOW_COLOR_BOX_DESC"
-			class="btn-group btn-group-yesno"
-			default="1" filter="integer">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
-		
-		<field name="order_by" type="list"
-			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_TITLE"
-			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_DESC"
-			default="0" filter="integer">				
-			<option value="0">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
-			<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
-			<option value="2">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
 		</field>
-		
+
+		<field name="show_color_code" type="radio"
+			label="COM_GORILLA_CONTAINERS_FIELD_CONFIG_SHOW_COLOR_BOX_TITLE"
+			description="COM_GORILLA_CONTAINERS_FIELD_CONFIG_SHOW_COLOR_BOX_DESC"
+			class="btn-group btn-group-yesno"
+			default="1" filter="integer">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field name="order_by" type="list"
+			label="COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_BY_TITLE"
+			description="COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_BY_DESC"
+			default="0" filter="integer">
+			<option value="0">COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
+			<option value="1">COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
+			<option value="2">COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
+		</field>
+
 		<field name="order_orientation" type="list"
-			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
-			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_DESC"
+			label="COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
+			description="COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_ORIENTATION_DESC"
 			default="0">
-			<option value="0">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
-			<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>				
-		</field>		
-		
+			<option value="0">COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
+			<option value="1">COM_GORILLA_CONTAINERS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>
+		</field>
+
 		<field name="number_of_columns" type="list"
-			label="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_TITLE"
-			description="COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_DESC"
+			label="COM_GORILLA_CONTAINERS_FIELD_CONFIG_NUMBER_OF_COLUMNS_TITLE"
+			description="COM_GORILLA_CONTAINERS_FIELD_CONFIG_NUMBER_OF_COLUMNS_DESC"
 			default="2" filter="integer">
-			<option value="1">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_1</option>
-			<option value="2">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_2</option>				
-			<option value="3">COM_GORILLA_NOTEBOOKS_FIELD_CONFIG_NUMBER_OF_COLUMNS_3</option>
-		</field>					
-		
+			<option value="1">COM_GORILLA_CONTAINERS_FIELD_CONFIG_NUMBER_OF_COLUMNS_1</option>
+			<option value="2">COM_GORILLA_CONTAINERS_FIELD_CONFIG_NUMBER_OF_COLUMNS_2</option>
+			<option value="3">COM_GORILLA_CONTAINERS_FIELD_CONFIG_NUMBER_OF_COLUMNS_3</option>
+		</field>
+
 	</fieldset>
-	
+
 	<fieldset name="documents"
 		label="COM_GORILLA_CONFIG_DOCUMENTS_LABEL"
 		description="COM_GORILLA_CONFIG_DOCUMENTS_DESCRIPTION">
-		
-		<field name="show_notebook_description" type="radio"			    
-			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_DESCRIPTION_TITLE"
-			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_DESCRIPTION_DESC"
+
+		<field name="show_container_description" type="radio"
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_CONTAINER_DESCRIPTION_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_CONTAINER_DESCRIPTION_DESC"
 			class="btn-group btn-group-yesno"
 			default="1" filter="integer">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>		
-		
-		<field name="show_notebook_color_code" type="radio"
-			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_COLOR_BOX_TITLE"
-			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_NOTEBOOK_COLOR_BOX_DESC"
+		</field>
+
+		<field name="show_container_color_code" type="radio"
+			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_CONTAINER_COLOR_BOX_TITLE"
+			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_CONTAINER_COLOR_BOX_DESC"
 			class="btn-group btn-group-yesno"
 			default="1" filter="integer">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>	
-		
-		<field name="show_document_description" type="radio"			    
+		</field>
+
+		<field name="show_document_description" type="radio"
 			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_DESCRIPTION_TITLE"
 			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_SHOW_DESCRIPTION_DESC"
 			class="btn-group btn-group-yesno"
 			default="1" filter="integer">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>		
-		
+		</field>
+
 		<field name="documents_order_by" type="list"
 			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_TITLE"
 			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_DESC"
-			default="0" filter="integer">				
+			default="0" filter="integer">
 			<option value="0">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_ORDERING</option>
 			<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_CREATION_DATE</option>
 			<option value="2">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_BY_ALPHABETICAL</option>
 		</field>
-		
+
 		<field name="documents_order_orientation" type="list"
 			label="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_TITLE"
 			description="COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_DESC"
 			default="0">
 			<option value="0">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_ASC</option>
-			<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>				
-		</field>		
-		
+			<option value="1">COM_GORILLA_DOCUMENTS_FIELD_CONFIG_ORDER_ORIENTATION_BY_DESC</option>
+		</field>
+
 	</fieldset>
-				
+
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
 		label="JCONFIG_PERMISSIONS_LABEL">
@@ -117,6 +117,6 @@
 			validate="rules"
 			label="JCONFIG_PERMISSIONS_LABEL"
 			section="component" />
-			
+
 	</fieldset>
 </config>

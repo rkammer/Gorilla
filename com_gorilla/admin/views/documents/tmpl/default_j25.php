@@ -40,7 +40,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%" colspan="2">
-					<?php echo JHtml::_('grid.sort', 'COM_GORILLA_DOCUMENTS_FIELD_NOTEBOOK_ID_LABEL', 'a.notebook_id', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_GORILLA_DOCUMENTS_FIELD_CONTAINER_ID_LABEL', 'a.container_id', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
@@ -94,11 +94,11 @@ $saveOrder	= $listOrder == 'a.ordering';
 				</td>
 				<td width="1%">
 					<span class="minicolors-swatch">
-						<span style="background-color: <?php echo $this->escape($item->notebook_color_code); ?>;"></span>
+						<span style="background-color: <?php echo $this->escape($item->container_color_code); ?>;"></span>
 					</span>
-				</td>				
+				</td>
 				<td class="left">
-					<?php echo $this->escape($item->notebook_title); ?>
+					<?php echo $this->escape($item->container_title); ?>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'documents.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>

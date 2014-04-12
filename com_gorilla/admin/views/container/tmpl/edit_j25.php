@@ -25,8 +25,8 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 
 <script type="text/javascript">
 	Joomla.submitbutton = function(task) {
-		if (task == 'notebook.cancel' || document.formvalidator.isValid(document.id('notebook-form'))) {
-			Joomla.submitform(task, document.getElementById('notebook-form'));
+		if (task == 'container.cancel' || document.formvalidator.isValid(document.id('container-form'))) {
+			Joomla.submitform(task, document.getElementById('container-form'));
 		} else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
@@ -52,10 +52,10 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
     });
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="notebook-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="container-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo empty($this->item->id) ? JText::_('COM_GORILLA_NEW_NOTEBOOK') : JText::sprintf('COM_GORILLA_EDIT_NOTEBOOK', $this->item->id); ?></legend>
+			<legend><?php echo empty($this->item->id) ? JText::_('COM_GORILLA_NEW_CONTAINER') : JText::sprintf('COM_GORILLA_EDIT_CONTAINER', $this->item->id); ?></legend>
 			<ul class="adminformlist">
 				<li>
 					<?php echo $this->form->getLabel('title'); ?>
@@ -90,7 +90,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 	</div>
 
 	<div class="width-40 fltrt">
-		<?php echo JHtml::_('sliders.start', 'notebook-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.start', 'container-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
 		<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 			<fieldset class="panelform">

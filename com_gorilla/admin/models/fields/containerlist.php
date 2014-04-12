@@ -19,19 +19,19 @@ JFormHelper::loadFieldClass('list');
 require_once dirname(__FILE__) . '/../../helpers/gorilla.php';
 
 /**
- * Custo field to list notebooks.
+ * Custo field to list containers.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class JFormFieldNotebookList extends JFormFieldList
+class JFormFieldContainerList extends JFormFieldList
 {
 	/**
 	 * The form field type.
 	 *
 	 * @var		string
 	 */
-	protected $type = 'NotebookList';
+	protected $type = 'ContainerList';
 
 	/**
 	 * Method to get the field options.
@@ -40,6 +40,6 @@ class JFormFieldNotebookList extends JFormFieldList
 	 */
 	public function getOptions()
 	{
-		return GorillaHelper::getNotebookListOptions();
+		return GorillaHelper::getContainerListOptions();
 	}
 }

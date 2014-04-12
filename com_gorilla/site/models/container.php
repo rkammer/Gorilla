@@ -17,12 +17,12 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Methods to load documents from a notebook
+ * Methods to load documents from a container
  *
  * @package		Joomla.Site
  * @subpackage	com_gorilla
  */
-class GorillaModelNotebook extends JModelList
+class GorillaModelContainer extends JModelList
 {
 	/**
 	 * Constructor.
@@ -63,7 +63,7 @@ class GorillaModelNotebook extends JModelList
 		// Verifying params from the caller
 		$id = JRequest::getInt('id');
 		if ($id == 0) {
-			$id = $params->get('notebook');
+			$id = $params->get('container');
 		}
 		$this->setState('id', $id);
 	}
@@ -88,7 +88,7 @@ class GorillaModelNotebook extends JModelList
 				)
 		);
 
-		$query->from('#__gorilla_notebooks a');
+		$query->from('#__gorilla_containers a');
 
 		// Filter by published (state)
 		$published = $this->getState('filter.published');

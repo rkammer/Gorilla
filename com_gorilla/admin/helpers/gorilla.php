@@ -63,13 +63,13 @@ class GorillaHelper {
 	 *
 	 * @return void
 	 */
-	public static function addSubmenu($vName = 'notebooks') {
+	public static function addSubmenu($vName = 'containers') {
 
 		if (version_compare(JVERSION, '3', 'lt')) {
-			JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTEBOOKS' ), 'index.php?option=com_gorilla&view=notebooks', $vName == 'notebooks' );
+			JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CONTAINERS' ), 'index.php?option=com_gorilla&view=containers', $vName == 'containers' );
 		}
 		else {
-			JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTEBOOKS' ), 'index.php?option=com_gorilla&view=notebooks', $vName == 'notebooks' );
+			JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CONTAINERS' ), 'index.php?option=com_gorilla&view=containers', $vName == 'containers' );
 			// 		JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CATEGORIES' ), 'index.php?option=com_categories&extension=com_folio', $vName == 'categories' );
 			// 		if ($vName == 'categories') {
 			// 			JToolbarHelper::title ( JText::sprintf ( 'COM_CATEGORIES_CATEGORIES_TITLE', JText::_ ( 'com_folio' ) ), 'folios-categories' );
@@ -87,11 +87,11 @@ class GorillaHelper {
 	}
 
 	/**
-	 * Generic list (combo) creater for notebooks.
+	 * Generic list (combo) creater for containers.
 	 *
 	 * @return array  The field option objects.
 	 */
-	public static function getNotebookListOptions() {
+	public static function getContainerListOptions() {
 		// Initialize variables.
 		$options = array();
 
@@ -99,7 +99,7 @@ class GorillaHelper {
 		$query	= $db->getQuery(true);
 
 		$query->select('a.id AS value, a.title AS text');
-		$query->from('#__gorilla_notebooks AS a');
+		$query->from('#__gorilla_containers AS a');
 		$query->where('a.published = 1');
 		$query->order('a.ordering, a.alias');
 
@@ -116,7 +116,7 @@ class GorillaHelper {
 
 		// Merge any additional options in the XML definition.
 		//$options = array_merge(parent::getOptions(), $options);
-		array_unshift($options, JHtml::_('select.option', '', JText::_('COM_GORILLA_NOTEBOOK_LIST_SELECT')));
+		array_unshift($options, JHtml::_('select.option', '', JText::_('COM_GORILLA_CONTAINER_LIST_SELECT')));
 
 		return $options;
 	}

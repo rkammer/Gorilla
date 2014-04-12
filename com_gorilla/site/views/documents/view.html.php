@@ -14,7 +14,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-require_once JPATH_COMPONENT . '/models/notebook.php';
+require_once JPATH_COMPONENT . '/models/container.php';
 
 /**
  * Methods display a list of documents records.
@@ -40,11 +40,11 @@ class GorillaViewDocuments extends JViewLegacy
 	protected $items;
 
 	/**
-	 * Notebook from models
+	 * Container from models
 	 *
 	 * @var array
 	 */
-	protected $notebook;
+	protected $container;
 
 	/**
 	 * Params from xml
@@ -75,19 +75,19 @@ class GorillaViewDocuments extends JViewLegacy
 
 		$this->state 		= $this->get('State');
 		$this->items 		= $this->get('Items');
-		
-		// Get notebook from context
-		$NotebookModel = new GorillaModelNotebook();
-		$notebooks = $NotebookModel->getItems();
-		
-		// Check if return a notebook
-		if (count($notebooks) != 1) {
+
+		// Get container from context
+		$ContainerModel = new GorillaModelContainer();
+		$containers = $ContainerModel->getItems();
+
+		// Check if return a container
+		if (count($containers) != 1) {
 			JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
-			return false;			
+			return false;
 		}
-		$this->notebook = $notebooks[0]; 
-				
-		//$this->notebook		= $this->get('Items', 'Notebook')[0];
+		$this->container = $containers[0];
+
+		//$this->container		= $this->get('Items', 'Container')[0];
 		$this->pagination   = $this->get('Pagination');
 
 		// Check for errors

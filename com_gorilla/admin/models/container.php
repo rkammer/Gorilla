@@ -20,12 +20,12 @@ JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' 
 require_once dirname(__FILE__) . '/../helpers/gorilla.php';
 
 /**
- * Model class for notebook.
+ * Model class for container.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaModelNotebook extends JModelAdmin {
+class GorillaModelContainer extends JModelAdmin {
 
 	/**
 	 * The type alias for this content type.
@@ -33,7 +33,7 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @var      string
 	 * @since    3.2
 	 */
-	public $typeAlias = 'com_gorilla.notebook';
+	public $typeAlias = 'com_gorilla.container';
 
 	/**
 	 * The prefix to use with controller messages.
@@ -56,7 +56,7 @@ class GorillaModelNotebook extends JModelAdmin {
 	 *
 	 * @see     JModelLegacy
 	 */
-	public function getTable($type = 'Notebook', $prefix = 'GorillaTable', $config = array()) {
+	public function getTable($type = 'Container', $prefix = 'GorillaTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
 
@@ -72,11 +72,11 @@ class GorillaModelNotebook extends JModelAdmin {
 	 */
 	public function getForm($data = array(), $loadData = true) {
 		$app = JFactory::getApplication ();
-		$modelXMLName = 'notebook';
+		$modelXMLName = 'container';
 		if (version_compare(JVERSION, '3', 'lt')) {
 			$modelXMLName .= '_j25';
 		}
-		$form = $this->loadForm ( 'com_gorilla.notebook', $modelXMLName, array (
+		$form = $this->loadForm ( 'com_gorilla.container', $modelXMLName, array (
 				'control' => 'jform',
 				'load_data' => $loadData
 			)
@@ -95,12 +95,12 @@ class GorillaModelNotebook extends JModelAdmin {
 	 * @see  	JModelForm
 	 */
 	protected function loadFormData() {
-		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.notebook.data', array () );
+		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.container.data', array () );
 		if (empty ( $data )) {
 			$data = $this->getItem ();
 
 			// Prime some default values.
-			if ($this->getState('notebook.id') == 0)
+			if ($this->getState('container.id') == 0)
 			{
 				// Get next color
 				$GorillaModelConfig = new GorillaModelConfig();
@@ -144,7 +144,7 @@ class GorillaModelNotebook extends JModelAdmin {
 			if (empty($table->ordering))
 			{
 				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_notebooks');
+				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_containers');
 				$max = $db->loadResult();
 
 				$table->ordering = $max + 1;

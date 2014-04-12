@@ -31,7 +31,7 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 		task = document.getElementById("task");
 		task.setAttribute('value', 'guide.config');
 		form = document.getElementById("guide-form");
-		form.setAttribute('action', 'index.php?option=com_gorilla&view=notebooks');
+		form.setAttribute('action', 'index.php?option=com_gorilla&view=containers');
 		form.submit();
 	}
 </script>

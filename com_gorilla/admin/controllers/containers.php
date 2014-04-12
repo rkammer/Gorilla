@@ -17,12 +17,12 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controlleradmin');
 
 /**
- * Notebooks list controller class.
+ * Containers list controller class.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaControllerNotebooks extends JControllerAdmin
+class GorillaControllerContainers extends JControllerAdmin
 {
 
 	/**
@@ -33,7 +33,7 @@ class GorillaControllerNotebooks extends JControllerAdmin
 	 *
 	 * @return	JModel
 	 */
-	public function getModel($name = 'Notebook', $prefix = 'GorillaModel')
+	public function getModel($name = 'Container', $prefix = 'GorillaModel')
 	{
 		$model = parent::getModel($name, $prefix, $config);
 		return $model;

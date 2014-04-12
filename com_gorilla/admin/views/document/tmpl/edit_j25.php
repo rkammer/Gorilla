@@ -55,8 +55,8 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 					<?php echo $this->form->getInput('access'); ?>
 				</li>
 				<li>
-					<?php echo $this->form->getLabel('notebook_id'); ?>
-					<?php echo $this->form->getInput('notebook_id'); ?>
+					<?php echo $this->form->getLabel('container_id'); ?>
+					<?php echo $this->form->getInput('container_id'); ?>
 				</li>
 				<li>
 					<?php echo $this->form->getLabel('id'); ?>

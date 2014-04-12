@@ -56,7 +56,7 @@
     background-color: #000000;
 }
 
-.notebook-box-small {
+.container-box-small {
     width:   24px;
     height:  24px;
     float:   left;
@@ -66,7 +66,7 @@
     border-radius:         3px;
 }
 
-.notebook-box-large {
+.container-box-large {
     width:   40px;
     height:  40px;
     float:   left;
@@ -76,15 +76,15 @@
     border-radius:         3px;
 }
 
-.notebook-title {
+.container-title {
 	margin-left: 10px;
 }
 
-.notebookj25-h1 {
+.containerj25-h1 {
 	border-bottom: 0 !important;
 }
 
-.notebookj25-p-muted {
+.containerj25-p-muted {
 	line-height: 0px !important;
 	margin: 8px 0px 0px 0px !important;
 }

@@ -15,12 +15,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Methods display a list of notebooks records.
+ * Methods display a list of containers records.
  *
  * @package		Joomla.Site
  * @subpackage	com_gorilla
  */
-class GorillaViewNotebooks extends JViewLegacy
+class GorillaViewContainers extends JViewLegacy
 {
 
 	/**

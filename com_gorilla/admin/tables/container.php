@@ -15,12 +15,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Table class for notebook.
+ * Table class for container.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaTableNotebook extends JTable {
+class GorillaTableContainer extends JTable {
 
 	/**
 	 * Object constructor to set table and key fields.  In most cases this will
@@ -34,7 +34,7 @@ class GorillaTableNotebook extends JTable {
 	 * @see   JTable
 	 */
 	public function __construct(&$db) {
-		parent::__construct ( '#__gorilla_notebooks', 'id', $db );
+		parent::__construct ( '#__gorilla_containers', 'id', $db );
 	}
 
 	/**
@@ -97,7 +97,7 @@ class GorillaTableNotebook extends JTable {
 	{
 		$k = $this->_tbl_key;
 
-		return $this->extension . '.notebook.' . (int) $this->$k;
+		return $this->extension . '.container.' . (int) $this->$k;
 	}
 
 	/**
@@ -124,7 +124,7 @@ class GorillaTableNotebook extends JTable {
 	{
 		$assetId = null;
 
-		// For while, we don't have hierarchy in notebooks
+		// For while, we don't have hierarchy in containers
 
 		// This is a category under a category.
 // 		if ($this->parent_id > 1)
@@ -132,7 +132,7 @@ class GorillaTableNotebook extends JTable {
 // 			// Build the query to get the asset id for the parent category.
 // 			$query = $this->_db->getQuery(true)
 // 			->select($this->_db->quoteName('asset_id'))
-// 			->from($this->_db->quoteName('#__gorilla_notebooks'))
+// 			->from($this->_db->quoteName('#__gorilla_containers'))
 // 			->where($this->_db->quoteName('id') . ' = ' . $this->parent_id);
 
 // 			// Get the asset id from the database.

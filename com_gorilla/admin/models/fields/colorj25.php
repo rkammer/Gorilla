@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 JFormHelper::loadFieldClass('text');
 
 /**
- * Custo field to list notebooks.
+ * Custo field to list containers.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla

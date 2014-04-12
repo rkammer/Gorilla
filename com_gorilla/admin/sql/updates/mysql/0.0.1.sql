@@ -1,7 +1,7 @@
 	-- -----------------------------------------------------
-	-- Table `#__gorilla_notebooks`
+	-- Table `#__gorilla_containers`
 	-- -----------------------------------------------------
-	CREATE TABLE IF NOT EXISTS `#__gorilla_notebooks` (
+	CREATE TABLE IF NOT EXISTS `#__gorilla_containers` (
 	  `id`             	 INT              NOT NULL AUTO_INCREMENT,
       `guid`             VARCHAR(36)      NOT NULL,
 	  `title`          	 VARCHAR(255)     NOT NULL,

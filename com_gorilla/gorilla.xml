@@ -77,9 +77,9 @@
         <!-- Administration Menu Section -->
         <menu img="../media/com_gorilla/img/icon-16-dashboard.png">COM_GORILLA_MENU</menu>
 		<submenu>
-			<menu view="notebooks"
+			<menu view="containers"
 			      img="../media/com_gorilla/img/icon-16-book.png"
-				  alt="Gorilla/Notebooks">COM_GORILLA_SUBMENU_NOTEBOOKS</menu>
+				  alt="Gorilla/Containers">COM_GORILLA_SUBMENU_CONTAINERS</menu>
 			<menu view="documents"
 			      img="../media/com_gorilla/img/icon-16-stack.png"
 				  alt="Gorilla/Documents">COM_GORILLA_SUBMENU_DOCUMENTS</menu>

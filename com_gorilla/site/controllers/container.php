@@ -17,11 +17,11 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controllerform');
 
 /**
- * Notebook controller class.
+ * Container controller class.
  *
- * @package		Joomla.Administrator
+ * @package		Joomla.Site
  * @subpackage	com_gorilla
  */
-class GorillaControllerNotebook extends JControllerForm
+class GorillaControllerContainer extends JControllerForm
 {
 }

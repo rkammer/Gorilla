@@ -23,7 +23,7 @@ defined('_JEXEC') or die;
 class GorillaController extends JControllerLegacy
 {
     // Set the default view of component
-	protected $default_view = 'notebooks';
+	protected $default_view = 'containers';
 
 	/**
 	 * Method to display a view.
@@ -38,16 +38,16 @@ class GorillaController extends JControllerLegacy
 	{
 		require_once JPATH_COMPONENT.'/helpers/gorilla.php';
 
-		$view	= JFactory::getApplication()->input->get('view', 'notebooks');
+		$view	= JFactory::getApplication()->input->get('view', 'containers');
 		$layout = JFactory::getApplication()->input->get('layout', 'default');
 		$id		= JFactory::getApplication()->input->getInt('id');
 
 		// Protect edit view from direct access
-		if ($view == 'notebook' && $layout == 'edit' && !$this->checkEditId('com_gorilla.edit.notebook', $id))
+		if ($view == 'container' && $layout == 'edit' && !$this->checkEditId('com_gorilla.edit.container', $id))
 		{
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 			$this->setMessage($this->getError(), 'error');
-			$this->setRedirect(JRoute::_('index.php?option=com_gorilla&view=notebooks', false));
+			$this->setRedirect(JRoute::_('index.php?option=com_gorilla&view=containers', false));
 			return false;
 		}
 

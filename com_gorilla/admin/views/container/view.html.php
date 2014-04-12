@@ -15,12 +15,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Methods display a list of notebooks records.
+ * Methods display a list of containers records.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaViewNotebook extends JViewLegacy {
+class GorillaViewContainer extends JViewLegacy {
 
 	/**
 	 * Store the data retrieved from the model
@@ -82,28 +82,28 @@ class GorillaViewNotebook extends JViewLegacy {
 		$isNew = ($this->item->id == 0);
 
 		// Add title
-		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTEBOOKS' ), 'book' );
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_CONTAINERS' ), 'book' );
 
 		// Add apply button
-		JToolbarHelper::apply('notebook.apply');
+		JToolbarHelper::apply('container.apply');
 
 		// Add save button
-		JToolbarHelper::save ( 'notebook.save' );
+		JToolbarHelper::save ( 'container.save' );
 
 		// Add save2new (after save, create new record)
-		JToolbarHelper::save2new('notebook.save2new');
+		JToolbarHelper::save2new('container.save2new');
 
 		// Add save2copy only when record already exists
 		if (!$isNew) {
-			JToolbarHelper::save2copy('notebook.save2copy');
+			JToolbarHelper::save2copy('container.save2copy');
 		}
 
 		// show a Cancel button if you create a new record,
 		// or a Close button if you are editing an existing record
 		if (empty ( $this->item->id )) {
-			JToolbarHelper::cancel ( 'notebook.cancel' );
+			JToolbarHelper::cancel ( 'container.cancel' );
 		} else {
-			JToolbarHelper::cancel ( 'notebook.cancel', 'JTOOLBAR_CLOSE' );
+			JToolbarHelper::cancel ( 'container.cancel', 'JTOOLBAR_CLOSE' );
 		}
 	}
 }
