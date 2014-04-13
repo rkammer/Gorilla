@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension>
+<extension type="library" version="2.5" method="upgrade">
+	<name>Gorilla Framework</name>
+	<libraryname>gorilla</libraryname>
+	<version>0.0.1</version>
+	<versionname>Banana</versionname>
+	<creationDate>2014-04-05</creationDate>
+	<author>Gorilla Team</author>
+	<authorEmail>info@sohoprospecting.com</authorEmail>
+	<authorUrl>https://www.sohoprospecting.com</authorUrl>
+	<copyright>2013-2014 SOHO Prospecting</copyright>
+	<license>GNU/GPLv2 or later</license>
+	<description>Gorilla Framework.</description>
+	<files>
+		<folder>handlers</folder>
+		<folder>factories</folder>
+		<filename>index.html</filename>
+	</files>
+</extension>

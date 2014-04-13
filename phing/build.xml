@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Gorilla" basedir="." default="main" >
+ 
+        <!-- Get Project Path -->
+        <property name="src" value="${project.basedir}" override="true" />
+		<property name="des" value="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds" override="true" />
+		<property name="com_version" value="0.0.6" override="true" />
+		<property name="lib_version" value="0.0.1" override="true" />
+		<property name="pkg_version" value="0.0.1" override="true" />
+		
+        
+        <!-- Prepare filesets -->
+	    <fileset dir="${src}/pkg_gorilla" id="pkg_files">
+	            <include name="**" />                
+	    </fileset>	
+	
+        <fileset dir="${src}/com_gorilla" id="com_files">
+                <include name="**" />                
+        </fileset>
+	
+	    <fileset dir="${src}/lib_gorilla" id="lib_files">
+	            <include name="**" />                
+	    </fileset> 	
+ 
+        <!-- Copy Target -->
+        <target name="main" description="preperaing builds">
+                <echo>Building Gorilla...
+                </echo>
+                
+	    	    <copy todir="${des}">
+	    	           <fileset refid="pkg_files" />
+	            	   <filterchain>
+	            	        <replacetokens begintoken="%%" endtoken="%%">
+	            	            <token key="com_gorilla_0.0.1.zip" value="com_gorilla_${com_version}.zip" />
+	            	            <token key="lib_gorilla_0.0.1.zip" value="lib_gorilla_${lib_version}.zip" />
+	            	        </replacetokens>
+	            	    </filterchain>	    	    	
+	    	    </copy>	 
+        	
+        		<zip destfile="${des}/packages/com_gorilla_${com_version}.zip">
+                        <fileset refid="com_files" />
+                </zip>
+        	
+	    		<zip destfile="${des}/packages/lib_gorilla_${lib_version}.zip">
+	                    <fileset refid="lib_files" />
+	            </zip>        	
+        	
+        </target>
+	
+		<!-- Zipping package -->
+	    <fileset dir="${des}" id="full_package">
+	            <include name="packages/**" />                
+	    		<include name="pkg_gorilla.xml" />
+	    </fileset>	
+	
+	    <!-- Copy Target -->
+	    <target name="packing" description="packing builds">
+	            <echo>Packing Gorilla...
+	            </echo>
+	            
+	    		<zip destfile="${des}/pkg_gorilla_${pkg_version}.zip">
+	                    <fileset refid="full_package" />
+	            </zip>
+	    	
+	    		<delete file="${des}/pkg_gorilla.xml" quiet="true" />
+	    		<delete dir="${des}/packages" quiet="true" />
+	    	
+	    </target>	
+	
+</project>
