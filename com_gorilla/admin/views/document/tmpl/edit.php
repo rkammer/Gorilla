@@ -28,7 +28,7 @@ JHtml::_('formbehavior.chosen', 'select');
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="document-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="document-form" class="form-validate" enctype="multipart/form-data">
 
 	<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
 
@@ -41,6 +41,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				<div class="form-vertical">
 					<?php echo $this->form->getControlGroup('container_id'); ?>
 					<?php echo $this->form->getControlGroup('description'); ?>
+					<?php echo $this->form->getControlGroup('upload_file'); ?>
 				</div>
 			</div>
 			<div class="span3">
@@ -74,6 +75,7 @@ JHtml::_('formbehavior.chosen', 'select');
 
 	</div>
 
-	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="task" value="" />		
+	<input type="hidden" name="MAX_FILE_SIZE" value="20000" />	
 	<?php echo JHtml::_('form.token'); ?>
 </form>

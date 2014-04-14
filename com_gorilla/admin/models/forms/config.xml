@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="amazon">
+
+		<field name="amazon_key_id" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_AMAZON_KEY_ID_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_AMAZON_KEY_ID_DESC" hint="COM_GORILLA_CONFIG_FIELD_AMAZON_KEY_ID_PLACEHOLDER" />
+		    
+		<field name="amazon_secret_key" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_AMAZON_SECRET_KEY_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_AMAZON_SECRET_KEY_DESC" hint="COM_GORILLA_CONFIG_FIELD_AMAZON_SECRET_KEY_PLACEHOLDER" />		    
+		    
+		<field name="amazon_bucket" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_AMAZON_BUCKET_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_AMAZON_BUCKET_DESC" hint="COM_GORILLA_CONFIG_FIELD_AMAZON_BUCKET_PLACEHOLDER" />		    
+			
+	</fieldset>
+</form>

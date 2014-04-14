@@ -49,6 +49,13 @@
 			required="true"
 			/>
 
+		<field
+			name="upload_file"
+			type="file"
+			label="COM_GORILLA_DOCUMENTS_FIELD_UPLOAD_FILE_LABEL"
+			description="COM_GORILLA_DOCUMENTS_FIELD_UPLOAD_FILE_LABEL"
+			size="10" />
+
 	</fieldset>
 
 	<fieldset name="publishing">

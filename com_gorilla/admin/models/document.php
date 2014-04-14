@@ -14,10 +14,16 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+// Import dependencies
 jimport('joomla.application.component.modeladmin');
 JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' );
 
 require_once dirname(__FILE__) . '/../helpers/gorilla.php';
+
+jimport('gorilla.factories.factory');
+
+//Import filesystem libraries.
+jimport('joomla.filesystem.file');
 
 /**
  * Model class for document.
@@ -94,7 +100,7 @@ class GorillaModelDocument extends JModelAdmin {
 		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.document.data', array () );
 		if (empty ( $data )) {
 			$data = $this->getItem ();
-
+			
 			// Prime some default values.
 			if ($this->getState('document.id') == 0)
 			{
@@ -102,6 +108,7 @@ class GorillaModelDocument extends JModelAdmin {
 				$GorillaModelConfig = new GorillaModelConfig();
 				$data->set('color_code', $GorillaModelConfig->getNextColor());
 			}
+			
 		}
 		return $data;
 	}
@@ -177,8 +184,100 @@ class GorillaModelDocument extends JModelAdmin {
 			$data['alias']	= $alias;
 			$data['state']	= 0;
 		}
-
-		return parent::save($data);
+		
+		//return parent::save($data);
+		
+		$dispatcher = JEventDispatcher::getInstance();
+		$table = $this->getTable();
+		
+		if ((!empty($data['tags']) && $data['tags'][0] != ''))
+		{
+			$table->newTags = $data['tags'];
+		}
+		
+		$key = $table->getKeyName();
+		$pk = (!empty($data[$key])) ? $data[$key] : (int) $this->getState($this->getName() . '.id');
+		$isNew = true;
+		
+		// Include the content plugins for the on save events.
+		JPluginHelper::importPlugin('content');
+		
+		// Allow an exception to be thrown.
+		try
+		{
+			// Load the row if saving an existing record.
+			if ($pk > 0)
+			{
+				$table->load($pk);
+				$isNew = false;
+			}
+		
+			// Bind the data.
+			if (!$table->bind($data))
+			{
+				$this->setError($table->getError());
+		
+				return false;
+			}
+		
+			// Prepare the row for saving
+			$this->prepareTable($table);
+		
+			// Check the data.
+			if (!$table->check())
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		
+			// Receive uploaded file
+			$files        = $app->input->files->get('jform', '', 'array');
+			if (!empty($files)) {
+				$file_name = $this->upload($files['upload_file'], $table->get('guid', ''));
+				if (!$file_name) {
+					return false;
+				}
+				$data['file_name'] = $file_name;
+			}			
+			
+			// Trigger the onContentBeforeSave event.
+			$result = $dispatcher->trigger($this->event_before_save, array($this->option . '.' . $this->name, $table, $isNew));
+		
+			if (in_array(false, $result, true))
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		
+			// Store the data.
+			if (!$table->store())
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		
+			// Clean the cache.
+			$this->cleanCache();
+		
+			// Trigger the onContentAfterSave event.
+			$dispatcher->trigger($this->event_after_save, array($this->option . '.' . $this->name, $table, $isNew));
+		}
+		catch (Exception $e)
+		{
+			$this->setError($e->getMessage());
+		
+			return false;
+		}
+		
+		$pkName = $table->getKeyName();
+		
+		if (isset($table->$pkName))
+		{
+			$this->setState($this->getName() . '.id', $table->$pkName);
+		}
+		$this->setState($this->getName() . '.new', $isNew);
+		
+		return true;		
 	}
 
 	/**
@@ -204,5 +303,44 @@ class GorillaModelDocument extends JModelAdmin {
 
 		return array($title, $alias);
 	}
+	
+	/**
+	 * Method to sanitized and persiste uploaded file.
+	 *
+	 * @param   file     $file  	   Uploaded file in tmp dir
+	 * @param   string   $guid  	   Guid to identify file
+	 *
+	 * @return	mixed  	 File name on success, false on failure  
+	 */
+	protected function upload(&$file, $guid)
+	{
+		$file_name = '';
+		
+		// Sanitize file name
+		$file['name']      = JFile::makeSafe($file['name']);
+		$file_name         = $file['name']; 
+		
+		// Getting max size in Bytes (1024 to KB, 1025 to MB)
+		$max = ini_get('upload_max_filesize') * 1024 * 1024;
+		
+		// Testing file size
+		if($file['size'] > $max) {
+			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MAXIMUM_FILE_SIZE', $max));
+			return false;
+		}
+
+		if($guid == '') {
+			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_GUID_EMPTY'));
+			return false;
+		}		
+		
+		$GorillaHandler = GorillaFactory::getNewHandler();
+		$GorillaHandler->set('_file', $file);
+		$GorillaHandler->set('_guid', $guid);
+		$GorillaHandler->upload();
+		die();
+	
+		return $file_name;
+	}	
 
 }

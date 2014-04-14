@@ -24,18 +24,29 @@ jimport('gorilla.handlers.amazon.handler');
  * @package		Joomla.Library
  * @subpackage	lib_gorilla
  */
-class GorillaFactory 
+class GorillaFactory
 {
+
+	/**
+	 * Get Gorilla configuration object.
+	 *
+	 * @return GorillaModelConfig
+	 */
+	public static function getConfig() {
+
+		return GorillaModelConfig::getInstance();
+
+	}
 
 	/**
 	 * Create new GorillaHandlers according to the storage configuration.
 	 *
-	 * @return Specialized GorillaHandler according with config. 
+	 * @return Specialized GorillaHandler according with config.
 	 */
-	public static function getNewHandler() {	
-		
+	public static function getNewHandler() {
+
 		return new GorillaHandlerAmazon();
-		
+
 	}
-	
+
 }

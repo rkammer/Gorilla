@@ -11,7 +11,7 @@
     <license>GNU/GPLv2 or later</license>
 
     <!--  The version string is recorded in the components table -->
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 
     <!-- The description is optional and defaults to the name -->
     <description>COM_GORILLA_DESCRIPTION</description>
@@ -83,6 +83,9 @@
 			<menu view="documents"
 			      img="../media/com_gorilla/img/icon-16-stack.png"
 				  alt="Gorilla/Documents">COM_GORILLA_SUBMENU_DOCUMENTS</menu>
+			<menu view="config"
+			      img="../media/com_gorilla/img/icon-16-config.png"
+				  alt="Gorilla/Config">COM_GORILLA_SUBMENU_CONFIG</menu>				  
 		</submenu>
 
         <!-- Administration Main File Copy Section -->

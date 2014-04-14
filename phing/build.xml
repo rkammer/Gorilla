@@ -4,7 +4,7 @@
         <!-- Get Project Path -->
         <property name="src" value="${project.basedir}" override="true" />
 		<property name="des" value="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds" override="true" />
-		<property name="com_version" value="0.0.6" override="true" />
+		<property name="com_version" value="0.0.7" override="true" />
 		<property name="lib_version" value="0.0.1" override="true" />
 		<property name="pkg_version" value="0.0.1" override="true" />
 		
@@ -58,7 +58,9 @@
 	            <echo>Packing Gorilla...
 	            </echo>
 	            
-	    		<zip destfile="${des}/pkg_gorilla_${pkg_version}.zip">
+	    		<tstamp />
+	    	
+	    		<zip destfile="${des}/pkg_gorilla_${pkg_version}_${DSTAMP}_${TSTAMP}.zip">
 	                    <fileset refid="full_package" />
 	            </zip>
 	    	
