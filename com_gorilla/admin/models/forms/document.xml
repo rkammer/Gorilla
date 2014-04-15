@@ -49,6 +49,8 @@
 			required="true"
 			/>
 
+		<field name="file_name" type="hidden" />
+
 		<field
 			name="upload_file"
 			type="file"

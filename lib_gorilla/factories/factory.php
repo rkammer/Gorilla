@@ -32,9 +32,9 @@ class GorillaFactory
 	 *
 	 * @return GorillaModelConfig
 	 */
-	public static function getConfig() {
+	public static function getNewConfig() {
 
-		return GorillaModelConfig::getInstance();
+		return new GorillaModelConfig();
 
 	}
 

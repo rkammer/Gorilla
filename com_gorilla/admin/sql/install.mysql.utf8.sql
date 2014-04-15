@@ -90,6 +90,7 @@
 	  `asset_id` 			INT(10) 			NOT NULL DEFAULT '0',
 	  `download_count`		INT(5) UNSIGNED		NOT NULL DEFAULT 0,
 	  `guid`                VARCHAR(36)      	NOT NULL,
+	  `file_name`           VARCHAR(60)         NOT NULL,
 	  PRIMARY KEY (`id`),
 	  INDEX `idx_access` (`access` ASC),
 	  INDEX `idx_checkout` (`checked_out` ASC),

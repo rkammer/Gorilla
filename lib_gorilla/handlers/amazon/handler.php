@@ -35,49 +35,59 @@ class GorillaHandlerAmazon extends GorillaHandler
 	 *
 	 * @return true if success
 	 */
-	public function upload() {
-		echo "Uploaded=" . $this->_file['name'];
-		echo "GUID=" . $this->_guid;
+	public function upload()
+	{
+		//$GorillaConfig = GorillaFactory::getNewConfig();
 
-		echo '1<br/>';
+		//$GorillaConfig = new GorillaModelConfig();
 
+		$db 	= JFactory::getDBO ();
 
+		$query	= $db->getQuery(true);
+		$query->select($db->quoteName('value'));
+		$query->from('#__gorilla_config');
+		$query->where($db->quoteName('key') . ' = ' . $db->quote('AMAZON_KEY_ID'));
+		$db->setQuery($query);
+		$row = $db->loadObject();
 
-		echo '2<br/>';
+		$amazon_key_id = $row->value;
 
-		//cria o objecto
+		$query	= $db->getQuery(true);
+		$query->select($db->quoteName('value'));
+		$query->from('#__gorilla_config');
+		$query->where($db->quoteName('key') . ' = ' . $db->quote('AMAZON_SECRET_KEY'));
+		$db->setQuery($query);
+		$row = $db->loadObject();
+
+		$amazon_secret_key = $row->value;
+
+		$query	= $db->getQuery(true);
+		$query->select($db->quoteName('value'));
+		$query->from('#__gorilla_config');
+		$query->where($db->quoteName('key') . ' = ' . $db->quote('AMAZON_BUCKET'));
+		$db->setQuery($query);
+		$row = $db->loadObject();
+
+		$amazon_bucket = $row->value;
+
+		// Create S3 client
 		$s3Client = S3Client::factory(array(
-				'key'    => '',
-				'secret' => '',
+				'key'    => $amazon_key_id,
+				'secret' => $amazon_secret_key,
 		));
 
-		echo '3<br/>';
-
-		//nome do bucket
-		$bucket_name = 'rkammer';
-
-		echo '4<br/>';
-
-		//cria o bucket (na primeira vez)
+		// Create bucket
+		$bucket_name = $amazon_bucket;
 		//$s3Client->createBucket(array('Bucket' => $bucket_name));
+		//$s3Client->waitUntilBucketExists(array('Bucket' => $bucket_name));
 
-		echo '5<br/>';
-
-		//cria um arquivo txt com o conteudo "Hello World"
-		//$result = $s3Client->putObject(array(
-		//		'Bucket' => $bucket_name,
-		//		'Key'    => 'data.txt',
-		//		'Body'   => 'Hello World!!'
-		//));
-
+		// Upload file
 		$s3Client->putObject(array(
 				'Bucket'     => $bucket_name,
 				'Key'        => $this->_guid,
 				'SourceFile' => $this->_file['tmp_name'],
 				'ACL'        => 'public-read'
 		));
-
-		echo "banana";
 
 	}
 
