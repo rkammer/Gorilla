@@ -84,7 +84,7 @@
 			      img="../media/com_gorilla/img/icon-16-stack.png"
 				  alt="Gorilla/Documents">COM_GORILLA_SUBMENU_DOCUMENTS</menu>
 			<menu view="config"
-			      img="../media/com_gorilla/img/icon-16-config.png"
+			      img="../media/com_gorilla/img/icon-16-cog.png"
 				  alt="Gorilla/Config">COM_GORILLA_SUBMENU_CONFIG</menu>				  
 		</submenu>
 

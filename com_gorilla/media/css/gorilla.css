@@ -34,6 +34,18 @@
     background-image: url(../img/icon-48-stack.png);
 }
 
+.icon-16-cog       {
+	background-image: url(../img/icon-16-cog.png);
+}
+
+.icon-32-cog       {
+	background-image: url(../img/icon-32-cog.png);
+}
+
+.icon-48-cog       {
+    background-image: url(../img/icon-48-cog.png);
+}
+
 .icon-32-arrow-left  {
 	background-image: url('../img/icon-32-arrow-left.png');
 }

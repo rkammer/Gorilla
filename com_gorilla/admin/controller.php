@@ -60,6 +60,15 @@ class GorillaController extends JControllerLegacy
 			return false;
 		}
 
+		// Not allow config without config permission
+		if ($view == 'config' && !JFactory::getUser()->authorise('core.admin', 'com_gorilla'))
+		{
+			$this->setError(JText::sprintf('JERROR_ALERTNOAUTHOR', $id));
+			$this->setMessage($this->getError(), 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_gorilla&view=dashboard', false));
+			return false;
+		}
+
 		parent::display();
 
 		return $this;
