@@ -5,7 +5,6 @@
         <property name="src" value="${project.basedir}" override="true" />
 		<property name="des" value="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds" override="true" />
 		<property name="com_version" value="0.0.8" override="true" />
-		<property name="lib_version" value="0.0.1" override="true" />
 		<property name="pkg_version" value="0.0.1" override="true" />
 		
         
@@ -18,10 +17,6 @@
                 <include name="**" />                
         </fileset>
 	
-	    <fileset dir="${src}/lib_gorilla" id="lib_files">
-	            <include name="**" />                
-	    </fileset> 	
- 
         <!-- Copy Target -->
         <target name="main" description="preperaing builds">
                 <echo>Building Gorilla...
@@ -32,7 +27,6 @@
 	            	   <filterchain>
 	            	        <replacetokens begintoken="%%" endtoken="%%">
 	            	            <token key="com_gorilla_0.0.1.zip" value="com_gorilla_${com_version}.zip" />
-	            	            <token key="lib_gorilla_0.0.1.zip" value="lib_gorilla_${lib_version}.zip" />
 	            	        </replacetokens>
 	            	    </filterchain>	    	    	
 	    	    </copy>	 
@@ -40,10 +34,6 @@
         		<zip destfile="${des}/packages/com_gorilla_${com_version}.zip">
                         <fileset refid="com_files" />
                 </zip>
-        	
-	    		<zip destfile="${des}/packages/lib_gorilla_${lib_version}.zip">
-	                    <fileset refid="lib_files" />
-	            </zip>        	
         	
         </target>
 	

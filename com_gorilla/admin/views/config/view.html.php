@@ -46,6 +46,9 @@ class GorillaViewConfig extends JViewLegacy
     	$this->item = $this->get ( 'Item' );
     	$this->form = $this->get ( 'Form' );
 
+    	// add submenu in view
+    	GorillaHelper::addSubmenu('config');
+
     	//Check for errors.
         if (count($errors = $this->get('Errors')))
         {
@@ -60,6 +63,9 @@ class GorillaViewConfig extends JViewLegacy
 		if (version_compare(JVERSION, '3', 'lt')) {
 			parent::display ( $tpl . 'j25' );
 		} else {
+			// Add sidebar in the display
+			$this->sidebar = JHtmlSidebar::render();
+
 			parent::display ( $tpl );
 		}
 	}
@@ -71,8 +77,11 @@ class GorillaViewConfig extends JViewLegacy
 	 */
 	protected function addToolbar() {
 
+		// user permissions
+		$canDo = GorillaHelper::getActions ();
+
 		// hide the main menu so we don't see links to the other views
-		JFactory::getApplication ()->input->set ( 'hidemainmenu', true );
+		//JFactory::getApplication ()->input->set ( 'hidemainmenu', true );
 
 		// Add title
 		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_CONFIG' ), 'cog' );
@@ -85,6 +94,11 @@ class GorillaViewConfig extends JViewLegacy
 
 		// Add cancel button
 		JToolbarHelper::cancel ( 'config.cancel' );
+
+		// Add preferences button if user has permission
+		if ($canDo->get ( 'core.admin' )) {
+			JToolbarHelper::preferences ( 'com_gorilla' );
+		}
 	}
 
 }

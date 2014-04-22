@@ -14,10 +14,6 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-// Import dependencies
-jimport('gorilla.handlers.handler');
-jimport('gorilla.handlers.amazon.handler');
-
 /**
  * Gorilla factory
  *
@@ -34,6 +30,9 @@ class GorillaFactory
 	 */
 	public static function getNewConfig() {
 
+		// Import dependencies
+		require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
+
 		return new GorillaModelConfig();
 
 	}
@@ -41,11 +40,23 @@ class GorillaFactory
 	/**
 	 * Create new GorillaHandlers according to the storage configuration.
 	 *
+	 * @param   string   $sufix       Handler Sufix. Complete list:
+	 * 								  - Amazon
+
+	 * @param   array    $properties  Array of properties needed in constructor.
+	 *
 	 * @return Specialized GorillaHandler according with config.
 	 */
-	public static function getNewHandler() {
+	public static function getNewHandler($sufix, $properties = null) {
 
-		return new GorillaHandlerAmazon();
+		switch($sufix) {
+			case 'Amazon':
+				// Import dependencies
+				require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/handlers/amazon/handler.php' );
+				$class = "GorillaHandler".$sufix;
+				return new $class($properties);
+		}
+
 
 	}
 

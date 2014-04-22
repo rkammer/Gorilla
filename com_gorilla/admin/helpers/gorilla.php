@@ -66,6 +66,13 @@ class GorillaHelper {
 	public static function addSubmenu($vName = 'containers') {
 
 		if (version_compare(JVERSION, '3', 'lt')) {
+			JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_DASHBOARD' ), 'index.php?option=com_gorilla&view=dashboard', $vName == 'dashboard' );
+		}
+		else {
+			JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_DASHBOARD' ), 'index.php?option=com_gorilla&view=dashboard', $vName == 'dashboard' );
+		}
+
+		if (version_compare(JVERSION, '3', 'lt')) {
 			JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CONTAINERS' ), 'index.php?option=com_gorilla&view=containers', $vName == 'containers' );
 		}
 		else {

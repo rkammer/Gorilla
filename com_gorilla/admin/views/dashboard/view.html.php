@@ -29,6 +29,9 @@ class GorillaViewDashboard extends JViewLegacy
     {
     	JToolBarHelper::title(JText::_('COM_GORILLA'), 'dashboard');
 
+    	// add submenu in view
+    	GorillaHelper::addSubmenu('dashboard');
+
 		//Check for errors.
         if (count($errors = $this->get('Errors')))
         {
@@ -36,7 +39,36 @@ class GorillaViewDashboard extends JViewLegacy
             return false;
         }
 
-        // Display the template
-        parent::display($tpl);
+        // Add toolbar in the display
+        $this->addToolbar ();
+
+        // Different layout for different version
+		if (version_compare(JVERSION, '3', 'lt')) {
+			parent::display ( $tpl . 'j25' );
+		} else {
+			// Add sidebar in the display
+			$this->sidebar = JHtmlSidebar::render();
+
+			parent::display ( $tpl );
+		}
+	}
+
+	/**
+	 * Create toolbar for the view.
+	 *
+	 * @return void
+	 */
+	protected function addToolbar() {
+
+		// user permissions
+		$canDo = GorillaHelper::getActions ();
+
+		// Add title
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_DASHBOARD' ), 'dashboard' );
+
+		// Add preferences button if user has permission
+		if ($canDo->get ( 'core.admin' )) {
+			JToolbarHelper::preferences ( 'com_gorilla' );
+		}
 	}
 }

@@ -13,6 +13,5 @@
 	
 	<files folder="packages">
 		<file type="component" id="sohodocs">%%com_gorilla_0.0.1.zip%%</file>
-		<file type="component" id="sohodocs">%%lib_gorilla_0.0.1.zip%%</file>
 	</files>
 </extension>

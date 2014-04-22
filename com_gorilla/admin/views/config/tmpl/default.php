@@ -31,7 +31,16 @@ JHtml::_('formbehavior.chosen', 'select');
 </script>
 <form action="" method="post" name="adminForm" id="config-form" class="form-validate">
 
-	<div class="row-fluid">
+	<?php if (!empty( $this->sidebar)) : ?>
+	<div id="j-sidebar-container" class="span2">
+	<?php echo $this->sidebar; ?>
+	</div>
+	<div id="j-main-container" class="span10">
+	<?php else : ?>
+	<div id="j-main-container">
+	<?php endif;?>
+
+	<!-- <div class="row-fluid"> -->
 
 		<ul class="nav nav-tabs" id="configTabs">
 			<?php $fieldSets = $this->form->getFieldsets(); ?>

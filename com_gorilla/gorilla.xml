@@ -76,6 +76,7 @@
     <administration>
         <!-- Administration Menu Section -->
         <menu img="../media/com_gorilla/img/icon-16-dashboard.png">COM_GORILLA_MENU</menu>
+        <!--  
 		<submenu>
 			<menu view="containers"
 			      img="../media/com_gorilla/img/icon-16-book.png"
@@ -87,6 +88,7 @@
 			      img="../media/com_gorilla/img/icon-16-cog.png"
 				  alt="Gorilla/Config">COM_GORILLA_SUBMENU_CONFIG</menu>				  
 		</submenu>
+		-->
 
         <!-- Administration Main File Copy Section -->
         <files folder="admin">
@@ -99,6 +101,7 @@
 
 			<folder>controllers</folder>
 			<folder>helpers</folder>
+			<folder>libraries</folder>
 			<folder>models</folder>
 			<folder>sql</folder>
 			<folder>tables</folder>

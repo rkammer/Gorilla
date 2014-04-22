@@ -16,6 +16,8 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modeladmin');
 
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php' );
+
 /**
  * Methods to access configurations
  *
@@ -193,6 +195,26 @@ class GorillaModelConfig extends JModelAdmin
 	 */
 	public function save($data)
 	{
+		// Validate fields
+
+		// Amazon Tab
+		if (!empty($data['amazon_bucket'])) {
+
+			$handlerAmazon = array(
+					'key_id'     => $data['amazon_key_id'],
+					'secret_key' => $data['amazon_secret_key'],
+					'bucket'     => $data['amazon_bucket']
+			);
+
+			$GorillaHandler = GorillaFactory::getNewHandler('Amazon', $handlerAmazon);
+			if (!$GorillaHandler->createBucket()) {
+				foreach ($GorillaHandler->getErrors() as $error) {
+					$this->setError($error);
+				}
+				return false;
+			}
+
+		}
 
 		// For each field
 		foreach ($data as $key => $value)

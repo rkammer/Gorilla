@@ -19,8 +19,7 @@ jimport('joomla.application.component.modeladmin');
 JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' );
 
 require_once dirname(__FILE__) . '/../helpers/gorilla.php';
-
-jimport('gorilla.factories.factory');
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php' );
 
 //Import filesystem libraries.
 jimport('joomla.filesystem.file');
@@ -334,7 +333,7 @@ class GorillaModelDocument extends JModelAdmin {
 			return false;
 		}
 
-		$GorillaHandler = GorillaFactory::getNewHandler();
+		$GorillaHandler = GorillaFactory::getNewHandler('Amazon');
 		$GorillaHandler->set('_file', $file);
 		$GorillaHandler->set('_guid', $guid);
 		$GorillaHandler->upload();

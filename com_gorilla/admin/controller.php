@@ -23,7 +23,7 @@ defined('_JEXEC') or die;
 class GorillaController extends JControllerLegacy
 {
     // Set the default view of component
-	protected $default_view = 'containers';
+	protected $default_view = 'dashboard';
 
 	/**
 	 * Method to display a view.

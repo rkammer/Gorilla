@@ -29,10 +29,6 @@
         <fileset dir="${src}/com_gorilla" id="all_files">
                 <include name="**" />                
         </fileset>
-	
-	    <fileset dir="${src}/lib_gorilla" id="lib_files">
-	            <include name="**" />                
-	    </fileset> 	
  
         <!-- Copy Target -->
         <target name="main" description="copy target">
@@ -55,10 +51,6 @@
                         <fileset refid="site_files" />
                 </copy>
         	
-                <copy todir="${joomla}/libraries/gorilla/">
-                        <fileset refid="lib_files" />
-                </copy>        	
-                
 	            <echo>Updating Gorilla for Joomla 2.5
 	            </echo>
 	            
@@ -77,10 +69,6 @@
 	            <copy todir="${joomla25}/components/com_gorilla/">
 	                    <fileset refid="site_files" />
 	            </copy>
-        	
-	            <copy todir="${joomla25}/libraries/gorilla/">
-	                    <fileset refid="lib_files" />
-	            </copy>         	
         	
         </target>
 	
