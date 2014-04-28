@@ -3,7 +3,7 @@
 /**
  * Gorilla Document Manager
  *
- * @author     Rodrigo Petters
+ * @author     Gorilla Team
  * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  * @link https://www.sohoprospecting.com
@@ -63,21 +63,21 @@ JHtml::_('formbehavior.chosen', 'select');
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('JCONFIG_PERMISSIONS_LABEL', true)); ?>
-		<div class="row-fluid form-horizontal-desktop">
-			<div class="span12">
-				<?php echo $this->form->getControlGroups('permissions'); ?>
-			</div>
-		</div>
-		<?php echo JHtml::_('bootstrap.endTab'); ?>
-
-		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
+				<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span6">
 				<?php echo $this->form->getControlGroups('publishing'); ?>
 			</div>
 			<div class="span6">
 				<?php echo $this->form->getControlGroups('metadata'); ?>
+			</div>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('JCONFIG_PERMISSIONS_LABEL', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span12">
+				<?php echo $this->form->getControlGroups('permissions'); ?>
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>

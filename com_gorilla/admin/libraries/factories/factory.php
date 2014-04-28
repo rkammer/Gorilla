@@ -51,10 +51,21 @@ class GorillaFactory
 
 		switch($sufix) {
 			case 'Amazon':
+
 				// Import dependencies
 				require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/handlers/amazon/handler.php' );
+
 				$class = "GorillaHandler".$sufix;
-				return new $class($properties);
+
+				if (isset($properties)) {
+					return new $class(
+							false,
+							$properties['key_id'],
+							$properties['secret_key'],
+							$properties['bucket']
+						);
+				}
+				return new $class(true);
 		}
 
 

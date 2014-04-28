@@ -3,7 +3,7 @@
 /**
  * Gorilla Document Manager
  *
- * @author     Rodrigo Petters
+ * @author     Gorilla Team
  * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  * @link https://www.sohoprospecting.com
@@ -14,15 +14,25 @@
 // No direct access.
 defined ( '_JEXEC' ) or die ();
 
+jimport( 'joomla.form.form' );
+
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select');
 
 ?>
+
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'document.cancel' || document.formvalidator.isValid(document.id('document-form'))) {
+		directSubmit    = task == 'document.cancel' || task == 'document.download';
+		jformFileName   = document.getElementById('jform_file_name');
+		jformUploadFile = document.getElementById('jform_upload_file');
+		if ((!directSubmit) && (jformFileName.value == '') && (jformUploadFile.value == '')) {
+			alert('<?php echo $this->escape(JText::_('COM_GORILLA_DOCUMENT_CLIENT_MUST_HAVE_FILE'));?>');
+			return false;
+		}
+		if (directSubmit || document.formvalidator.isValid(document.id('document-form'))) {
 			Joomla.submitform(task, document.getElementById('document-form'));
 		}
 	}
@@ -50,14 +60,6 @@ JHtml::_('formbehavior.chosen', 'select');
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('JCONFIG_PERMISSIONS_LABEL', true)); ?>
-		<div class="row-fluid form-horizontal-desktop">
-			<div class="span12">
-				<?php echo $this->form->getControlGroups('permissions'); ?>
-			</div>
-		</div>
-		<?php echo JHtml::_('bootstrap.endTab'); ?>
-
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span6">
@@ -69,13 +71,27 @@ JHtml::_('formbehavior.chosen', 'select');
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('JCONFIG_PERMISSIONS_LABEL', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span12">
+				<?php echo $this->form->getControlGroups('permissions'); ?>
+			</div>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+
 		<?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
 
 		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 
 	</div>
 
-	<input type="hidden" name="task" value="" />		
-	<input type="hidden" name="MAX_FILE_SIZE" value="20000" />	
+	<?php echo $this->form->getControlGroup('id'); ?>
+	<?php echo $this->form->getControlGroup('guid'); ?>
+	<?php echo $this->form->getControlGroup('file_name'); ?>
+	<!-- <input type="hidden" name="id" value="<?php echo $this->form->getValue('id'); ?>" /> -->
+	<!-- <input type="hidden" name="guid" value="<?php echo $this->form->getValue('guid'); ?>" /> -->
+	<!-- <input type="hidden" name="file_name" value="<?php echo $this->form->getValue('file_name'); ?>" /> -->
+	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="MAX_FILE_SIZE" value="20000" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

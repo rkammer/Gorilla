@@ -3,7 +3,7 @@
 /**
  * Gorilla Document Manager
  *
- * @author     Rodrigo Petters
+ * @author     Gorilla Team
  * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  * @link https://www.sohoprospecting.com
@@ -147,10 +147,9 @@ class GorillaModelDocument extends JModelAdmin {
 
 				$table->ordering = $max + 1;
 
-				$table->created    = $date->toSql();
-				$table->created_by = $user->get('id');
-				$table->guid       = GorillaHelper::getGUID();
 			}
+			$table->created    = $date->toSql();
+			$table->created_by = $user->get('id');
 
 		}
 		else
@@ -184,99 +183,31 @@ class GorillaModelDocument extends JModelAdmin {
 			$data['state']	= 0;
 		}
 
-		//return parent::save($data);
-
-		$dispatcher = JEventDispatcher::getInstance();
-		$table = $this->getTable();
-
-		if ((!empty($data['tags']) && $data['tags'][0] != ''))
-		{
-			$table->newTags = $data['tags'];
+		if (empty($data['id'])) {
+			// Generate new GUID
+			$data['guid'] = GorillaHelper::getGUID();
 		}
 
-		$key = $table->getKeyName();
-		$pk = (!empty($data[$key])) ? $data[$key] : (int) $this->getState($this->getName() . '.id');
-		$isNew = true;
-
-		// Include the content plugins for the on save events.
-		JPluginHelper::importPlugin('content');
-
-		// Allow an exception to be thrown.
-		try
-		{
-			// Load the row if saving an existing record.
-			if ($pk > 0)
-			{
-				$table->load($pk);
-				$isNew = false;
+		$files = $app->input->files->get('jform', '', 'array');
+		if (empty($files['upload_file']['name'])) {
+			// Must have a file when new
+			if (empty($data['id'])) {
+				$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MUST_HAVE_FILE'), 'warning');
+				return false;
 			}
-
-			// Bind the data.
-			if (!$table->bind($data))
-			{
-				$this->setError($table->getError());
-
+		}
+		else {
+			$file_name = $this->_upload($files['upload_file'], $data['guid']);
+			if (!$file_name) {
+				$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_ERROR_ON_UPLOAD'));
 				return false;
 			}
 
-			// Prepare the row for saving
-			$this->prepareTable($table);
-
-			// Check the data.
-			if (!$table->check())
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Receive uploaded file
-			$files        = $app->input->files->get('jform', '', 'array');
-			if (!empty($files)) {
-				$file_name = $this->upload($files['upload_file'], $table->get('guid', ''));
-				if (!$file_name) {
-					return false;
-				}
-				$data['file_name'] = $file_name;
-			}
-
-			// Trigger the onContentBeforeSave event.
-			$result = $dispatcher->trigger($this->event_before_save, array($this->option . '.' . $this->name, $table, $isNew));
-
-			if (in_array(false, $result, true))
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Store the data.
-			if (!$table->store())
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Clean the cache.
-			$this->cleanCache();
-
-			// Trigger the onContentAfterSave event.
-			$dispatcher->trigger($this->event_after_save, array($this->option . '.' . $this->name, $table, $isNew));
-		}
-		catch (Exception $e)
-		{
-			$this->setError($e->getMessage());
-
-			return false;
+			$data['file_name'] = $file_name;
 		}
 
-		$pkName = $table->getKeyName();
 
-		if (isset($table->$pkName))
-		{
-			$this->setState($this->getName() . '.id', $table->$pkName);
-		}
-		$this->setState($this->getName() . '.new', $isNew);
-
-		return true;
+		return parent::save($data);
 	}
 
 	/**
@@ -311,7 +242,7 @@ class GorillaModelDocument extends JModelAdmin {
 	 *
 	 * @return	mixed  	 File name on success, false on failure
 	 */
-	protected function upload(&$file, $guid)
+	protected function _upload(&$file, $guid)
 	{
 		$file_name = '';
 
@@ -333,10 +264,14 @@ class GorillaModelDocument extends JModelAdmin {
 			return false;
 		}
 
+		// Upload
 		$GorillaHandler = GorillaFactory::getNewHandler('Amazon');
-		$GorillaHandler->set('_file', $file);
-		$GorillaHandler->set('_guid', $guid);
-		$GorillaHandler->upload();
+		if (!$GorillaHandler->upload($guid, $file)) {
+			foreach ($GorillaHandler->getErrors() as $error) {
+				$this->setError($error);
+			}
+			return false;
+		}
 
 		return $file_name;
 	}

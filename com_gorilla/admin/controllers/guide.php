@@ -3,7 +3,7 @@
 /**
  * Gorilla Document Manager
  *
- * @author     Rodrigo Petters
+ * @author     Gorilla Team
  * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  * @link https://www.sohoprospecting.com

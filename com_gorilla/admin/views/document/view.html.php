@@ -3,7 +3,7 @@
 /**
  * Gorilla Document Manager
  *
- * @author     Rodrigo Petters
+ * @author     Gorilla Team
  * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  * @link https://www.sohoprospecting.com
@@ -104,6 +104,11 @@ class GorillaViewDocument extends JViewLegacy {
 			JToolbarHelper::cancel ( 'document.cancel' );
 		} else {
 			JToolbarHelper::cancel ( 'document.cancel', 'JTOOLBAR_CLOSE' );
+		}
+
+		// Download button
+		if (!empty ( $this->item->id )) {
+			JToolbarHelper::custom('document.download', 'download', 'download', 'COM_GORILLA_TOOLBAR_DOWNLOAD', false);
 		}
 	}
 }
