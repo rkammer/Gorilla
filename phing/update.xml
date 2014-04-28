@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Gorilla" basedir="." default="main" >
  
+		<!-- 
+		How to use this file:
+		1. First install component.
+		2. "C:\xampp\php\phing.bat" -f phing/update.xml 
+		-->	
+	
         <!-- Get Project Path -->
         <property name="src" value="${project.basedir}" override="true" />
         
@@ -10,8 +16,9 @@
         
         <!-- Prepare filesets -->        
         <fileset dir="${src}/com_gorilla/admin" id="component_admin_files">
-                <include name="**" />
-                <exclude name="/language/" />
+        		<include name="**" />
+                <exclude name="/language/" />        		
+        		<exclude name="/libraries/handlers/amazon/aws/" />
         </fileset>
         
         <fileset dir="${src}/com_gorilla/admin/language" id="component_language_files">

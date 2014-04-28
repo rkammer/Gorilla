@@ -159,6 +159,9 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'documents.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 					</td>
 					<td class="nowrap has-context">
+						<!-- <a class="btn btn-micro active hasTooltip" title="" onclick="return listItemTask('cb0','documents.unpublish')" href="javascript:void(0);" data-original-title="">
+						    <i class="icon-download"></i>
+						</a> -->
 						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=document.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->title); ?></a>
 						<span class="small">

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Gorilla" basedir="." default="main" >
- 
+<project name="Gorilla" basedir="." default="step1" >
+
+		<!-- 
+		How to use this file:
+		"C:\xampp\php\phing.bat" -f phing/build.xml step1 step2 step3 step4 
+		-->
+	
         <!-- Get Project Path -->
         <property name="src" value="${project.basedir}" override="true" />
 		<property name="des" value="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds" override="true" />
@@ -14,11 +19,40 @@
 	    </fileset>	
 	
         <fileset dir="${src}/com_gorilla" id="com_files">
-                <include name="**" />                
+                <include name="**" />
         </fileset>
 	
+		<!-- Unzip Amazon -->
+		<target name="step1" description="unzip amazon">
+            <echo>Copy files to build path...
+            </echo>
+			
+			<copy todir="${des}/com_temp">			
+            	<fileset refid="com_files" />
+            </copy>
+			
+			<unzip file="${src}/com_gorilla/admin/libraries/handlers/amazon/aws/aws.zip" todir="${des}/com_temp/admin/libraries/handlers/amazon/aws/">
+			  <fileset dir=".">
+				<include name="*.zip"/>
+			  </fileset>
+			</unzip>
+			
+		</target>	
+	
+		<target name="step2" description="delete zip file">
+	        <echo>Deleting zip file
+	        </echo>
+			
+			<delete file="${des}/com_temp/admin/libraries/handlers/amazon/aws/aws.zip" quiet="true" />
+		</target>	
+	
+		<!-- Component with AWS -->
+	    <fileset dir="${des}/com_temp" id="com_temp">
+	            <include name="**" />	    		
+	    </fileset>	
+	
         <!-- Copy Target -->
-        <target name="main" description="preperaing builds">
+        <target name="step3" description="preperaing builds">
                 <echo>Building Gorilla...
                 </echo>
                 
@@ -32,8 +66,10 @@
 	    	    </copy>	 
         	
         		<zip destfile="${des}/packages/com_gorilla_${com_version}.zip">
-                        <fileset refid="com_files" />
+                        <fileset refid="com_temp" />
                 </zip>
+        	
+        		<delete dir="${des}/com_temp" quiet="true" />
         	
         </target>
 	
@@ -44,7 +80,7 @@
 	    </fileset>	
 	
 	    <!-- Copy Target -->
-	    <target name="packing" description="packing builds">
+	    <target name="step4" description="packing builds">
 	            <echo>Packing Gorilla...
 	            </echo>
 	            
