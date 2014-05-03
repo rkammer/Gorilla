@@ -47,6 +47,32 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 		}
 		Joomla.tableOrdering(order, dirn, '');
 	}
+
+	jQuery(document).ready(function() {
+
+        // attach event to each download button
+        jQuery('.download-button').click(function(){
+
+            var $form = jQuery("#downloadForm");
+            if ($form.length == 0) {
+                $form = jQuery("<form>").attr({ "target": "_blank", "id": "downloadForm", "method": "POST", "action": "index.php?option=com_gorilla&task=documents.download" }).hide();
+                jQuery("body").append($form);
+            }
+
+            var $download_id        = jQuery(this).children(".download-id");
+            var $download_guid      = jQuery(this).children(".download-guid");
+            var $download_file_name = jQuery(this).children(".download-file_name");
+
+            $form.append(jQuery("<input>").attr({"value":$download_id.val(), "name":'id'}));
+            $form.append(jQuery("<input>").attr({"value":$download_guid.val(), "name":'guid'}));
+            $form.append(jQuery("<input>").attr({"value":$download_file_name.val(), "name":'file_name'}));
+            $form.append(jQuery("<input>").attr({"value":'1', "name":'<?php echo JSession::getFormToken(); ?>'}));
+
+            $form.submit();
+
+        });
+
+	});
 </script>
 <form
 	action="<?php echo JRoute::_('index.php?option=com_gorilla&view=documents'); ?>"
@@ -159,9 +185,12 @@ JHtml::_('stylesheet', 'jui/jquery.minicolors.css', false, true);
 						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'documents.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 					</td>
 					<td class="nowrap has-context">
-						<!-- <a class="btn btn-micro active hasTooltip" title="" onclick="return listItemTask('cb0','documents.unpublish')" href="javascript:void(0);" data-original-title="">
+						<a class="btn btn-micro active hasTooltip download-button" href="#">
 						    <i class="icon-download"></i>
-						</a> -->
+						    <input type="hidden" class="download-id" value="<?php echo $item->id; ?>" />
+						    <input type="hidden" class="download-guid" value="<?php echo $item->guid; ?>" />
+						    <input type="hidden" class="download-file_name" value="<?php echo $item->file_name; ?>" />
+						</a>
 						<a href="<?php echo JRoute::_('index.php?option=com_gorilla&task=document.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->title); ?></a>
 						<span class="small">
