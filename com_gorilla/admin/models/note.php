@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Gorilla Document Manager
+ * Gorilla Note Manager
  *
  * @author     Gorilla Team
  * @copyright  2013-2014 SOHO Prospecting LLC (California - USA)
@@ -25,12 +25,12 @@ require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php
 jimport('joomla.filesystem.file');
 
 /**
- * Model class for document.
+ * Model class for note.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla
  */
-class GorillaModelDocument extends JModelAdmin {
+class GorillaModelNote extends JModelAdmin {
 
 	/**
 	 * The type alias for this content type.
@@ -38,7 +38,7 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @var      string
 	 * @since    3.2
 	 */
-	public $typeAlias = 'com_gorilla.document';
+	public $typeAlias = 'com_gorilla.note';
 
 	/**
 	 * The prefix to use with controller messages.
@@ -61,7 +61,7 @@ class GorillaModelDocument extends JModelAdmin {
 	 *
 	 * @see     JModelLegacy
 	 */
-	public function getTable($type = 'Document', $prefix = 'GorillaTable', $config = array()) {
+	public function getTable($type = 'Note', $prefix = 'GorillaTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
 
@@ -77,7 +77,7 @@ class GorillaModelDocument extends JModelAdmin {
 	 */
 	public function getForm($data = array(), $loadData = true) {
 		$app = JFactory::getApplication ();
-		$form = $this->loadForm ( 'com_gorilla.document', 'document', array (
+		$form = $this->loadForm ( 'com_gorilla.note', 'note', array (
 				'control' => 'jform',
 				'load_data' => $loadData
 			)
@@ -96,12 +96,12 @@ class GorillaModelDocument extends JModelAdmin {
 	 * @see  	JModelForm
 	 */
 	protected function loadFormData() {
-		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.document.data', array () );
+		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.note.data', array () );
 		if (empty ( $data )) {
 			$data = $this->getItem ();
 
 			// Prime some default values.
-			if ($this->getState('document.id') == 0)
+			if ($this->getState('note.id') == 0)
 			{
 				// Get next color
 				$GorillaModelConfig = new GorillaModelConfig();
@@ -142,7 +142,7 @@ class GorillaModelDocument extends JModelAdmin {
 			if (empty($table->ordering))
 			{
 				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_documents');
+				$db->setQuery('SELECT MAX(ordering) FROM #__gorilla_notes');
 				$max = $db->loadResult();
 
 				$table->ordering = $max + 1;
@@ -192,14 +192,14 @@ class GorillaModelDocument extends JModelAdmin {
 		if (empty($files['upload_file']['name'])) {
 			// Must have a file when new
 			if (empty($data['id'])) {
-				$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MUST_HAVE_FILE'), 'warning');
+				$this->setError(JText::sprintf('COM_GORILLA_NOTE_MUST_HAVE_FILE'), 'warning');
 				return false;
 			}
 		}
 		else {
 			$file_name = $this->_upload($files['upload_file'], $data['guid']);
 			if (!$file_name) {
-				$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_ERROR_ON_UPLOAD'));
+				$this->setError(JText::sprintf('COM_GORILLA_NOTE_ERROR_ON_UPLOAD'));
 				return false;
 			}
 
@@ -255,12 +255,12 @@ class GorillaModelDocument extends JModelAdmin {
 
 		// Testing file size
 		if($file['size'] > $max) {
-			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MAXIMUM_FILE_SIZE', $max));
+			$this->setError(JText::sprintf('COM_GORILLA_NOTE_MAXIMUM_FILE_SIZE', $max));
 			return false;
 		}
 
 		if($guid == '') {
-			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_GUID_EMPTY'));
+			$this->setError(JText::sprintf('COM_GORILLA_NOTE_GUID_EMPTY'));
 			return false;
 		}
 
