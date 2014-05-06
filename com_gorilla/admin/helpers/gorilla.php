@@ -91,6 +91,14 @@ class GorillaHelper {
 			JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_DOCUMENTS' ), 'index.php?option=com_gorilla&view=documents', $vName == 'documents' );
 		}
 
+        if (version_compare(JVERSION, '3', 'lt')) {
+			JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTES' ), 'index.php?option=com_gorilla&view=notes', $vName == 'documents' );
+		}
+		else
+		{
+			JHtmlSidebar::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_NOTES' ), 'index.php?option=com_gorilla&view=notes', $vName == 'notes' );
+		}
+
 		//if (JFactory::getUser()->authorise('core.admin', 'com_gorilla')) {
 			if (version_compare(JVERSION, '3', 'lt')) {
 				JSubMenuHelper::addEntry ( JText::_ ( 'COM_GORILLA_SUBMENU_CONFIG' ), 'index.php?option=com_gorilla&view=config', $vName == 'config' );
