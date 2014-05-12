@@ -82,7 +82,7 @@ class GorillaViewNote extends JViewLegacy {
 		$isNew = ($this->item->id == 0);
 
 		// Add title
-		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTES' ), 'stack' );
+		JToolbarHelper::title ( JText::_ ( 'COM_GORILLA_MANAGER_NOTES' ), 'note' );
 
 		// Add apply button
 		JToolbarHelper::apply('note.apply');
@@ -107,8 +107,8 @@ class GorillaViewNote extends JViewLegacy {
 		}
 
 		// Download button
-		if (!empty ( $this->item->id )) {
-			JToolbarHelper::custom('note.download', 'download', 'download', 'COM_GORILLA_TOOLBAR_DOWNLOAD', false);
-		}
+		// if (!empty ( $this->item->id )) {
+			// JToolbarHelper::custom('note.download', 'download', 'download', 'COM_GORILLA_TOOLBAR_DOWNLOAD', false);
+		// }
 	}
 }

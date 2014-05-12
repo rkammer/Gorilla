@@ -101,12 +101,12 @@ class GorillaModelNote extends JModelAdmin {
 			$data = $this->getItem ();
 
 			// Prime some default values.
-			if ($this->getState('note.id') == 0)
-			{
+			// if ($this->getState('note.id') == 0)
+			// {
 				// Get next color
-				$GorillaModelConfig = new GorillaModelConfig();
-				$data->set('color_code', $GorillaModelConfig->getNextColor());
-			}
+				// $GorillaModelConfig = new GorillaModelConfig();
+				// $data->set('color_code', $GorillaModelConfig->getNextColor());
+			// }
 
 		}
 		return $data;
@@ -188,23 +188,23 @@ class GorillaModelNote extends JModelAdmin {
 			$data['guid'] = GorillaHelper::getGUID();
 		}
 
-		$files = $app->input->files->get('jform', '', 'array');
-		if (empty($files['upload_file']['name'])) {
+		// $files = $app->input->files->get('jform', '', 'array');
+		// if (empty($files['upload_file']['name'])) {
 			// Must have a file when new
-			if (empty($data['id'])) {
-				$this->setError(JText::sprintf('COM_GORILLA_NOTE_MUST_HAVE_FILE'), 'warning');
-				return false;
-			}
-		}
-		else {
-			$file_name = $this->_upload($files['upload_file'], $data['guid']);
-			if (!$file_name) {
-				$this->setError(JText::sprintf('COM_GORILLA_NOTE_ERROR_ON_UPLOAD'));
-				return false;
-			}
+			// if (empty($data['id'])) {
+				// $this->setError(JText::sprintf('COM_GORILLA_NOTE_MUST_HAVE_FILE'), 'warning');
+				// return false;
+			// }
+		// }
+		// else {
+			// $file_name = $this->_upload($files['upload_file'], $data['guid']);
+			// if (!$file_name) {
+				// $this->setError(JText::sprintf('COM_GORILLA_NOTE_ERROR_ON_UPLOAD'));
+				// return false;
+			// }
 
-			$data['file_name'] = $file_name;
-		}
+			// $data['file_name'] = $file_name;
+		// }
 
 
 		return parent::save($data);
@@ -242,38 +242,38 @@ class GorillaModelNote extends JModelAdmin {
 	 *
 	 * @return	mixed  	 File name on success, false on failure
 	 */
-	protected function _upload(&$file, $guid)
-	{
-		$file_name = '';
+	// protected function _upload(&$file, $guid)
+	// {
+		// $file_name = '';
 
 		// Sanitize file name
-		$file['name']      = JFile::makeSafe($file['name']);
-		$file_name         = $file['name'];
+		// $file['name']      = JFile::makeSafe($file['name']);
+		// $file_name         = $file['name'];
 
 		// Getting max size in Bytes (1024 to KB, 1025 to MB)
-		$max = ini_get('upload_max_filesize') * 1024 * 1024;
+		// $max = ini_get('upload_max_filesize') * 1024 * 1024;
 
 		// Testing file size
-		if($file['size'] > $max) {
-			$this->setError(JText::sprintf('COM_GORILLA_NOTE_MAXIMUM_FILE_SIZE', $max));
-			return false;
-		}
+		// if($file['size'] > $max) {
+			// $this->setError(JText::sprintf('COM_GORILLA_NOTE_MAXIMUM_FILE_SIZE', $max));
+			// return false;
+		// }
 
-		if($guid == '') {
-			$this->setError(JText::sprintf('COM_GORILLA_NOTE_GUID_EMPTY'));
-			return false;
-		}
+		// if($guid == '') {
+			// $this->setError(JText::sprintf('COM_GORILLA_NOTE_GUID_EMPTY'));
+			// return false;
+		// }
 
 		// Upload
-		$GorillaHandler = GorillaFactory::getNewHandler('Amazon');
-		if (!$GorillaHandler->upload($guid, $file)) {
-			foreach ($GorillaHandler->getErrors() as $error) {
-				$this->setError($error);
-			}
-			return false;
-		}
+		// $GorillaHandler = GorillaFactory::getNewHandler('Amazon');
+		// if (!$GorillaHandler->upload($guid, $file)) {
+			// foreach ($GorillaHandler->getErrors() as $error) {
+				// $this->setError($error);
+			// }
+			// return false;
+		// }
 
-		return $file_name;
+		// return $file_name;
 	}
 
 }
