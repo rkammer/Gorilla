@@ -1,49 +1,61 @@
 .icon-16-dashboard       {
-	background-image: url(../img/icon-16-dashboard.png);
+	background-image: url(../img/gorilla-icon-16.png);
 }
 
 .icon-32-dashboard       {
-	background-image: url(../img/icon-32-dashboard.png);
+	background-image: url(../img/gorilla-icon-32.png);
 }
 
 .icon-48-dashboard       {
-    background-image: url(../img/icon-48-dashboard.png);
+    background-image: url(../img/gorilla-icon-48.png);
 }
 
 .icon-16-book       {
-	background-image: url(../img/icon-16-book.png);
+	background-image: url(../img/gorilla-container-16.png);
 }
 
 .icon-32-book       {
-	background-image: url(../img/icon-32-book.png);
+	background-image: url(../img/gorilla-container-32.png);
 }
 
 .icon-48-book       {
-    background-image: url(../img/icon-48-book.png);
+    background-image: url(../img/gorilla-container-48.png);
 }
 
 .icon-16-stack       {
-	background-image: url(../img/icon-16-stack.png);
+	background-image: url(../img/gorilla-document-16.png);
 }
 
 .icon-32-stack       {
-	background-image: url(../img/icon-32-stack.png);
+	background-image: url(../img/gorilla-document-32.png);
 }
 
 .icon-48-stack       {
-    background-image: url(../img/icon-48-stack.png);
+    background-image: url(../img/gorilla-document-48.png);
+}
+
+.icon-16-note       {
+	background-image: url(../img/gorilla-note-16.png);
+}
+
+.icon-32-note       {
+	background-image: url(../img/gorilla-note-32.png);
+}
+
+.icon-48-note       {
+    background-image: url(../img/gorilla-note-48.png);
 }
 
 .icon-16-cog       {
-	background-image: url(../img/icon-16-cog.png);
+	background-image: url(../img/gorilla-config-16.png);
 }
 
 .icon-32-cog       {
-	background-image: url(../img/icon-32-cog.png);
+	background-image: url(../img/gorilla-config-32.png);
 }
 
 .icon-48-cog       {
-    background-image: url(../img/icon-48-cog.png);
+    background-image: url(../img/gorilla-config-48.png);
 }
 
 .icon-32-arrow-left  {
@@ -141,7 +153,7 @@
     text-indent: -99999px;
     overflow: hidden;
     background-position: 0px 0px;
-    background: url(../img/icon-48-book.png) no-repeat scroll left top transparent;
+    background: url(../img/gorilla-container-48.png) no-repeat scroll left top transparent;
     margin: 4px auto 6px;
 }
 
@@ -152,7 +164,18 @@
     text-indent: -99999px;
     overflow: hidden;
     background-position: 0px 0px;
-    background: url(../img/icon-48-stack.png) no-repeat scroll left top transparent;
+    background: url(../img/gorilla-document-48.png) no-repeat scroll left top transparent;
+    margin: 4px auto 6px;
+}
+
+.gorilla-dashboard-box-notes-div {
+    display: block;
+    width: 48px;
+    height: 48px;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-position: 0px 0px;
+    background: url(../img/gorilla-note-48.png) no-repeat scroll left top transparent;
     margin: 4px auto 6px;
 }
 
@@ -163,7 +186,7 @@
     text-indent: -99999px;
     overflow: hidden;
     background-position: 0px 0px;
-    background: url(../img/icon-48-cog.png) no-repeat scroll left top transparent;
+    background: url(../img/gorilla-config-48.png) no-repeat scroll left top transparent;
     margin: 4px auto 6px;
 }
 
