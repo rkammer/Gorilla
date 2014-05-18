@@ -183,29 +183,34 @@ class GorillaModelDocument extends JModelAdmin {
 			$data['state']	= 0;
 		}
 
-		if (empty($data['id'])) {
-			// Generate new GUID
-			$data['guid'] = GorillaHelper::getGUID();
-		}
+		$newGuid = '';
+		$newFileName = '';
+		if (!empty($data['filelist'])) {
+			$filelist = json_decode($data['filelist']);
 
-		$files = $app->input->files->get('jform', '', 'array');
-		if (empty($files['upload_file']['name'])) {
-			// Must have a file when new
-			if (empty($data['id'])) {
-				$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MUST_HAVE_FILE'), 'warning');
-				return false;
+			// Check if array has content
+			if (isset($filelist->files) && count($filelist->files) > 0) {
+				$newGuid     = $filelist->files[0]->serverName;
+				$newFileName = JFile::makeSafe($filelist->files[0]->originalName);
 			}
 		}
-		else {
-			$file_name = $this->_upload($files['upload_file'], $data['guid']);
-			if (!$file_name) {
+
+		// No file uploaded
+		if (empty($data['id']) && $newGuid == '') {
+			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MUST_HAVE_FILE'), 'warning');
+			return false;
+		}
+
+		// Upload new file
+		if (!empty($newGuid)) {
+			if (!$this->_upload($newGuid)) {
 				$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_ERROR_ON_UPLOAD'));
 				return false;
 			}
 
-			$data['file_name'] = $file_name;
+			$data['guid']     = $newGuid;
+			$data['filename'] = $newFileName;
 		}
-
 
 		return parent::save($data);
 	}
@@ -235,26 +240,24 @@ class GorillaModelDocument extends JModelAdmin {
 	}
 
 	/**
-	 * Method to sanitized and persiste uploaded file.
+	 * Method to upload and persiste uploaded file.
 	 *
-	 * @param   file     $file  	   Uploaded file in tmp dir
 	 * @param   string   $guid  	   Guid to identify file
 	 *
-	 * @return	mixed  	 File name on success, false on failure
+	 * @return	boolean	 true on success, false on failure
 	 */
-	protected function _upload(&$file, $guid)
+	protected function _upload($guid)
 	{
-		$file_name = '';
-
-		// Sanitize file name
-		$file['name']      = JFile::makeSafe($file['name']);
-		$file_name         = $file['name'];
+		// Get handler to move to dropped directory
+		$HandlerDrop    = GorillaFactory::getNewHandler('Drop');
+		$fullfilename   = $HandlerDrop->getAbsolutePath($guid);
 
 		// Getting max size in Bytes (1024 to KB, 1025 to MB)
-		$max = ini_get('upload_max_filesize') * 1024 * 1024;
+		$GorillaConfig  = GorillaFactory::getNewConfig();
+		$maxInBytes     = $GorillaConfig->getConfigByKey('max_file_size')->value * 1024 * 1024;
 
 		// Testing file size
-		if($file['size'] > $max) {
+		if(filesize($fullfilename) > $maxInBytes) {
 			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_MAXIMUM_FILE_SIZE', $max));
 			return false;
 		}
@@ -266,14 +269,17 @@ class GorillaModelDocument extends JModelAdmin {
 
 		// Upload
 		$GorillaHandler = GorillaFactory::getNewHandler('Amazon');
-		if (!$GorillaHandler->upload($guid, $file)) {
+		if (!$GorillaHandler->uploadFromSourceFile($guid, $fullfilename)) {
 			foreach ($GorillaHandler->getErrors() as $error) {
 				$this->setError($error);
 			}
 			return false;
 		}
 
-		return $file_name;
+		// Remove dropped file
+		$HandlerDrop->del($guid);
+
+		return true;
 	}
 
 }

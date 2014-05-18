@@ -19,7 +19,7 @@ JFormHelper::loadFieldClass('list');
 require_once dirname(__FILE__) . '/../../helpers/gorilla.php';
 
 /**
- * Custo field to list containers.
+ * Custom field to list containers.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_gorilla

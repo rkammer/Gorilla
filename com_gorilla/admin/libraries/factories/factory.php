@@ -42,7 +42,8 @@ class GorillaFactory
 	 *
 	 * @param   string   $sufix       Handler Sufix. Complete list:
 	 * 								  - Amazon
-
+	 *                                - Drop
+     *
 	 * @param   array    $properties  Array of properties needed in constructor.
 	 *
 	 * @return Specialized GorillaHandler according with config.
@@ -66,6 +67,15 @@ class GorillaFactory
 						);
 				}
 				return new $class(true);
+
+			case 'Drop':
+
+				// Import dependencies
+				require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/handlers/local/drop.php' );
+
+				$class = "GorillaHandler".$sufix;
+
+				return new $class();
 		}
 
 

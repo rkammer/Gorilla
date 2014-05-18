@@ -98,7 +98,7 @@ class GorillaModelDocuments extends JModelList
 			$this->getState(
 				'list.select',
 				'a.id, a.title, a.alias, a.description, a.container_id, ' .
-				'a.filename, a.published, a.guid, a.file_name, ' .
+				'a.filename, a.published, a.guid, a.filename, ' .
 				'a.access, a.ordering, a.checked_out, a.checked_out_time, a.metadesc, ' .
 				'a.metakey, a.created, a.created_by, a.modified, a.modified_by, ' .
 				'a.publish_up, a.publish_down, a.asset_id, a.download_count '

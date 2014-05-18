@@ -90,7 +90,7 @@ class GorillaModelConfig extends JModelAdmin
 	 *
 	 * @return string
 	 */
-	private function getQueryForConfig($key = '') {
+	private function _getQueryForConfig($key = '') {
 		$db 	= $this->getDbo();
 		$query	= $db->getQuery(true);
 
@@ -100,7 +100,7 @@ class GorillaModelConfig extends JModelAdmin
 
 		// Filter by key
 		if (!empty($key)) {
-			$query->where($db->quoteName('key') . ' = ' . $db->quote($key));
+			$query->where($db->quoteName('key') . ' = ' . strtoupper($db->quote($key)));
 		}
 
 		return $query;
@@ -115,7 +115,7 @@ class GorillaModelConfig extends JModelAdmin
 	 */
 	private function getAllConfigRecords() {
 		$db 	= $this->getDbo();
-		$query	= $this->getQueryForConfig();
+		$query	= $this->_getQueryForConfig();
 
 		// Get the options.
 		$db->setQuery($query);
@@ -134,7 +134,7 @@ class GorillaModelConfig extends JModelAdmin
 	 * @see  	JModelForm
 	 */
 	protected function loadFormData() {
-		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.config.data', array () );
+		$data = JFactory::getApplication ()->getUserState ( 'com_gorilla.edit.config.data', array() );
 		if (empty ( $data )) {
 
 			$all_fields = array();
@@ -165,7 +165,7 @@ class GorillaModelConfig extends JModelAdmin
 	 */
 	private function setConfigByKey($key, $value) {
 		$db 	= $this->getDbo();
-		$query	= $this->getQueryForConfig($key);
+		$query	= $this->_getQueryForConfig($key);
 
 		// Build update
 		$query->update('#__gorilla_config');
@@ -173,7 +173,7 @@ class GorillaModelConfig extends JModelAdmin
 		$query->set($db->quoteName('value') .' = ' . $db->quote($value));
 
 		// Only the right configuration
-		$query->where($db->quoteName('key') .' = ' . $db->quote($key));
+		$query->where($db->quoteName('key') .' = ' . strtoupper($db->quote($key)));
 
 		// Execute update
 		$db->setQuery($query);
@@ -195,10 +195,19 @@ class GorillaModelConfig extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		// Validate fields
+		// Validate file size
+		$php_max  = (int) ini_get('upload_max_filesize');
+		$post_max = (int) ini_get('post_max_size');
+		$cfg_max  = $data['max_file_size'];
+		if ($cfg_max > $php_max) {
+			$this->setError(JText::_('COM_GORILLA_CONFIG_UPLOAD_MAX_FILESIZE_VALIDATION'));
+		}
+		if ($post_max <= $php_max) {
+			$this->setError(JText::_('COM_GORILLA_CONFIG_POST_MAX_SIZE_VALIDATION'));
+		}
 
 		// Amazon Tab
-		if (!empty($data['amazon_bucket'])) {
+		if ( $data['storage'] == 0 ) {
 
 			$handlerAmazon = array(
 					'key_id'     => $data['amazon_key_id'],
@@ -211,9 +220,14 @@ class GorillaModelConfig extends JModelAdmin
 				foreach ($GorillaHandler->getErrors() as $error) {
 					$this->setError($error);
 				}
-				return false;
 			}
 
+		}
+
+		// Stop when error to show all errors at once
+		$errors = $this->getErrors();
+		if (!empty($errors)) {
+			return false;
 		}
 
 		// For each field
@@ -242,7 +256,7 @@ class GorillaModelConfig extends JModelAdmin
 	 */
 	public function getConfigByKey($key) {
 		$db 	= $this->getDbo();
-		$query	= $this->getQueryForConfig($key);
+		$query	= $this->_getQueryForConfig($key);
 
 		// Get the options.
 		$db->setQuery($query);

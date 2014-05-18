@@ -25,17 +25,18 @@ JHtml::_('formbehavior.chosen', 'select');
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
+		var myDropzone  = Dropzone.forElement("#dropzone-div");
 		directSubmit    = task == 'document.cancel' || task == 'document.download';
-		jformFileName   = document.getElementById('jform_file_name');
-		jformUploadFile = document.getElementById('jform_upload_file');
-		if ((!directSubmit) && (jformFileName.value == '') && (jformUploadFile.value == '')) {
+ 		newRecord       = document.getElementById('jform_id').value == '' || document.getElementById('jform_id').value == '0';
+ 		if ((!directSubmit) && (newRecord) && (myDropzone.files.length == 0)) {
 			alert('<?php echo $this->escape(JText::_('COM_GORILLA_DOCUMENT_CLIENT_MUST_HAVE_FILE'));?>');
-			return false;
-		}
+ 			return false;
+ 		}
 		if (directSubmit || document.formvalidator.isValid(document.id('document-form'))) {
 			Joomla.submitform(task, document.getElementById('document-form'));
 		}
 	}
+
 </script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_gorilla&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="document-form" class="form-validate" enctype="multipart/form-data">
@@ -47,11 +48,15 @@ JHtml::_('formbehavior.chosen', 'select');
 
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'details', empty($this->item->id) ? JText::_('COM_GORILLA_NEW_DOCUMENT', true) : JText::sprintf('COM_GORILLA_EDIT_DOCUMENT', $this->item->id, true)); ?>
 		<div class="row-fluid">
-			<div class="span9">
+			<div class="span4">
 				<div class="form-vertical">
 					<?php echo $this->form->getControlGroup('container_id'); ?>
 					<?php echo $this->form->getControlGroup('description'); ?>
-					<?php echo $this->form->getControlGroup('upload_file'); ?>
+				</div>
+			</div>
+			<div class="span5">
+				<div class="form-vertical">
+					<?php echo $this->form->getControlGroup('filelist'); ?>
 				</div>
 			</div>
 			<div class="span3">
@@ -87,11 +92,7 @@ JHtml::_('formbehavior.chosen', 'select');
 
 	<?php echo $this->form->getControlGroup('id'); ?>
 	<?php echo $this->form->getControlGroup('guid'); ?>
-	<?php echo $this->form->getControlGroup('file_name'); ?>
-	<!-- <input type="hidden" name="id" value="<?php echo $this->form->getValue('id'); ?>" /> -->
-	<!-- <input type="hidden" name="guid" value="<?php echo $this->form->getValue('guid'); ?>" /> -->
-	<!-- <input type="hidden" name="file_name" value="<?php echo $this->form->getValue('file_name'); ?>" /> -->
+	<?php echo $this->form->getControlGroup('filename'); ?>
 	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="MAX_FILE_SIZE" value="20000" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

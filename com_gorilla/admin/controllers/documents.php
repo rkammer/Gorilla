@@ -78,16 +78,16 @@ class GorillaControllerDocuments extends JControllerAdmin
 
 		$id        = $input->get('id', '', 'int');
 		$guid      = $input->get('guid', '', 'string');
-		$file_name = $input->get('file_name', '', 'string');
+		$filename  = $input->get('filename', '', 'string');
 
 		// Validate file association
-		if (empty($id) || empty($guid) || empty($file_name)) {
+		if (empty($id) || empty($guid) || empty($filename)) {
 			jexit(JText::sprintf('COM_GORILLA_DOCUMENT_NO_FILE'));
 		}
 
 		// Get handler and download
 		$GorillaHandler = GorillaFactory::getNewHandler('Amazon');
-		if (!$GorillaHandler->download($guid, $file_name)) {
+		if (!$GorillaHandler->download($guid, $filename)) {
 			$errors = '';
  			foreach ($GorillaHandler->getErrors() as $error) {
  				$errors .= $error.'<br />';

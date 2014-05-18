@@ -16,6 +16,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controllerform');
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php' );
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/helpers/gorilla.php' );
 
 /**
  * Document controller class.
@@ -46,10 +47,10 @@ class GorillaControllerDocument extends JControllerForm
 		// Get fields from form
 		$id        = $formData->get('id', '');
 		$guid      = $formData->get('guid', '');
-		$file_name = $formData->get('file_name', '');
+		$filename  = $formData->get('filename', '');
 
 		// Validate file association
-		if (empty($id) || empty($guid) || empty($file_name)) {
+		if (empty($id) || empty($guid) || empty($filename)) {
 
 			$this->setError(JText::sprintf('COM_GORILLA_DOCUMENT_NO_FILE'));
 			$this->setMessage($this->getError(), 'warning');
@@ -66,7 +67,7 @@ class GorillaControllerDocument extends JControllerForm
 
 		// Get handler and download
 		$GorillaHandler = GorillaFactory::getNewHandler('Amazon');
-		if (!$GorillaHandler->download($guid, $file_name)) {
+		if (!$GorillaHandler->download($guid, $filename)) {
 			foreach ($GorillaHandler->getErrors() as $error) {
 				$this->setError($error);
 				$this->setMessage($error, 'error');
@@ -81,6 +82,99 @@ class GorillaControllerDocument extends JControllerForm
 
 			return false;
 		}
+	}
+
+	/**
+	 * Method to upload file from dropzone.
+	 *
+	 * Echo string File GUID when success,
+	 * Echo 403 error message when otherwise.
+	 *
+	 * return void
+	 */
+	public function dropfile() {
+
+		// Check for request forgeries.
+		if (!JSession::checkToken()) {
+			header("HTTP/1.0 403");
+			echo JText::_('JINVALID_TOKEN');
+			die();
+		}
+
+		$app = JFactory::getApplication();
+		$clientName = $app->input->get('clientname', '', 'string');
+
+		$GorillaConfig = GorillaFactory::getNewConfig();
+
+		// Getting max size in Bytes (1024 to KB, 1025 to MB)
+		$maxInBytes = $GorillaConfig->getConfigByKey('max_file_size')->value * 1024 * 1024;
+
+		// Testing file size
+		if($_FILES['file']['size'] > $maxInBytes) {
+			header("HTTP/1.0 403");
+			echo JText::sprintf('COM_GORILLA_DOCUMENT_MAXIMUM_FILE_SIZE', $max);
+			die();
+		}
+
+		// Generate new guid
+		$guid = GorillaHelper::getGUID();
+
+		// Get handler to move to dropped directory
+		$GorillaHandler = GorillaFactory::getNewHandler('Drop');
+		$GorillaHandler->move($guid, $_FILES['file']);
+
+		ob_clean();
+
+		// Check for errors
+		if ( count($GorillaHandler->getErrors()) == 0 )
+		{
+			$return = array();
+			$return['clientName'] = $clientName;
+			$return['serverName'] = $guid;
+			echo json_encode($return);
+			die();
+		}
+		else {
+			$error_msg = '';
+			foreach ($GorillaHandler->getErrors() as $error) {
+				$error_msg .= $error;
+			}
+			header("HTTP/1.0 403");
+			echo $error_msg;
+			die();
+		}
+	}
+
+	/**
+	 * Method to remove file from dropzone.
+	 *
+	 * Echo empty string when success,
+	 * Echo 403 error message when otherwise.
+	 *
+	 * return void
+	 */
+	public function removefile() {
+
+		// Check for request forgeries.
+		if (!JSession::checkToken()) {
+			header("HTTP/1.0 403");
+			echo JText::_('JINVALID_TOKEN');
+			die();
+		}
+
+		$app  = JFactory::getApplication();
+		$guid = $app->input->get('servername', '', 'string');
+
+		// Get handler to move to dropped directory
+		$GorillaHandler = GorillaFactory::getNewHandler('Drop');
+		if (!$GorillaHandler->del($guid)) {
+			header("HTTP/1.0 403");
+			echo JText::_('COM_GORILLA_HANDLER_DROP_CANNOT_DELETE');
+			die();
+		}
+
+		echo '';
+		die();
 	}
 
 }

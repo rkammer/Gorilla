@@ -2,9 +2,6 @@
 <form>
 	<fieldset name="details">
 
-		<!-- <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
-			readonly="true" class="readonly"
-			description="JGLOBAL_FIELD_ID_DESC" /> -->
 		<field name="id" type="hidden" />
 
 		<field name="title" type="text"
@@ -50,18 +47,16 @@
 			required="true"
 			/>
 
-		<field name="file_name" type="hidden" />
-
-		<field
-			name="upload_file"
-			type="file"
-			label="COM_GORILLA_DOCUMENTS_FIELD_UPLOAD_FILE_LABEL"
-			description="COM_GORILLA_DOCUMENTS_FIELD_UPLOAD_FILE_LABEL"
-			size="10" 
-			class="validate-upload_file"
-			/>
-
+		<field name="filelist" 
+			type="dropzone"
+			addFileUrl="index.php?option=com_gorilla&amp;task=document.dropfile"
+			cancelFileUrl="index.php?option=com_gorilla&amp;task=document.removefile"
+			maxFilesize="10"
+			uploadMultiple="false"
+			maxFiles="1" />
+			
 		<field name="guid" type="hidden" />
+		<field name="filename" type="hidden" />			
 
 	</fieldset>
 

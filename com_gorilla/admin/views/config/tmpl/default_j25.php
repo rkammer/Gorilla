@@ -37,7 +37,7 @@ $canConfig	= $user->authorise('core.admin','com_gorilla');
 	<div class="width-60 fltlft">
 
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('COM_GORILLA_AMAZON_FIELDSET_LABEL'); ?></legend>
+			<legend><?php echo JText::_('COM_GORILLA_CONFIG_AMAZON_FIELDSET_LABEL'); ?></legend>
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('amazon') as $field): ?>
 					<li><?php echo $field->label; ?>

@@ -181,3 +181,9 @@
 	background-size: 292px 122px;
 	background-repeat:no-repeat;	
 }
+
+/* Dropzone */
+
+.dropzone-within-form {
+	margin-right: 50px;
+}

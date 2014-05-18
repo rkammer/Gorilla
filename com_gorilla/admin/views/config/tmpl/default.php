@@ -45,7 +45,7 @@ JHtml::_('formbehavior.chosen', 'select');
 		<ul class="nav nav-tabs" id="configTabs">
 			<?php $fieldSets = $this->form->getFieldsets(); ?>
 			<?php foreach ($fieldSets as $name => $fieldSet) : ?>
-				<?php $label = empty($fieldSet->label) ? 'COM_GORILLA_' . strtoupper($name) . '_FIELDSET_LABEL' : $fieldSet->label; ?>
+				<?php $label = empty($fieldSet->label) ? 'COM_GORILLA_CONFIG_' . strtoupper($name) . '_FIELDSET_LABEL' : $fieldSet->label; ?>
 				<li><a href="#<?php echo $name; ?>" data-toggle="tab"><?php echo JText::_($label); ?></a></li>
 			<?php endforeach; ?>
 		</ul>

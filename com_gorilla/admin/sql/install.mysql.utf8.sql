@@ -90,7 +90,6 @@
 	  `asset_id` 			INT(10) 			NOT NULL DEFAULT '0',
 	  `download_count`		INT(5) UNSIGNED		NOT NULL DEFAULT 0,
 	  `guid`                VARCHAR(36)      	NOT NULL,
-	  `file_name`           VARCHAR(60)         NOT NULL,
 	  PRIMARY KEY (`id`),
 	  INDEX `idx_access` (`access` ASC),
 	  INDEX `idx_checkout` (`checked_out` ASC),
@@ -131,3 +130,38 @@
 	 WHERE not exists (SELECT 1 AS OK
 	                     FROM `#__gorilla_config`
 	                    WHERE `key` = 'AMAZON_BUCKET' );
+	                    
+	-- -----------------------------------------------------
+	-- Adds max file size and dropped dir config
+	-- -----------------------------------------------------
+	INSERT INTO `#__gorilla_config`
+	(`key`, `value`)
+	SELECT 'MAX_FILE_SIZE_MB',''
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
+	                    WHERE `key` = 'MAX_FILE_SIZE_MB' );
+	                    
+	INSERT INTO `#__gorilla_config`
+	(`key`, `value`)
+	SELECT 'DROPPED_DIR',''
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
+	                    WHERE `key` = 'DROPPED_DIR' );
+
+	INSERT INTO `#__gorilla_config`
+	(`key`, `value`)
+	SELECT 'STORAGE',''
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
+	                    WHERE `key` = 'STORAGE' );
+	                    
+	INSERT INTO `#__gorilla_config`
+	(`key`, `value`)
+	SELECT 'LOCAL_DIR',''
+	  FROM dual
+	 WHERE not exists (SELECT 1 AS OK
+	                     FROM `#__gorilla_config`
+	                    WHERE `key` = 'LOCAL_DIR' );

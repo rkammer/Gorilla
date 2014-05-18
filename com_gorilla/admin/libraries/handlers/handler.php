@@ -20,7 +20,7 @@ defined('_JEXEC') or die;
  * @package		Joomla.Library
  * @subpackage	lib_gorilla
  */
-class GorillaHandler extends JObject
+abstract class GorillaHandler extends JObject
 {
 
 	/**
@@ -43,47 +43,14 @@ class GorillaHandler extends JObject
 	 *
 	 * @var    string
 	 */
-	protected $_file_name;
-
-	/**
-	 * Upload file.
-	 *
-	 * @return true if success
-	 */
-// 	public function upload() {
-// 		return true;
-// 	}
-
-	/**
-	 * Prepare file and download.
-	 *
-	 * @param  file   $file File that will be handle.
-	 *
-	 * @return void
-	 */
-// 	public function download() {
-
-// 		if (file_exists($this->_file)) {
-// 			header('Content-Description: File Transfer');
-// 			header('Content-Type: application/octet-stream');
-// 			header('Content-Disposition: attachment; filename='.basename($this->_file));
-// 			header('Expires: 0');
-// 			header('Cache-Control: must-revalidate');
-// 			header('Pragma: public');
-// 			header('Content-Length: ' . filesize($this->_file));
-// 			ob_clean();
-// 			flush();
-// 			readfile($this->_file);
-// 			exit;
-// 		}
-// 	}
+	protected $_filename;
 
 	/**
 	 * Generate and unique name in tmp_dir based on guid.
 	 *
 	 * @return string Full file name
 	 */
-	protected function getTempFilename() {
+	protected function _getTempFilename() {
 		$tmp_dir = ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir();
 		return  $tmp_dir . '/' . $this->_guid;
 	}

@@ -83,6 +83,11 @@ class GorillaHandlerAmazon extends GorillaHandler
 			$this->_secret_key = $GorillaConfig->getConfigByKey('amazon_secret_key')->value;
 			$this->_bucket     = $GorillaConfig->getConfigByKey('amazon_bucket')->value;
 		}
+		else {
+			$this->_key_id     = $key_id;
+			$this->_secret_key = $secret_key;
+			$this->_bucket     = $bucket;
+		}
 
 		// Create S3 client
 		$this->_s3client = S3Client::factory(array(
@@ -111,6 +116,30 @@ class GorillaHandlerAmazon extends GorillaHandler
 				'Bucket'     => $this->_bucket,
 				'Key'        => $this->_guid,
 				'SourceFile' => $this->_file['tmp_name'],
+				'ACL'        => 'public-read'
+		));
+
+		return true;
+	}
+
+	/**
+	 * Upload file.
+	 *
+	 * @param   string   $guid      Guid to save file.
+	 * @param   file     $file      File to upload.
+	 *
+	 * @return true if success
+	 */
+	public function uploadFromSourceFile($guid, $sourceFile) {
+
+		// Move attributes
+		$this->_guid      = $guid;
+
+		// Upload file
+		$this->_s3client->putObject(array(
+				'Bucket'     => $this->_bucket,
+				'Key'        => $this->_guid,
+				'SourceFile' => $sourceFile,
 				'ACL'        => 'public-read'
 		));
 
@@ -149,17 +178,17 @@ class GorillaHandlerAmazon extends GorillaHandler
 	 * Prepare download the file.
 	 *
 	 * @param   string   $guid      Guid to obtain file.
-	 * @param   string   $file_name File name to rename uploaded file.
+	 * @param   string   $filename  File name to rename uploaded file.
 	 *
 	 * @return	mixed    Exit if successful, false otherwise.
 	 *
 	 * @throws S3Exception
 	 */
-	public function download($guid, $file_name)
+	public function download($guid, $filename)
 	{
 		// Move attributes
-		$this->_guid      = $guid;
-		$this->_file_name = $file_name;
+		$this->_guid     = $guid;
+		$this->_filename = $filename;
 
 		try {
 
@@ -170,7 +199,7 @@ class GorillaHandlerAmazon extends GorillaHandler
 			));
 
 			header("Content-type: {$result['ContentType']}");
-			header("Content-Disposition: attachment; filename={$this->_file_name}");
+			header("Content-Disposition: attachment; filename=\"{$this->_filename}\"");
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate');
 

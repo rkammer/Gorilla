@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	 Observation:	 
+	 Name attribute MUST have lower case.
+ -->
 <form>
+	<fieldset name="general">
+
+		<field name="storage" type="list"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_DESC" hint="COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_PLACEHOLDER" 
+		    default="0" filter="integer" required="true">
+			<option value="0">COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_AMAZON</option>
+			<option value="1">COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_LOCAL</option>
+		</field>
+
+		<field name="max_file_size" type="text"
+		    class="inputbox input-xxlarge input-large-text" filter="integer"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_GENERAL_MAX_FILE_SIZE_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_GENERAL_MAX_FILE_SIZE_DESC" hint="COM_GORILLA_CONFIG_FIELD_GENERAL_MAX_FILE_SIZE_PLACEHOLDER" 
+		    required="true" />
+		    
+		<field name="dropped_dir" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_GENERAL_DROPPED_DIR_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_GENERAL_DROPPED_DIR_DESC" hint="COM_GORILLA_CONFIG_FIELD_GENERAL_DROPPED_DIR_PLACEHOLDER" 
+		    required="true" />		    
+			
+	</fieldset>
 	<fieldset name="amazon">
 
 		<field name="amazon_key_id" type="text"
@@ -18,4 +45,12 @@
 		    description="COM_GORILLA_CONFIG_FIELD_AMAZON_BUCKET_DESC" hint="COM_GORILLA_CONFIG_FIELD_AMAZON_BUCKET_PLACEHOLDER" />		    
 			
 	</fieldset>
+	<fieldset name="local">
+
+		<field name="local_dir" type="text"
+		    class="inputbox input-xxlarge input-large-text"
+		    size="40" label="COM_GORILLA_CONFIG_FIELD_LOCAL_LOCAL_DIR_LABEL"
+		    description="COM_GORILLA_CONFIG_FIELD_LOCAL_LOCAL_DIR_DESC" hint="COM_GORILLA_CONFIG_FIELD_LOCAL_LOCAL_DIR_PLACEHOLDER" />
+			
+	</fieldset>	
 </form>
