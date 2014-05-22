@@ -25,15 +25,8 @@ JHtml::_('formbehavior.chosen', 'select');
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		directSubmit    = task == 'note.cancel' || task == 'note.download';
-		jformFileName   = note.getElementById('jform_file_name');
-		jformUploadFile = note.getElementById('jform_upload_file');
-		if ((!directSubmit) && (jformFileName.value == '') && (jformUploadFile.value == '')) {
-			alert('<?php echo $this->escape(JText::_('COM_GORILLA_NOTE_CLIENT_MUST_HAVE_FILE'));?>');
-			return false;
-		}
-		if (directSubmit || note.formvalidator.isValid(note.id('note-form'))) {
-			Joomla.submitform(task, note.getElementById('note-form'));
+		if (task == 'note.cancel' || document.formvalidator.isValid(document.id('note-form'))) {
+			Joomla.submitform(task, document.getElementById('note-form'));
 		}
 	}
 </script>
@@ -51,7 +44,6 @@ JHtml::_('formbehavior.chosen', 'select');
 				<div class="form-vertical">
 					<?php echo $this->form->getControlGroup('container_id'); ?>
 					<?php echo $this->form->getControlGroup('description'); ?>
-					<?php echo $this->form->getControlGroup('upload_file'); ?>
 				</div>
 			</div>
 			<div class="span3">
@@ -85,13 +77,6 @@ JHtml::_('formbehavior.chosen', 'select');
 
 	</div>
 
-	<?php echo $this->form->getControlGroup('id'); ?>
-	<?php echo $this->form->getControlGroup('guid'); ?>
-	<?php echo $this->form->getControlGroup('file_name'); ?>
-	<!-- <input type="hidden" name="id" value="<?php echo $this->form->getValue('id'); ?>" /> -->
-	<!-- <input type="hidden" name="guid" value="<?php echo $this->form->getValue('guid'); ?>" /> -->
-	<!-- <input type="hidden" name="file_name" value="<?php echo $this->form->getValue('file_name'); ?>" /> -->
 	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="MAX_FILE_SIZE" value="20000" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

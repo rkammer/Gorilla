@@ -274,6 +274,6 @@ class GorillaModelNote extends JModelAdmin {
 		// }
 
 		// return $file_name;
-	}
+	//}
 
 }
