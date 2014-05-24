@@ -312,7 +312,7 @@ class JFormFieldDropzone extends JFormField
 		$doc->addStyleSheet(JURI::root().'media/com_gorilla/dropzone/css/basic.css');
 		$doc->addStyleSheet(JURI::root().'media/com_gorilla/dropzone/css/dropzone.css');
 
-		$html[] = '<div id="dropzone-div" class="dropzone dz-clickable"></div>';
+		$html[] = '<div id="dropzone-div" class="dropzone dz-clickable gorilla-dropzone"></div>';
 
 		$params = array();
 		$params['addFileUrl'] 		= $this->addFileUrl;

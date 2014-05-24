@@ -17,6 +17,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controllerform');
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php' );
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/helpers/gorilla.php' );
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
 
 /**
  * Document controller class.
@@ -104,15 +105,13 @@ class GorillaControllerDocument extends JControllerForm
 		$app = JFactory::getApplication();
 		$clientName = $app->input->get('clientname', '', 'string');
 
-		$GorillaConfig = GorillaFactory::getNewConfig();
-
-		// Getting max size in Bytes (1024 to KB, 1025 to MB)
-		$maxInBytes = $GorillaConfig->getConfigByKey('max_file_size')->value * 1024 * 1024;
+		$GorillaConfig = new GorillaModelConfig();
+		$maxInBytes = $GorillaConfig->getUploadMaxsizeBytes();
 
 		// Testing file size
 		if($_FILES['file']['size'] > $maxInBytes) {
 			header("HTTP/1.0 403");
-			echo JText::sprintf('COM_GORILLA_DOCUMENT_MAXIMUM_FILE_SIZE', $max);
+			echo JText::sprintf('COM_GORILLA_DOCUMENT_MAXIMUM_FILE_SIZE', $maxInBytes/1024/1024);
 			die();
 		}
 

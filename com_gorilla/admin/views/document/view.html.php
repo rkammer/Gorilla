@@ -14,6 +14,8 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
+
 /**
  * Methods display a list of documents records.
  *
@@ -71,7 +73,7 @@ class GorillaViewDocument extends JViewLegacy {
 		$this->addToolbar ();
 
 		// Get config object
-		$this->config  = GorillaFactory::getNewConfig();
+		$this->config  = new GorillaModelConfig();
 
 		// Different layout for different version
 		if (version_compare(JVERSION, '3', 'lt')) {

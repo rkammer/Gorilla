@@ -17,6 +17,7 @@ defined('_JEXEC') or die;
 // Import dependencies
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/handlers/handler.php' );
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php' );
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
 
 /**
  * Gorilla handle to manage files in local.
@@ -40,7 +41,7 @@ class GorillaHandlerDrop extends GorillaHandler
 		$this->_file = $file;
 		$this->_guid = $guid;
 
-		$GorillaConfig = GorillaFactory::getNewConfig();
+		$GorillaConfig = new GorillaModelConfig();
 		$target_file   = $GorillaConfig->getConfigByKey('dropped_dir')->value . $this->_guid;
 
 		if (!move_uploaded_file($this->_file['tmp_name'], $target_file)) {
@@ -61,7 +62,7 @@ class GorillaHandlerDrop extends GorillaHandler
 	{
 		$this->_guid = $guid;
 
-		$GorillaConfig = GorillaFactory::getNewConfig();
+		$GorillaConfig = new GorillaModelConfig();
 		$target_file   = $GorillaConfig->getConfigByKey('dropped_dir')->value . $this->_guid;
 
 		if (is_readable($target_file)) {
@@ -82,7 +83,7 @@ class GorillaHandlerDrop extends GorillaHandler
 	public function getAbsolutePath($guid) {
 		$this->_guid = $guid;
 
-		$GorillaConfig = GorillaFactory::getNewConfig();
+		$GorillaConfig = new GorillaModelConfig();
 		$target_file   = $GorillaConfig->getConfigByKey('dropped_dir')->value . $this->_guid;
 		return $target_file;
 	}

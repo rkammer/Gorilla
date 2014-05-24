@@ -20,6 +20,7 @@ JLoader::import( 'config', JPATH_ADMINISTRATOR.'/components/com_gorilla/models' 
 
 require_once dirname(__FILE__) . '/../helpers/gorilla.php';
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/factories/factory.php' );
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
 
 //Import filesystem libraries.
 jimport('joomla.filesystem.file');
@@ -252,9 +253,8 @@ class GorillaModelDocument extends JModelAdmin {
 		$HandlerDrop    = GorillaFactory::getNewHandler('Drop');
 		$fullfilename   = $HandlerDrop->getAbsolutePath($guid);
 
-		// Getting max size in Bytes (1024 to KB, 1025 to MB)
-		$GorillaConfig  = GorillaFactory::getNewConfig();
-		$maxInBytes     = $GorillaConfig->getConfigByKey('max_file_size')->value * 1024 * 1024;
+		$GorillaConfig  = new GorillaModelConfig();
+		$maxInBytes     = $GorillaConfig->getUploadMaxsizeBytes();
 
 		// Testing file size
 		if(filesize($fullfilename) > $maxInBytes) {

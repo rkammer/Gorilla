@@ -24,20 +24,6 @@ class GorillaFactory
 {
 
 	/**
-	 * Get Gorilla configuration object.
-	 *
-	 * @return GorillaModelConfig
-	 */
-	public static function getNewConfig() {
-
-		// Import dependencies
-		require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
-
-		return new GorillaModelConfig();
-
-	}
-
-	/**
 	 * Create new GorillaHandlers according to the storage configuration.
 	 *
 	 * @param   string   $sufix       Handler Sufix. Complete list:

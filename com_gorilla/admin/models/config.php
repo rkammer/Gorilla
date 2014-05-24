@@ -195,17 +195,6 @@ class GorillaModelConfig extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		// Validate file size
-		$php_max  = (int) ini_get('upload_max_filesize');
-		$post_max = (int) ini_get('post_max_size');
-		$cfg_max  = $data['max_file_size'];
-		if ($cfg_max > $php_max) {
-			$this->setError(JText::_('COM_GORILLA_CONFIG_UPLOAD_MAX_FILESIZE_VALIDATION'));
-		}
-		if ($post_max <= $php_max) {
-			$this->setError(JText::_('COM_GORILLA_CONFIG_POST_MAX_SIZE_VALIDATION'));
-		}
-
 		// Amazon Tab
 		if ( $data['storage'] == 0 ) {
 
@@ -333,6 +322,17 @@ class GorillaModelConfig extends JModelAdmin
 		{
 			JError::raiseWarning(500, $db->getErrorMsg());
 		}
+	}
+
+	/*
+	 * Method to get max size that file can be (in bytes).
+	 *
+	 * @return int
+	 */
+	public function getUploadMaxsizeBytes() {
+		$cparams = JComponentHelper::getParams('com_media');
+		// Getting max size in Bytes (1024 to MB to KB and 1024 to KB to B )
+		return $cparams->get('upload_maxsize', 0) * 1024 * 1024;
 	}
 
 }

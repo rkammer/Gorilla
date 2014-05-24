@@ -16,9 +16,8 @@ defined('_JEXEC') or die;
 
 // Import dependencies
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/handlers/handler.php' );
-
-// Import amazon sdk
 require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/libraries/handlers/amazon/aws/aws-autoloader.php' );
+require_once ( JPATH_COMPONENT_ADMINISTRATOR . '/models/config.php' );
 
 // Define namespace from sdk
 use Aws\S3\S3Client;
@@ -78,7 +77,7 @@ class GorillaHandlerAmazon extends GorillaHandler
 	{
 		// Load S3 identification from config
 		if ($auto_load) {
-			$GorillaConfig = GorillaFactory::getNewConfig();
+			$GorillaConfig = new GorillaModelConfig();
 			$this->_key_id     = $GorillaConfig->getConfigByKey('amazon_key_id')->value;
 			$this->_secret_key = $GorillaConfig->getConfigByKey('amazon_secret_key')->value;
 			$this->_bucket     = $GorillaConfig->getConfigByKey('amazon_bucket')->value;
