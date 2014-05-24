@@ -13,12 +13,6 @@
 			<option value="0">COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_AMAZON</option>
 			<option value="1">COM_GORILLA_CONFIG_FIELD_GENERAL_STORAGE_LOCAL</option>
 		</field>
-
-		<field name="dropped_dir" type="text"
-		    class="inputbox input-xxlarge input-large-text"
-		    size="40" label="COM_GORILLA_CONFIG_FIELD_GENERAL_DROPPED_DIR_LABEL"
-		    description="COM_GORILLA_CONFIG_FIELD_GENERAL_DROPPED_DIR_DESC" hint="COM_GORILLA_CONFIG_FIELD_GENERAL_DROPPED_DIR_PLACEHOLDER" 
-		    required="true" />		    
 			
 	</fieldset>
 	<fieldset name="amazon">

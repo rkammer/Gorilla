@@ -175,14 +175,6 @@
 	-- -----------------------------------------------------
 	INSERT INTO `#__gorilla_config`
 	(`key`, `value`)
-	SELECT 'DROPPED_DIR',''
-	  FROM dual
-	 WHERE not exists (SELECT 1 AS OK
-	                     FROM `#__gorilla_config`
-	                    WHERE `key` = 'DROPPED_DIR' );
-
-	INSERT INTO `#__gorilla_config`
-	(`key`, `value`)
 	SELECT 'STORAGE',''
 	  FROM dual
 	 WHERE not exists (SELECT 1 AS OK

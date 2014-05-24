@@ -41,8 +41,8 @@ class GorillaHandlerDrop extends GorillaHandler
 		$this->_file = $file;
 		$this->_guid = $guid;
 
-		$GorillaConfig = new GorillaModelConfig();
-		$target_file   = $GorillaConfig->getConfigByKey('dropped_dir')->value . $this->_guid;
+		$app = JFactory::getApplication('administrator');
+		$target_file = $app->getCfg('tmp_path') . '/' . $this->_guid;
 
 		if (!move_uploaded_file($this->_file['tmp_name'], $target_file)) {
 			$this->setError(JText::_('COM_GORILLA_HANDLER_DROP_CANNOT_SAVE'));
@@ -62,8 +62,8 @@ class GorillaHandlerDrop extends GorillaHandler
 	{
 		$this->_guid = $guid;
 
-		$GorillaConfig = new GorillaModelConfig();
-		$target_file   = $GorillaConfig->getConfigByKey('dropped_dir')->value . $this->_guid;
+		$app = JFactory::getApplication('administrator');
+		$target_file   = $app->getCfg('tmp_path') . '/' . $this->_guid;
 
 		if (is_readable($target_file)) {
 			if (unlink($target_file)) {
@@ -83,8 +83,8 @@ class GorillaHandlerDrop extends GorillaHandler
 	public function getAbsolutePath($guid) {
 		$this->_guid = $guid;
 
-		$GorillaConfig = new GorillaModelConfig();
-		$target_file   = $GorillaConfig->getConfigByKey('dropped_dir')->value . $this->_guid;
+		$app = JFactory::getApplication('administrator');
+		$target_file   = $app->getCfg('tmp_path') . '/' . $this->_guid;
 		return $target_file;
 	}
 

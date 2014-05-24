@@ -78,19 +78,23 @@
     <administration>
         <!-- Administration Menu Section -->
         <menu img="../media/com_gorilla/img/icon-16-dashboard.png">COM_GORILLA_MENU</menu>
-        <!--
 		<submenu>
+			<menu view="dashboard"
+			      img="../media/com_gorilla/img/icon-16-dashboard.png"
+				  alt="Gorilla/Dashboard">COM_GORILLA_SUBMENU_DASHBOARD</menu>		
 			<menu view="containers"
-			      img="../media/com_gorilla/img/icon-16-book.png"
+			      img="../media/com_gorilla/img/gorilla-container-16.png"
 				  alt="Gorilla/Containers">COM_GORILLA_SUBMENU_CONTAINERS</menu>
 			<menu view="documents"
-			      img="../media/com_gorilla/img/icon-16-stack.png"
+			      img="../media/com_gorilla/img/gorilla-document-16.png"
 				  alt="Gorilla/Documents">COM_GORILLA_SUBMENU_DOCUMENTS</menu>
+			<menu view="documents"
+			      img="../media/com_gorilla/img/gorilla-note-16.png"
+				  alt="Gorilla/Notes">COM_GORILLA_SUBMENU_NOTES</menu>				  
 			<menu view="config"
-			      img="../media/com_gorilla/img/icon-16-cog.png"
+			      img="../media/com_gorilla/img/gorilla-config-16.png"
 				  alt="Gorilla/Config">COM_GORILLA_SUBMENU_CONFIG</menu>
 		</submenu>
-		-->
 
         <!-- Administration Main File Copy Section -->
         <files folder="admin">
