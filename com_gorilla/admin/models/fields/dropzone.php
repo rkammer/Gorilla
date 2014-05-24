@@ -189,10 +189,10 @@ class JFormFieldDropzone extends JFormField
 			$doc->addScriptDeclaration($line);
 		}
 
-		$doc->addScript(JURI::root().'media/com_gorilla/js/gorilla.js');
-		$doc->addScript(JURI::root().'media/com_gorilla/dropzone/dropzone.js');
-		$doc->addStyleSheet(JURI::root().'media/com_gorilla/dropzone/css/basic.css');
-		$doc->addStyleSheet(JURI::root().'media/com_gorilla/dropzone/css/dropzone.css');
+		$doc->addScript(JURI::root().'media/com_gorilla/js/dropzone-gorilla.min.js');
+		$doc->addScript(JURI::root().'media/com_gorilla/js/dropzone/dropzone.min.js');
+		$doc->addStyleSheet(JURI::root().'media/com_gorilla/js/dropzone/css/basic.css');
+		$doc->addStyleSheet(JURI::root().'media/com_gorilla/js/dropzone/css/dropzone.css');
 
 		$html[] = '<div id="dropzone-div" class="dropzone dz-clickable gorilla-dropzone"></div>';
 

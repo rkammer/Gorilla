@@ -63,7 +63,6 @@
 	<media destination="com_gorilla" folder="media">
 		<filename>index.html</filename>
 		<folder>css</folder>
-		<folder>dropzone</folder>
 		<folder>img</folder>
 		<folder>js</folder>
 		<folder>jscolor</folder>		

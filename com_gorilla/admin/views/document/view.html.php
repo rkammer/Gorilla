@@ -134,30 +134,5 @@ class GorillaViewDocument extends JViewLegacy {
 	 */
 	protected function addScripts()
 	{
-// 		$doc = JFactory::getDocument();
-
-// 		$script = array();
-// 		//$script[] = 'Dropzone.autoDiscover = false;';
-// 		$script[] = 'Dropzone.options.dropzoneDiv = {';
-// 		$script[] = '	url: "index.php?option=com_gorilla&task=document.dropfile",';
-// 		$script[] = '	paramName: "file",';
-// 		$script[] = '	maxFilesize: 2, // MB';
-// 		$script[] = '	clickable: true,';
-// 		$script[] = '	uploadMultiple: false,';
-// 		$script[] = '	maxFiles: 1,';
-// 		$script[] = '	addRemoveLinks: true,';
-// 		$script[] = '	autoProcessQueue: true,';
-// 		$script[] = '	accept: function(file, done) {';
-// 		$script[] = '			done("Naha, you dont.");';
-// 		$script[] = '		}';
-// 		$script[] = '};';
-
-// 		foreach ($script as $line) {
-// 			$doc->addScriptDeclaration($line);
-// 		}
-
-// 		$doc->addScript(JURI::root().'media/com_gorilla/dropzone/dropzone.js');
-// 		$doc->addStyleSheet(JURI::root().'media/com_gorilla/dropzone/css/basic.css');
-// 		$doc->addStyleSheet(JURI::root().'media/com_gorilla/dropzone/css/dropzone.css');
 	}
 }
