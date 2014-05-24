@@ -51,7 +51,6 @@
 			type="dropzone"
 			addFileUrl="index.php?option=com_gorilla&amp;task=document.dropfile"
 			cancelFileUrl="index.php?option=com_gorilla&amp;task=document.removefile"
-			maxFilesize="10"
 			uploadMultiple="false"
 			maxFiles="1" />
 			

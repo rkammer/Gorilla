@@ -45,13 +45,6 @@ class JFormFieldDropzone extends JFormField
 	protected $cancelFileUrl;
 
 	/**
-	 * The max size that file can have.
-	 *
-	 * @var    int
-	 */
-	protected $maxFilesize;
-
-	/**
 	 * Allow to upload more than one file.
 	 *
 	 * @var    boolean
@@ -84,7 +77,6 @@ class JFormFieldDropzone extends JFormField
 			$this->$name = (string) $value;
 			break;
 
-			case 'maxFilesize':
 			case 'maxFiles':
 			$this->$name = (int) $value;
 			break;
@@ -114,7 +106,6 @@ class JFormFieldDropzone extends JFormField
 		{
 			case 'addFileUrl':
 			case 'cancelFileUrl':
-			case 'maxFilesize':
 			case 'maxFiles':
 			case 'uploadMultiple':
 			return $this->$name;
@@ -157,22 +148,10 @@ class JFormFieldDropzone extends JFormField
 		$attributes = array(
 				'name', 'id', 'addFileUrl', 'cancelFileUrl', 'maxFilesize', 'uploadMultiple', 'maxFiles');
 
-		//$this->default = isset($element['value']) ? (string) $element['value'] : $this->default;
-
-		// Set the field default value.
-		//$this->value = $value;
-
 		foreach ($attributes as $attributeName)
 		{
 			$this->__set($attributeName, $element[$attributeName]);
 		}
-
-		// Allow for repeatable elements
-		//$repeat = (string) $element['repeat'];
-		//$this->repeat = ($repeat == 'true' || $repeat == 'multiple' || (!empty($this->form->repeat) && $this->form->repeat == 1));
-
-		// Set the visibility.
-		//$this->hidden = ($this->hidden || (string) $element['type'] == 'hidden');
 
 		return true;
 	}
@@ -205,103 +184,6 @@ class JFormFieldDropzone extends JFormField
 		$doc = JFactory::getDocument();
 
 		$script[] = 'Dropzone.autoDiscover = false; ';
-		/*
-
-		$script[] = 'jQuery(document).ready(function() { ';
-
-		$script[] = 'var $myDropzone = new Dropzone("div#dropzone-div", { ';
-		$script[] = '	url: "index.php?option=com_gorilla&task=document.dropfile", ';
-		$script[] = '	paramName: "file", ';
-		$script[] = '	maxFilesize: 10, // MB ';
-		$script[] = '	clickable: true, ';
-		$script[] = '	uploadMultiple: false, ';
-		$script[] = '	maxFiles: 1, ';
-		$script[] = '	addRemoveLinks: true, ';
-		$script[] = '	autoProcessQueue: true ';
-		$script[] = '}); ';
-
-		$script[] = '$myDropzone.on("maxfilesexceeded", function(file) { ';
-		$script[] = '	this.removeFile(file); ';
-		$script[] = '}); ';
-
-		$script[] = '$myDropzone.on("sending", function(file, xhr, formData) { ';
-		$script[] = '   var fileRegistered = registerFile(file, xhr); ';
-		$script[] = '   var files = JSON.parse(filesJsonText(jQuery("' . $this->id . '").val())); ';
-		$script[] = '   files.files.push(fileRegistered); ';
-		$script[] = '   jQuery("' . $this->id . '").val(JSON.stringify(files)); ';
-		$script[] = '	// Will send the token along with the file as POST data. ';
-		$script[] = '	formData.append("clientname", fileRegistered.clientName); ';
-		$script[] = '	formData.append("' . JSession::getFormToken() . '", "1"); ';
-		$script[] = '}); ';
-
-		$script[] = '$myDropzone.on("addedfile", function(file) { ';
-		$script[] = '}); ';
-
-		$script[] = '$myDropzone.on("error", function(file, msg) { ';
-		$script[] = '	// Nothing to do. ';
-		$script[] = '	// Dropzone show progress bar in red and ';
-		$script[] = '	// on mouse over user can see error message. ';
-		$script[] = '}); ';
-
-		$script[] = '$myDropzone.on("success", function(file, responseText) { ';
-		$script[] = '	jQuery("#jform_new_guid").val(responseText); ';
-
-
-
-		$script[] = '}); ';
-
-		$script[] = '$myDropzone.on("removedFile", function(file) { ';
-		//$script[] = '	jQuery("#jform_new_guid").val(""); ';
-		$script[] = '});	 ';
-
-		$script[] = '}); '; // ready
-		*/
-
-		/* Dropzone no query style. But it doesn't work.
-		$script[] = 'Dropzone.options.dropzoneDiv = {';
-		$script[] = '	url: "index.php?option=com_gorilla&task=document.dropfile",';
-		$script[] = '	paramName: "file",';
-		$script[] = '	maxFilesize: 10, // MB';
-		$script[] = '	clickable: true,';
-		//$script[] = '	previewsContainer: ".dropzone-previews",';
-		$script[] = '	uploadMultiple: false,';
-		$script[] = '	maxFiles: 1,';
-		$script[] = '	addRemoveLinks: true,';
-		$script[] = '	autoProcessQueue: true,';
-
-		//$script[] = '	accept: function(file, done) {';
-		//$script[] = '		alert("here"); ';
-		//$script[] = '		done(); ';
-		//$script[] = '	},';
-
-		$script[] = '	maxfilesexceeded: function(file) {';
-		$script[] = '		this.removeFile(file); ';
-		$script[] = '		alert("max"); ';
-		$script[] = '	},';
-
-		$script[] = '	sending: function(file, xhr, formData) {';
-		$script[] = '		formData.append("' . JSession::getFormToken() . '", "1"); ';
-		$script[] = '	    alert("sending");';
-		$script[] = '	},';
-
-		$script[] = '	addedfile: function(file) {';
-		$script[] = '	    alert("added");';
-		$script[] = '	},';
-
-		$script[] = '	error: function(file, msg) {';
-		$script[] = '	    alert("error");';
-		$script[] = '	},';
-
-		$script[] = '	success: function(file, responseText) {';
-		$script[] = '	    alert("success");';
-		$script[] = '	},';
-
-		$script[] = '	removedFile: function(file) {';
-		$script[] = '	    alert("removed");';
-		$script[] = '	}';
-
-		$script[] = '};';
-		*/
 
 		foreach ($script as $line) {
 			$doc->addScriptDeclaration($line);
@@ -314,10 +196,12 @@ class JFormFieldDropzone extends JFormField
 
 		$html[] = '<div id="dropzone-div" class="dropzone dz-clickable gorilla-dropzone"></div>';
 
+		$cparams = JComponentHelper::getParams('com_media');
+
 		$params = array();
 		$params['addFileUrl'] 		= $this->addFileUrl;
 		$params['cancelFileUrl']	= $this->cancelFileUrl;
-		$params['maxFilesize']      = $this->maxFilesize;
+		$params['maxFilesize']      = $cparams->get('upload_maxsize', 0);
 		$params['uploadMultiple']   = $this->uploadMultiple;
 		$params['maxFiles']         = $this->maxFiles;
 		$params['fileListSelector'] = '#' . $this->id;
