@@ -162,6 +162,35 @@ class GorillaModelNote extends JModelAdmin {
 	}
 
 	/**
+	 * Method to get a single record.
+	 *
+	 * @param   integer  $pk  The id of the primary key.
+	 *
+	 * @return  mixed  Object on success, false on failure.
+	 *
+	 * @since   1.6
+	 */
+	public function getItem($pk = null)
+	{
+		if ($item = parent::getItem($pk))
+		{
+			// Convert the metadata field to an array.
+			$registry = new JRegistry;
+			$registry->loadString($item->metadata);
+			$item->metadata = $registry->toArray();
+
+			if (!empty($item->id))
+			{
+				$item->tags = new JHelperTags;
+				$item->tags->getTagIds($item->id, 'com_gorilla.note');
+				$item->metadata['tags'] = $item->tags;
+			}
+		}
+
+		return $item;
+	}
+
+	/**
 	 * Method to save the form data.
 	 *
 	 * @param   array  $data  The form data.

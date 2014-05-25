@@ -35,6 +35,7 @@ class GorillaTableNote extends JTable {
 	 */
 	public function __construct(&$db) {
 		parent::__construct ( '#__gorilla_notes', 'id', $db );
+		JObserverMapper::addObserverClassToClass('JTableObserverTags', 'GorillaTableNote', array('typeAlias' => 'com_gorilla.note'));
 	}
 
 	/**

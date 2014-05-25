@@ -35,6 +35,7 @@ class GorillaTableDocument extends JTable {
 	 */
 	public function __construct(&$db) {
 		parent::__construct ( '#__gorilla_documents', 'id', $db );
+		JObserverMapper::addObserverClassToClass('JTableObserverTags', 'GorillaTableDocument', array('typeAlias' => 'com_gorilla.document'));
 	}
 
 	/**

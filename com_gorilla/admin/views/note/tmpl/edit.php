@@ -40,14 +40,16 @@ JHtml::_('formbehavior.chosen', 'select');
 
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'details', empty($this->item->id) ? JText::_('COM_GORILLA_NEW_NOTE', true) : JText::sprintf('COM_GORILLA_EDIT_NOTE', $this->item->id, true)); ?>
 		<div class="row-fluid">
-			<div class="span9">
+			<div class="span8">
 				<div class="form-vertical">
 					<?php echo $this->form->getControlGroup('container_id'); ?>
 					<?php echo $this->form->getControlGroup('description'); ?>
 				</div>
 			</div>
-			<div class="span3">
-				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
+			<div class="span4">
+			    <?php echo $this->form->getControlGroup('tags'); ?>
+				<?php echo $this->form->getControlGroup('published'); ?>
+				<?php echo $this->form->getControlGroup('access'); ?>
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
@@ -59,6 +61,7 @@ JHtml::_('formbehavior.chosen', 'select');
 			</div>
 			<div class="span6">
 				<?php echo $this->form->getControlGroups('metadata'); ?>
+				<?php echo $this->form->getControlGroups('jmetadata'); ?>
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>

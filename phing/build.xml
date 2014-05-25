@@ -9,7 +9,7 @@
         <!-- Get Project Path -->
         <property name="src" value="${project.basedir}" override="true" />
 		<property name="des" value="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds" override="true" />
-		<property name="com_version" value="0.0.10" override="true" />
+		<property name="com_version" value="0.0.11" override="true" />
 		<property name="pkg_version" value="0.0.1" override="true" />
 		
         
