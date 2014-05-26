@@ -17,7 +17,33 @@ $container = $this->params->get('container');
 $show_back_to_containers_button = ($container == "");
 $add_href = 'index.php?option=com_gorilla&view=documents';
 ?>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
 
+        // attach event to each download button
+        jQuery('.download-button').click(function(){
+
+            var $form = jQuery("#downloadForm");
+            if ($form.length == 0) {
+                $form = jQuery("<form>").attr({ "target": "_blank", "id": "downloadForm", "method": "POST", "action": "index.php?option=com_gorilla&task=documents.download" }).hide();
+                jQuery("body").append($form);
+            }
+
+            var $download_id        = jQuery(this).children(".download-id");
+            var $download_guid      = jQuery(this).children(".download-guid");
+            var $download_filename  = jQuery(this).children(".download-filename");
+
+            $form.append(jQuery("<input>").attr({"value":$download_id.val(), "name":'id'}));
+            $form.append(jQuery("<input>").attr({"value":$download_guid.val(), "name":'guid'}));
+            $form.append(jQuery("<input>").attr({"value":$download_filename.val(), "name":'filename'}));
+            $form.append(jQuery("<input>").attr({"value":'1', "name":'<?php echo JSession::getFormToken(); ?>'}));
+
+            $form.submit();
+
+        });
+
+	});
+</script>
 <?php if ($show_back_to_containers_button) :  ?>
 <a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=containers'); ?>"><i class="icon-arrow-left"></i>Back</a>
 <?php endif; ?>
@@ -45,13 +71,22 @@ $add_href = 'index.php?option=com_gorilla&view=documents';
 	<?php foreach ($this->items as $key => $item) : ?>
         <div class="row">
             <div class="span12">
-                <div style="background-color: <?php echo $this->container->color_code; ?>;" class="container-box-small" title="<?php echo $this->container->title; ?>">&nbsp;</div> <a href="#"><p class="lead" style="margin-bottom: 0px;"><b><?php echo $item->title; ?></b></p></a>
+                <div style="background-color: <?php echo $this->container->color_code; ?>;" class="container-box-small" title="<?php echo $this->container->title; ?>">&nbsp;</div>
+                <p class="lead" style="margin-bottom: 0px;">
+                <a href="<?php echo JRoute::_('index.php?option=com_gorilla&view=document&id=' . $item->id); ?>"><b><?php echo $item->title; ?></b></a>
+                <a class="btn btn-micro active hasTooltip download-button" href="#">
+				    <i class="icon-download"></i>
+				    <input type="hidden" class="download-id" value="<?php echo $item->id; ?>" />
+				    <input type="hidden" class="download-guid" value="<?php echo $item->guid; ?>" />
+				    <input type="hidden" class="download-filename" value="<?php echo $item->filename; ?>" />
+				</a>
+                </p>
                 <?php if ($this->params->get('show_document_description') == 1) : ?>
                     <p class="muted"><?php echo $item->description; ?></p>
                 <?php endif; ?>
-                <button class="btn btn-small" type="button"><i class="icon-file"></i> Document</button>
-                <button class="btn btn-small" type="button"><i class="icon-folder-open"></i> Open</button>
-                <button class="btn btn-small" type="button"><i class="icon-download"></i> Download</button>
+                <!-- <button class="btn btn-small" type="button"><i class="icon-file"></i> Document</button> -->
+                <!-- <button class="btn btn-small" type="button"><i class="icon-folder-open"></i> Open</button> -->
+                <!-- <button class="btn btn-small" type="button"><i class="icon-download"></i> Download</button> -->
                 <hr/>
             </div>
         </div>

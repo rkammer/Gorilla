@@ -17,12 +17,12 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Methods supporting a list of documents records.
+ * Methods supporting a document viewer.
  *
  * @package		Joomla.Site
  * @subpackage	com_gorilla
  */
-class GorillaModelDocuments extends JModelList
+class GorillaModelDocument extends JModelList
 {
 	/**
 	 * Constructor.
@@ -60,33 +60,11 @@ class GorillaModelDocuments extends JModelList
 		$params = $app->getParams();
 		$this->setState('params', $params);
 
-		// Param documents_order_by
- 		$ordering = '';
-		switch ($params->get('documents_order_by')) {
-			case 1:
-				$ordering = 'a.created';
-				break;
-			case 2:
-				$ordering = 'a.title';
-				break;
-			default:
-				$ordering = 'a.ordering';
-		}
-
-		// Param documents_order_orientation
- 		$orientation = 'asc';
-		if ($params->get('documents_order_orientation') == 1) {
-			$orientation = 'desc';
-		}
-
 		// Verifying params from the caller
 		$id = JRequest::getInt('id');
-		if ($id == 0) {
-			$id = $params->get('container');
-		}
 		$this->setState('id', $id);
 
-		parent::populateState($ordering, $orientation);
+		parent::populateState($ordering, $direction);
 	}
 
 	/**
@@ -105,7 +83,7 @@ class GorillaModelDocuments extends JModelList
 		$query->select(
 				$this->getState(
 						'list.select',
-						'a.title, a.description, a.id, a.guid, a.filename '
+						'a.title, a.description, a.id, a.guid, a.filename, a.container_id '
 				)
 		);
 		$query->from('#__gorilla_documents a');
@@ -113,16 +91,7 @@ class GorillaModelDocuments extends JModelList
 		// Filter by id
 		if ($id = $this->getState('id'))
 		{
-			$query->where('a.container_id = '.(int) $id);
-		}
-
-		// Filter by published (state)
-		$published = $this->getState('filter.published');
-		if (is_numeric($published)) {
-			$query->where('a.published = ' . (int) $published);
-		}
-		elseif ($published === '') {
-			$query->where('(a.published IN (0, 1))');
+			$query->where('a.id = '.(int) $id);
 		}
 
 		// Filter by access level.
