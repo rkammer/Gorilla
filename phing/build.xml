@@ -2,13 +2,13 @@
 <project name="Gorilla" basedir="." default="step1" >
 
 		<!-- 
-		How to use this file:
+		How to use this file: 
 		"C:\xampp\php\phing.bat" -f phing/build.xml step1 step2 step3 step4 
 		-->
 	
         <!-- Get Project Path -->
         <property name="src" value="${project.basedir}" override="true" />
-		<property name="des" value="C:/Users/rodrigo/PHP/Joomla/Gorilla/builds" override="true" />
+		<property name="des" value="${project.basedir}\..\..\builds\" override="true" />
 		<property name="com_version" value="0.0.11" override="true" />
 		<property name="pkg_version" value="0.0.1" override="true" />
 		
